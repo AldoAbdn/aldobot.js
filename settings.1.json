@@ -1,0 +1,9 @@
+{
+	"ownerid": "PUT YOUR OWNER ID HERE",
+	"modrolename": "PUT MOD ROLE HERE",
+	"adminrolename": "PUT ADMIN ROLE HERE",
+	"prefix": "~",
+	"defaultrole": "PUT DEFAULT ROLE HERE",
+	"defaultchannel": "PUT A SPECIFIED CHANNEL NAME OR NULL HERE",
+	"token":"PUT BOT TOKEN FROM DISCORD API PAGE HERE"
+}

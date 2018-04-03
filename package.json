@@ -1,0 +1,19 @@
+{
+  "name": "aldobot",
+  "version": "1.0.0",
+  "description": "Discord bot created using Discord.js",
+  "main": "AldoBot.js",
+  "scripts": {
+    "start": "node AldoBot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alistair Quinn",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "discord.js": "^11.2.1",
+    "moment": "^2.20.1",
+    "node-opus": "^0.2.7",
+    "ytdl-core": "github:fent/node-ytdl-core#master"
+  }
+}
