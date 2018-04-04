@@ -1,4 +1,4 @@
 module.exports = role =>{
 	let guild = role.guild;
-	guild.defaultChannel.sendMessage(`A new role was created`);
+	postToDefault(client.guilds.get(message.guild.id),`A new role was created`);
 };

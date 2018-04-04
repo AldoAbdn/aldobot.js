@@ -1,3 +1,4 @@
+const {postToDefault} = require('../util/postToDefault.js');
 module.exports = (channel, time) => {
-	channel.guild.defaultChannel.sendMessage(`The pins for ${channel.name} have been updated (${time})`);
+	postToDefault(client.guilds.get(message.guild.id),`The pins for ${channel.name} have been updated (${time})`);	
 };

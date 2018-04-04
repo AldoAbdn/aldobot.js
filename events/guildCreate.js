@@ -1,3 +1,4 @@
+const {postToDefault} = require('../util/postToDefault.js');
 module.exports = guild =>{
-	guild.defaultChannel.sendMessage(`I have joined ${guild.name}`);
+	postToDefault(client.guilds.get(message.guild.id),`I have joined ${guild.name}`);
 };

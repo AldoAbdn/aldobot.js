@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
+const {postToDefault} = require('../util/postToDefault.js');
 module.exports = (guild, user) => {
-  guild.defaultChannel.send(`${user.tag} was just unbanned!`);
+  postToDefault(client.guilds.get(message.guild.id),`${user.tag} was just unbanned`);
   const embed = new Discord.RichEmbed()
     .setColor(0x00AE86)
     .setTimestamp()

@@ -1,3 +1,4 @@
+const {postToDefault} = require('../util/postToDefault.js');
 module.exports = (guild,user) => {
-	guild.defaultChannel.sendMessage(`${user.username} was just banned`);
+	postToDefault(client.guilds.get(message.guild.id),`${user.username} was just banned`);	
 };
