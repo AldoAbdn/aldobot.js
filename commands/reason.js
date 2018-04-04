@@ -15,22 +15,39 @@ exports.run = async (client, message, args) => {
   const modlog = client.channels.find('name', 'mod-log');
   const caseNumber = args.shift();
   const newReason = args.join(' ');
-
-  await modlog.fetchMessages({limit:100}).then((messages) => {
-    const caseLog = messages.filter(m => m.author.id === client.user.id &&
-      m.embeds[0] &&
-      m.embeds[0].type === 'rich' &&
-      m.embeds[0].footer &&
-      m.embeds[0].footer.text.startsWith('Case') &&
-      m.embeds[0].footer.text === `Case ${caseNumber}`
-    ).first();
-    modlog.fetchMessage(caseLog.id).then(logMsg => {
-      const embed = logMsg.embeds[0];
-      embedSan(embed);
-      embed.description = embed.description.replace(`Awaiting moderator's input. Use ${settings.prefix}reason ${caseNumber} <reason>.`, newReason);
-      logMsg.edit({embed});
+  if (client.channels.find("name",settings.moderationchannel)){
+    await client.channels.find("name",settings.moderationchannel).fetchMessages({limit:100}).then((messages) => {
+      const caseLog = messages.filter(m => m.author.id === client.user.id &&
+        m.embeds[0] &&
+        m.embeds[0].type === 'rich' &&
+        m.embeds[0].footer &&
+        m.embeds[0].footer.text.startsWith('Case') &&
+        m.embeds[0].footer.text === `Case ${caseNumber}`
+      ).first();
+      client.channels.find("name",settings.moderationchannel).fetchMessage(caseLog.id).then(logMsg => {
+        const embed = logMsg.embeds[0];
+        embedSan(embed);
+        embed.description = embed.description.replace(`Awaiting moderator's input. Use ${settings.prefix}reason ${caseNumber} <reason>.`, newReason);
+        logMsg.edit({embed});
+      });
     });
-  });
+  } else if (client.channels.find("name",settings.defaultchannel)){
+    await client.channels.find("name",settings.defaultchannel).fetchMessages({limit:100}).then((messages) => {
+      const caseLog = messages.filter(m => m.author.id === client.user.id &&
+        m.embeds[0] &&
+        m.embeds[0].type === 'rich' &&
+        m.embeds[0].footer &&
+        m.embeds[0].footer.text.startsWith('Case') &&
+        m.embeds[0].footer.text === `Case ${caseNumber}`
+      ).first();
+      client.channels.find("name",settings.defaultchannel).fetchMessage(caseLog.id).then(logMsg => {
+        const embed = logMsg.embeds[0];
+        embedSan(embed);
+        embed.description = embed.description.replace(`Awaiting moderator's input. Use ${settings.prefix}reason ${caseNumber} <reason>.`, newReason);
+        logMsg.edit({embed});
+      });
+    });
+  }
 };
 
 exports.conf = {

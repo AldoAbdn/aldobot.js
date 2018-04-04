@@ -5,9 +5,7 @@ const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   const user = message.mentions.users.first();
   parseUser(message, user);
-  const modlog = client.channels.find('name', 'mod-log');
   const caseNum = await caseNumber(client, modlog);
-  if (!modlog) return message.reply('I cannot find a mod-log channel');
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').catch(console.error);
 
   message.guild.member(user).kick();
@@ -18,7 +16,11 @@ exports.run = async (client, message, args) => {
   .setTimestamp()
   .setDescription(`**Action:** Kick\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
   .setFooter(`Case ${caseNum}`);
-  return client.channels.get(modlog.id).send({embed});
+  if (client.channels.find("name",settings.moderationchannel)){
+    return client.channels.find("name", settings.moderationchannel).send({embed});
+  } else {
+    return postToDefault(client.guilds.get(message.guild.id),{embed});
+  }
 };
 
 exports.conf = {

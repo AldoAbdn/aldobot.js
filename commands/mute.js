@@ -5,10 +5,8 @@ const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   const user = message.mentions.users.first();
   parseUser(message, user);
-  const modlog = client.channels.find('name', 'mod-log');
   const caseNum = await caseNumber(client, modlog);
   const muteRole = client.guilds.get(message.guild.id).roles.find('name', 'muted');
-  if (!modlog) return message.reply('I cannot find a mod-log channel').catch(console.error);
   if (!muteRole) return message.reply('I cannot find a mute role').catch(console.error);
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').catch(console.error);
   const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
@@ -23,14 +21,21 @@ exports.run = async (client, message, args) => {
 
   if (message.guild.member(user).roles.has(muteRole.id)) {
     message.guild.member(user).removeRole(muteRole).then(() => {
-      client.channels.get(modlog.id).send({embed}).catch(console.error);
+      if (client.channels.find("name",settings.moderationchannel)){
+        return client.channels.find("name", settings.moderationchannel).send({embed}).catch(console.error);;
+      } else {
+        return postToDefault(client.guilds.get(message.guild.id),{embed});
+      }
     });
   } else {
     message.guild.member(user).addRole(muteRole).then(() => {
-      client.channels.get(modlog.id).send({embed}).catch(console.error);
+      if (client.channels.find("name",settings.moderationchannel)){
+        return client.channels.find("name", settings.moderationchannel).send({embed}).catch(console.error);;
+      } else {
+        return postToDefault(client.guilds.get(message.guild.id),{embed});
+      }
     });
   }
-
 };
 
 exports.conf = {
