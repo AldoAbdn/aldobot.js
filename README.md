@@ -41,7 +41,7 @@ Edit settings.1.JSON filling in required information (all marked in file)
 
 This will involve creating a new bot token which can be done on the discord dev website. Instructions to do so can be found [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
 
-*IMPORTANT* rename the file from settings.1.JSON to just settings.JSON before starting the bot 
+**IMPORTANT** rename the file from settings.1.JSON to just settings.JSON before starting the bot 
 
 ### Settings
 | Settings   | Description |
