@@ -1,4 +1,4 @@
-const {postToDefault} from '../util/postToDefault.js';
+const {postToDefault} = require('../util/postToDefault.js');
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {parseUser} = require('../util/parseUser.js');
