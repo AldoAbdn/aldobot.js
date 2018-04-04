@@ -25,5 +25,5 @@ exports.conf = {
 exports.help = {
   name: 'skip',
   description: 'Skips a song. Pass a track index to remove a track in the queue, or leave blank to skip the current song',
-  usage: 'skip [track index (Optional)]'
+  usage: 'skip <track index (Optional)>'
 };

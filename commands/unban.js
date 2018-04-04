@@ -18,5 +18,5 @@ exports.conf = {
 exports.help = {
   name: 'unban',
   description: 'Unbans the user.',
-  usage: 'unban [mention] [reason]'
+  usage: 'unban <mention> <reason>'
 };

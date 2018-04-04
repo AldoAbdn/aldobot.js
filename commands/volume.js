@@ -21,6 +21,6 @@ exports.conf = {
 
 exports.help = {
     name: 'volume',
-    description: 'Sets music volume',
-    usage: 'volume [volume]'
+    description: 'Sets music volume, pass an integer greater than 0. If no value is passed bot returns current volume',
+    usage: 'volume <volume (optional)>'
 };
