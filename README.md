@@ -16,4 +16,7 @@ This will involve creating a new bot token which can be done on the discord dev 
 *IMPORTANT* rename the file from settings.1.JSON to just settings.JSON before starting the bot 
 
 ## Starting the Bot
-Start a command line at the root of the projects folder, and type npm start
+Just to be safe, navigate to the project folder and open a command prompt there. type npm install
+
+Start a command line at the root of the projects folder (If you haven't already done so), and type npm start
+
