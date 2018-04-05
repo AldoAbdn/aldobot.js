@@ -34,6 +34,8 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Reload      | Reloads the command file, if it\'s been updated or modified | reload (commandname) |
 
 ### Just for Fun
+| Command     | Description   | Usage |
+|-------------|---------------|-------|
 | Ping        | Ping/Pong command. I wonder what this does? /sarcasm | ping |
 | Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed | roll (max **optional**) |
 
