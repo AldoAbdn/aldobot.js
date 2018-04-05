@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     if (max){
         randomInt = Math.floor(Math.random() * max) + 1;
         message.reply(`You rolled: ${randomInt}`);
-    } else if(max <= 1 || !Number.isInteger(max)) {
+    } else if(max <= 1) {
         message.reply(`Ooops! I can only roll for a valid integer that is greater than 1`);
     }else {
         randomInt = Math.floor(Math.random() * 20) + 1;
