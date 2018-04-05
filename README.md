@@ -32,7 +32,10 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Purge       | Purges X amount of messages from a given channel | purge (number) |
 | Reason      | Updates an unset moderator action | reason (case-number) (new-reason) |
 | Reload      | Reloads the command file, if it\'s been updated or modified | reload (commandname) |
+
+### Just for Fun
 | Ping        | Ping/Pong command. I wonder what this does? /sarcasm | ping |
+| Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed | roll (max **optional**) |
 
 ## Setup
 Clone this repo
