@@ -26,7 +26,7 @@ exports.playQueue = (client,message) => {
                 console.log('Debug:' +info);
               });      
               postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
-            } else if(client.guilds.get(message.guild.id.currentlyPlaying){
+            } else if(client.guilds.get(message.guild.id.currentlyPlaying)){
               client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}));
               client.guilds.get(message.guild.id).dispatcher.on('end', () => {
                 delete client.guilds.get(message.guild.id).dispatcher;
