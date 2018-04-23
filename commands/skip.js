@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
   } else if(index < 0 || index > client.guilds.get(message.guild.id).queue.length){
     message.reply("Invalid Index");
   } else if(client.guilds.get(message.guild.id).dispatcher){
-  	  client.guilds.get(message.guild.id).dispatcher.end();
+      client.guilds.get(message.guild.id).dispatcher.end();
   } else {
     message.reply("Not Currently Playing Music");
   }
