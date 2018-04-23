@@ -6,6 +6,9 @@ exports.run = (client, message, args) => {
   if (client.guilds.get(message.guild.id).lock == null){
     client.guilds.get(message.guild.id).lock = false;
   } 
+  if (client.guilds.get(message.guild.id).volume == null){
+    client.guilds.get(message.guild.id).volume = 1;
+  }
   let url = args[0];
   let replay = args[1];
   if (!client.guilds.get(message.guild.id).queue){
