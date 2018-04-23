@@ -14,18 +14,20 @@ exports.playQueue = (client,message) => {
               return;
             } else if (client.guilds.get(message.guild.id).queue.length > 0){
               client.guilds.get(message.guild.id).currentlyPlaying = client.guilds.get(message.guild.id).queue.shift();
-              client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}));
-              client.guilds.get(message.guild.id).dispatcher.on('end', () => {
-                delete client.guilds.get(message.guild.id).dispatcher;
-                exports.playQueue(client, message, [null,true]);
-              });
-              client.guilds.get(message.guild.id).dispatcher.on('error', e=>{
-                console.log('Error:'+e);
-               });
-              client.guilds.get(message.guild.id).dispatcher.on('debug', info=>{
-                console.log('Debug:' +info);
-              });      
-              postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
+              if (client.guilds.get(message.guild.id).currentlyPlaying){
+                client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}));
+                client.guilds.get(message.guild.id).dispatcher.on('end', () => {
+                  delete client.guilds.get(message.guild.id).dispatcher;
+                  exports.playQueue(client, message, [null,true]);
+                });
+                client.guilds.get(message.guild.id).dispatcher.on('error', e=>{
+                  console.log('Error:'+e);
+                 });
+                client.guilds.get(message.guild.id).dispatcher.on('debug', info=>{
+                  console.log('Debug:' +info);
+                });      
+                postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
+              }
             } else if(client.guilds.get(message.guild.id.currentlyPlaying)){
               client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}));
               client.guilds.get(message.guild.id).dispatcher.on('end', () => {
