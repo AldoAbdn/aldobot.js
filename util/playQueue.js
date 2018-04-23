@@ -15,7 +15,7 @@ exports.playQueue = (client,message) => {
             } else if (client.guilds.get(message.guild.id).queue.length > 0){
               client.guilds.get(message.guild.id).currentlyPlaying = client.guilds.get(message.guild.id).queue.shift();
               if (client.guilds.get(message.guild.id).currentlyPlaying){
-                client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}));
+                client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:client.guilds.get(message.guild.id).volume});
                 client.guilds.get(message.guild.id).dispatcher.on('end', () => {
                   delete client.guilds.get(message.guild.id).dispatcher;
                   exports.playQueue(client, message, [null,true]);
@@ -29,7 +29,7 @@ exports.playQueue = (client,message) => {
                 postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
               }
             } else if(client.guilds.get(message.guild.id.currentlyPlaying)){
-              client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}));
+              client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:client.guilds.get(message.guild.id).volume});
               client.guilds.get(message.guild.id).dispatcher.on('end', () => {
                 delete client.guilds.get(message.guild.id).dispatcher;
                 exports.playQueue(client, message, [null,true]);
@@ -40,6 +40,7 @@ exports.playQueue = (client,message) => {
               client.guilds.get(message.guild.id).dispatcher.on('debug', info=>{
                 console.log('Debug:' +info);
               });      
+
               postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
             }
           })
