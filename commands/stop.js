@@ -1,6 +1,7 @@
 exports.run = (client, message, args) => {   
     if (client.voiceConnections.find(val => val.channel.guild.id == message.guild.id)){
       client.voiceConnections.find(val => val.channel.guild.id == message.guild.id).disconnect();
+      client.guilds.get(message.guild.id).currentlyPlaying = null;
     }
 };
   
