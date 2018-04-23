@@ -7,7 +7,7 @@ exports.run = (client, message, args) => {
         message.reply("Volume must be an integer between 0 and 100 inclusive");
         return;
     } else if (client.guilds.get(message.guild.id).dispatcher) {
-        clients.guilds.get(message.guild.id).volume = volume/100;
+        client.guilds.get(message.guild.id).volume = volume/100;
         client.guilds.get(message.guild.id).dispatcher.setVolume(clients.guilds.get(message.guild.id).volume);
     }
 };
