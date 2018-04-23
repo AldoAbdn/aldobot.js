@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
         return;
     } else if (client.guilds.get(message.guild.id).dispatcher) {
         client.guilds.get(message.guild.id).volume = volume/100;
-        client.guilds.get(message.guild.id).dispatcher.setVolume(clients.guilds.get(message.guild.id).volume);
+        client.guilds.get(message.guild.id).dispatcher.setVolume(client.guilds.get(message.guild.id).volume);
     }
 };
   
