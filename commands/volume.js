@@ -1,5 +1,8 @@
 exports.run = (client, message, args) => {   
     let volume = parseInt(args[0]);
+    if (client.guilds.get(message.guild.id).volume == null){
+        client.guilds.get(message.guild.id).volume = 1;
+    }
     if (args.length == 0) {
         message.reply("Volume is:" + (client.guilds.get(message.guild.id).volume * 100));
     }
