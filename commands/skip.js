@@ -12,6 +12,8 @@ exports.run = (client, message, args) => {
     message.reply("Invalid Index");
   } else if(client.guilds.get(message.guild.id).dispatcher){
   	  client.guilds.get(message.guild.id).dispatcher.end();
+  } else {
+    message.reply("Not Currently Playing Music");
   }
 };
 
