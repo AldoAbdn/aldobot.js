@@ -29,12 +29,14 @@ exports.playQueue = (client,message) => {
                 postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
               }
             } else if(client.guilds.get(message.guild.id).currentlyPlaying){
+              console.log(Object.keys(client.guilds.get(message.guild.id).currentlyPlaying));
               let url = "https://www.youtube.com/watch?v=" + client.guilds.get(message.guild.id).currentlyPlaying.relatedVideos[0].id;
               yt.getInfo(url, function(err, info){
                 if (err) {
                   message.reply("Invalid URL");
                 }
                 client.guilds.get(message.guild.id).queue.push(info);
+                console.log(info)
                 playQueue(client,message);
               });
             }
