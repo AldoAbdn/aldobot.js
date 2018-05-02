@@ -37,7 +37,7 @@ exports.playQueue = (client,message) => {
                 }
                 client.guilds.get(message.guild.id).queue.push(info);
                 console.log(info)
-                playQueue(client,message);
+                exports.playQueue(client,message);
               });
             }
           })
