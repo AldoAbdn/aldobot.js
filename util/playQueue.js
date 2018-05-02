@@ -30,7 +30,7 @@ exports.playQueue = (client,message) => {
               }
             } else if(client.guilds.get(message.guild.id).currentlyPlaying){
               console.log(Object.keys(client.guilds.get(message.guild.id).currentlyPlaying));
-              let url = "https://www.youtube.com/watch?v=" + client.guilds.get(message.guild.id).currentlyPlaying.relatedVideos[0].id;
+              let url = "https://www.youtube.com/watch?v=" + client.guilds.get(message.guild.id).currentlyPlaying.related_videos[0].id;
               yt.getInfo(url, function(err, info){
                 if (err) {
                   message.reply("Invalid URL");
