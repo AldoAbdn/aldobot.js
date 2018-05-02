@@ -19,6 +19,7 @@ exports.run = (client, message, args) => {
       if (err) {
         message.reply("Invalid URL");
       }
+      console.log(info);
       client.guilds.get(message.guild.id).queue.push(info);
       playQueue(client,message);
     })
