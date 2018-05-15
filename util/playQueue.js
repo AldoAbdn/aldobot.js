@@ -13,12 +13,13 @@ exports.playQueue = (client,message) => {
               }
               return;
             } else if (client.guilds.get(message.guild.id).queue.length > 0){
+              client.guilds.get(message.guild.id).lastPlayed = client.guilds.get(message.guild.id).currentlyPlaying;
               client.guilds.get(message.guild.id).currentlyPlaying = client.guilds.get(message.guild.id).queue.shift();
               if (client.guilds.get(message.guild.id).currentlyPlaying){
                 client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:client.guilds.get(message.guild.id).volume});
                 client.guilds.get(message.guild.id).dispatcher.on('end', () => {
                   delete client.guilds.get(message.guild.id).dispatcher;
-                  exports.playQueue(client, message, [null,true]);
+                  exports.playQueue(client, message);
                 });
                 client.guilds.get(message.guild.id).dispatcher.on('error', e=>{
                   console.log('Error:'+e);
@@ -30,6 +31,16 @@ exports.playQueue = (client,message) => {
               }
             } else if(client.guilds.get(message.guild.id).currentlyPlaying){
               let url = "https://www.youtube.com/watch?v=" + client.guilds.get(message.guild.id).currentlyPlaying.related_videos[0].id;
+              for (let vid of client.guilds.get(message.guild.id).currentlyPlaying.related_videos){
+                if (client.guilds.get(message.guild.id).lastPlayed && vid.title != client.guilds.get(message.guild.id).lastPlayed.title){
+                  if (vid.id){
+                    url = "https://www.youtube.com/watch?v=" + vid.id;
+                  } else {
+                    url = "https://www.youtube.com/watch?v=" + vid.video_id;
+                  }
+                  break;
+                }
+              }
               yt.getInfo(url, function(err, info){
                 if (err) {
                   message.reply("Invalid URL");
