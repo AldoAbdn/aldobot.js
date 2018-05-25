@@ -33,7 +33,7 @@ exports.playQueue = (client,message) => {
             } else if(guild.currentlyPlaying){
               let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
               for (let vid of guild.currentlyPlaying.related_videos){
-                if (guild.lastPlayed && vid.title != guild.lastPlayed.title){
+                if (guild.lastPlayed && vid.title != undefined && vid.title != guild.lastPlayed.title){
                   if (vid.id){
                     url = "https://www.youtube.com/watch?v=" + vid.id;
                   } else {
