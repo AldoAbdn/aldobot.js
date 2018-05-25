@@ -1,5 +1,5 @@
 exports.run = (client, message) => {
-    if (client.guilds.get(message.guild.id).currentlyPlaying){
+    if (message.guild.currentlyPlaying){
         message.reply(`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`,{code:'asciidoc'});   
     } else {
         message.reply("Not Currently Playing Music");

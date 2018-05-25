@@ -1,17 +1,18 @@
 exports.run = (client, message, args) => {
+  const guild = message.guild;
   if (!client.voiceConnections.find("channel",message.member.voiceChannel)){
     return;
   }
-  if (!client.guilds.get(message.guild.id).queue){
-    client.guilds.get(message.guild.id).queue = [];
+  if (!guild.queue){
+    guild.queue = [];
   }
   let index = parseInt(args[0]);
-  if (index > 0 && index <= client.guilds.get(message.guild.id).queue.length){
-    client.guilds.get(message.guild.id).queue.splice(index-1,1);
-  } else if(index < 0 || index > client.guilds.get(message.guild.id).queue.length){
+  if (index > 0 && index <= guild.queue.length){
+    guild.queue.splice(index-1,1);
+  } else if(index < 0 || index > guild.queue.length){
     message.reply("Invalid Index");
-  } else if(client.guilds.get(message.guild.id).dispatcher){
-      client.guilds.get(message.guild.id).dispatcher.end();
+  } else if(guild.dispatcher){
+    guild.dispatcher.end();
   } else {
     message.reply("Not Currently Playing Music");
   }

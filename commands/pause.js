@@ -1,9 +1,10 @@
 exports.run = (client, message, args) => {
+  const guild = message.guild;
   if (!client.voiceConnections.find("channel",message.member.voiceChannel)){
     return;
   }
-  if(client.guilds.get(message.guild.id).dispatcher){
-      client.guilds.get(message.guild.id).dispatcher.pause();
+  if(guild.dispatcher){
+      guild.dispatcher.pause();
     }
 };
 

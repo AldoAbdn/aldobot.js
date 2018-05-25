@@ -1,7 +1,7 @@
 const {createQueueString} = require('../util/createQueueString.js');
 exports.run = (client, message) => {
-    if (!client.guilds.get(message.guild.id).queue) client.guilds.get(message.guild.id).queue = [];
-    let str = createQueueString(client.guilds.get(message.guild.id).queue);
+    if (!message.guild.queue) message.guild.queue = [];
+    let str = createQueueString(message.guild.queue);
     message.reply(str,{code:'asciidoc'});
   };
   

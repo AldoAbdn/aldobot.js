@@ -1,38 +1,39 @@
 const yt = require('ytdl-core');
 const {postToDefault} = require('../util/postToDefault.js');
 exports.playQueue = (client,message) => {
+  const guild = message.guild;
     if (message.member.voiceChannel) {
-        if (client.guilds.get(message.guild.id).lock && !client.voiceConnections.find("channel",message.member.voiceChannel)){
+        if (guild.lock && !client.voiceConnections.find("channel",message.member.voiceChannel)){
           return;
         }
         message.member.voiceChannel.join()
           .then(connection => {
-            if (client.guilds.get(message.guild.id).dispatcher) {
-              if (client.guilds.get(message.guild.id).dispatcher.paused){
-                client.guilds.get(message.guild.id).dispatcher.resume();
+            if (guild.dispatcher) {
+              if (guild.dispatcher.paused){
+                guild.dispatcher.resume();
               }
               return;
-            } else if (client.guilds.get(message.guild.id).queue.length > 0){
-              client.guilds.get(message.guild.id).lastPlayed = client.guilds.get(message.guild.id).currentlyPlaying;
-              client.guilds.get(message.guild.id).currentlyPlaying = client.guilds.get(message.guild.id).queue.shift();
-              if (client.guilds.get(message.guild.id).currentlyPlaying){
-                client.guilds.get(message.guild.id).dispatcher = connection.playStream(yt(client.guilds.get(message.guild.id).currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:client.guilds.get(message.guild.id).volume});
-                client.guilds.get(message.guild.id).dispatcher.on('end', () => {
-                  delete client.guilds.get(message.guild.id).dispatcher;
+            } else if (guild.queue.length > 0){
+              guild.lastPlayed = guild.currentlyPlaying;
+              guild.currentlyPlaying = guild.queue.shift();
+              if (guild.currentlyPlaying){
+                guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
+                guild.dispatcher.on('end', () => {
+                  delete guild.dispatcher;
                   exports.playQueue(client, message);
                 });
-                client.guilds.get(message.guild.id).dispatcher.on('error', e=>{
+                guild.dispatcher.on('error', e=>{
                   console.log('Error:'+e);
                  });
-                client.guilds.get(message.guild.id).dispatcher.on('debug', info=>{
+                guild.dispatcher.on('debug', info=>{
                   console.log('Debug:' +info);
                 });      
-                postToDefault(client.guilds.get(message.guild.id),`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`);
+                postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
               }
-            } else if(client.guilds.get(message.guild.id).currentlyPlaying){
-              let url = "https://www.youtube.com/watch?v=" + client.guilds.get(message.guild.id).currentlyPlaying.related_videos[0].id;
-              for (let vid of client.guilds.get(message.guild.id).currentlyPlaying.related_videos){
-                if (client.guilds.get(message.guild.id).lastPlayed && vid.title != client.guilds.get(message.guild.id).lastPlayed.title){
+            } else if(guild.currentlyPlaying){
+              let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
+              for (let vid of guild.currentlyPlaying.related_videos){
+                if (guild.lastPlayed && vid.title != guild.lastPlayed.title){
                   if (vid.id){
                     url = "https://www.youtube.com/watch?v=" + vid.id;
                   } else {
@@ -45,7 +46,7 @@ exports.playQueue = (client,message) => {
                 if (err) {
                   message.reply("Invalid URL");
                 }
-                client.guilds.get(message.guild.id).queue.push(info);
+                guild.queue.push(info);
                 exports.playQueue(client,message);
               });
             }

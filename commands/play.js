@@ -1,25 +1,25 @@
 const {playQueue} = require('../util/playQueue.js');
 const yt = require('ytdl-core');
-//const streamOptions = {seek: 0, volume: 1}
 
 exports.run = (client, message, args) => {
-  if (client.guilds.get(message.guild.id).lock == null){
-    client.guilds.get(message.guild.id).lock = false;
+  const guild = message.guild;
+  if (guild.lock == null){
+    guild.lock = false;
   } 
-  if (client.guilds.get(message.guild.id).volume == null){
-    client.guilds.get(message.guild.id).volume = 1;
+  if (guild.volume == null){
+    guild.volume = 1;
   }
   let url = args[0];
   let replay = args[1];
-  if (!client.guilds.get(message.guild.id).queue){
-    client.guilds.get(message.guild.id).queue = [];
+  if (!guild.queue){
+    guild.queue = [];
   }
   if (url) {
     yt.getInfo(url, function(err, info){
       if (err) {
         message.reply("Invalid URL");
       }
-      client.guilds.get(message.guild.id).queue.push(info);
+      guild.queue.push(info);
       playQueue(client,message);
     })
   } else {
