@@ -6,10 +6,14 @@ const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   const user = message.mentions.users.first();
   parseUser(message, user);
+  const modlog = client.channels.find("name",settings.moderationchannel);
   const caseNum = await caseNumber(client, modlog);
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to ban them.').catch(console.error);
 
   const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
+  
+  message.guild.member(user).ban(reason);
+
   const embed = new RichEmbed()
   .setColor(0x00AE86)
   .setTimestamp()
