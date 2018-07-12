@@ -4,6 +4,7 @@
 	"adminrolename": "PUT ADMIN ROLE HERE",
 	"prefix": "~",
 	"defaultrole": "PUT DEFAULT ROLE HERE",
+	"muterole": "PUT MUTE ROLE HERE",
 	"defaultchannel": "PUT A SPECIFIED CHANNEL NAME OR NULL HERE",
 	"token":"PUT BOT TOKEN FROM DISCORD API PAGE HERE"
 }

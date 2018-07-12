@@ -1,11 +1,11 @@
 exports.run = (client, message, args) => {
-  const guild = message.guild;
+  //If user is not in the voice channel, return
   if (!client.voiceConnections.find("channel",message.member.voiceChannel)){
     return;
+  } else if (message.guild.dispatcher){
+    //If there is a dispatcher, pause it
+    message.guild.dispatcher.pause();
   }
-  if(guild.dispatcher){
-      guild.dispatcher.pause();
-    }
 };
 
 exports.conf = {

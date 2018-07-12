@@ -4,8 +4,10 @@ const {caseNumber} = require('../util/caseNumber.js');
 const {parseUser} = require('../util/parseUser.js');
 const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
+    //Set Variables
     let max = parseInt(args[0]);
     let randomInt = 1;
+    //Random roll, max is passed
     if (max){
         randomInt = Math.floor(Math.random() * max) + 1;
         message.reply(`You rolled: ${randomInt}`);

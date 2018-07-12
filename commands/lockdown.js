@@ -1,16 +1,18 @@
 const ms = require('ms');
 const settings = require('../settings.json');
 exports.run = (client, message, args) => {
+  //Setup
   const role = message.guild.roles.find("name",settings.defaultrole);
   if (!client.lockit) client.lockit = [];
   const time = args.join(' ');
   const validUnlocks = ['release', 'unlock'];
   if (!time) return message.reply('You must set a duration for the lockdown in either hours, minutes or seconds');
-
+  //Checks if time includes a keywork, release or unlock
   if (validUnlocks.includes(time)) {
     message.channel.overwritePermissions(role, {
       SEND_MESSAGES: null
     }).then(() => {
+      //Unlocks channel
       message.channel.send('Lockdown lifted.');
       clearTimeout(client.lockit[message.channel.id]);
       delete client.lockit[message.channel.id];
@@ -21,9 +23,11 @@ exports.run = (client, message, args) => {
     message.channel.overwritePermissions(role, {
       SEND_MESSAGES: false
     }).then(() => {
+      //Loccks down channel for specified time
       message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
 
         client.lockit[message.channel.id] = setTimeout(() => {
+          //Only for default role
           message.channel.overwritePermissions(role, {
             SEND_MESSAGES: null
           }).then(message.channel.send('Lockdown lifted.')).catch(console.error);

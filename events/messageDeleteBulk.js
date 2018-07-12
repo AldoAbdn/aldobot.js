@@ -1,3 +1,3 @@
 module.exports = messages => {
-	console.log(`${messages.length} messages were deleted`);
+	console.log(`${messages.array().length} messages were deleted`);
 };

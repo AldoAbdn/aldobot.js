@@ -1,5 +1,7 @@
 exports.run = (client, message, args) => {
+  //Get count
   const messagecount = parseInt(args.join(' '));
+  //Fetch messages, include the command itself, delete them
   message.channel.fetchMessages({
     limit: messagecount + 1
   }).then(messages => message.channel.bulkDelete(messages));

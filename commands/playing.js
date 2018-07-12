@@ -1,4 +1,5 @@
 exports.run = (client, message) => {
+    //If currently playing is set, reply with details
     if (message.guild.currentlyPlaying){
         message.reply(`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`,{code:'asciidoc'});   
     } else {

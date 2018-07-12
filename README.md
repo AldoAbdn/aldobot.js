@@ -27,7 +27,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Kick        | Kicks the mentioned user | kick (mention) (reason) | 
 | Mute        | mutes or unmutes a mentioned user | un/mute (mention) (reason) |
 | Ban         | Bans the mentioned user | ban (mention) (reason) |
-| Unban       | Unbans the user | unban (mention) (reason) |
+| Unban       | Unbans the user | unban (ID) (reason) |
 | Lockdown    | This will lock a channel down for the set duration, be it in hours, minutes or seconds | lockdown (duration) |
 | Purge       | Purges X amount of messages from a given channel | purge (number) |
 | Reason      | Updates an unset moderator action | reason (case-number) (new-reason) |
@@ -38,6 +38,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 |-------------|---------------|-------|
 | Ping        | Ping/Pong command. I wonder what this does? /sarcasm | ping |
 | Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed | roll (max **optional**) |
+| Meta        | Lets a user store data, can be used to store traits for an RPG for example | meta (key) (value **optional**) |
 
 ## Setup
 Clone this repo

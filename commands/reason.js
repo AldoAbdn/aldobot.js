@@ -12,11 +12,15 @@ async function embedSan(embed) {
 }
 
 exports.run = async (client, message, args) => {
+  //Set variables
   const modlog = client.channels.find('name', 'mod-log');
   const caseNumber = args.shift();
   const newReason = args.join(' ');
+  //If there is a moderation channel
   if (client.channels.find("name",settings.moderationchannel)){
+    //Fetch last 100 messages
     await client.channels.find("name",settings.moderationchannel).fetchMessages({limit:100}).then((messages) => {
+      //Gets matching case log 
       const caseLog = messages.filter(m => m.author.id === client.user.id &&
         m.embeds[0] &&
         m.embeds[0].type === 'rich' &&
@@ -24,6 +28,7 @@ exports.run = async (client, message, args) => {
         m.embeds[0].footer.text.startsWith('Case') &&
         m.embeds[0].footer.text === `Case ${caseNumber}`
       ).first();
+      //Replace parts of message with new reason
       client.channels.find("name",settings.moderationchannel).fetchMessage(caseLog.id).then(logMsg => {
         const embed = logMsg.embeds[0];
         embedSan(embed);
@@ -32,6 +37,8 @@ exports.run = async (client, message, args) => {
       });
     });
   } else if (client.channels.find("name",settings.defaultchannel)){
+    //If no moderation channel, get default channel
+    //Get matching case log
     await client.channels.find("name",settings.defaultchannel).fetchMessages({limit:100}).then((messages) => {
       const caseLog = messages.filter(m => m.author.id === client.user.id &&
         m.embeds[0] &&
@@ -40,6 +47,7 @@ exports.run = async (client, message, args) => {
         m.embeds[0].footer.text.startsWith('Case') &&
         m.embeds[0].footer.text === `Case ${caseNumber}`
       ).first();
+      //Replace parts of message with new reason
       client.channels.find("name",settings.defaultchannel).fetchMessage(caseLog.id).then(logMsg => {
         const embed = logMsg.embeds[0];
         embedSan(embed);

@@ -1,9 +1,10 @@
 const {createQueueString} = require('../util/createQueueString.js');
 exports.run = (client, message) => {
-    if (!message.guild.queue) message.guild.queue = [];
-    let str = createQueueString(message.guild.queue);
-    message.reply(str,{code:'asciidoc'});
-  };
+  //If no queue, set it
+  if (!message.guild.queue) message.guild.queue = [];
+  //Display queue 
+  message.reply(createQueueString(message.guild.queue),{code:'asciidoc'});
+};
   
   exports.conf = {
     enabled: true,
