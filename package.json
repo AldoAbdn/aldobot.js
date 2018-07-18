@@ -12,7 +12,6 @@
   "dependencies": {
     "chalk": "^2.3.0",
     "discord.js": "^11.2.1",
-    "ffmpeg-binaries": "^4.0.0",
     "moment": "^2.20.1",
     "node-opus": "^0.2.7",
     "ytdl-core": "github:fent/node-ytdl-core#master"
