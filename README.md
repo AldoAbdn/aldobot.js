@@ -59,7 +59,17 @@ This will involve creating a new bot token which can be done on the discord dev 
 | defaultrole | Put default role here and bot will add this role to new members of the guild | 
 | defaultchannel | This is where bot will send message by default, if set to null will try to find default channel |
 | moderationchannel | This is where moderation cases will go, such as bans, if set to null will try to find default channel | 
-| token | This is your bot token, please see link in setup above | 
+
+### Bot Token 
+If you are not hosting the bot exterally replace 'process.env.TOKEN' on line 74 of AldoBot.js with your bot token and remove line 77. 
+```
+//Login
+//Replace process.env.TOKEN with your own bot token 
+client.login(process.env.TOKEN);
+
+//ZEIT NOW Fix
+require('http').createServer().listen(3000);
+```
 
 ## Starting the Bot
 Just to be safe, navigate to the project folder and open a command prompt there. type npm install
