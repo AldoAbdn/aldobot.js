@@ -11,11 +11,27 @@ Imports, and initial setup
 */
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const settings = require('./settings.json');
 const chalk = require('chalk');
 const fs = require('fs');
 const moment = require('moment');
 require('./util/eventLoader')(client);
+var settings;
+try{
+  settings = require('./settings.json');
+} catch {
+  let settings = {
+    ownerid: process.env.OWNER_ID,
+    prefix: process.env.PREFIX,
+    adminrolename: process.env.ADMIN_ROLE,
+    modrolename: process.env.MOD_ROLE,
+    defaultrole: process.env.DEFAULT_ROLE,
+    muterole: process.env.MUTE_ROLE,
+    defaultchannel: process.env.DEFAULT_CHANNEL,
+    moderationchannel: process.env.MODERATION_CHANNEL
+  }
+  fs.writeFileSync("settings.json",JSON.stringify(settings));
+  settings = require('./settings.json');
+}
 
 const log = message => {
   console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message}`);
