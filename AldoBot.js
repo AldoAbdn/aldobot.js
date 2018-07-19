@@ -9,7 +9,7 @@
 /*
 Imports, and initial setup 
 */
-
+const fs = require('fs');
 var settings;
 try{
   settings = require('./settings.json');
