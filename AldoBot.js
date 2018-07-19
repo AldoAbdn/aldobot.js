@@ -18,7 +18,7 @@ require('./util/eventLoader')(client);
 var settings;
 try{
   settings = require('./settings.json');
-} catch {
+} catch(error) {
   let settings = {
     ownerid: process.env.OWNER_ID,
     prefix: process.env.PREFIX,
