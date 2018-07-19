@@ -29,7 +29,7 @@ try{
     defaultchannel: process.env.DEFAULT_CHANNEL,
     moderationchannel: process.env.MODERATION_CHANNEL
   }
-  fs.writeFileSync("settings.json",JSON.stringify(settings));
+  fs.writeFileSync("./settings.json",JSON.stringify(settings));
   settings = require('./settings.json');
 }
 
