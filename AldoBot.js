@@ -89,7 +89,4 @@ client.elevation = message => {
 //Replace process.env.TOKEN with your own bot token 
 client.login(process.env.TOKEN);
 
-//ZEIT NOW Fix
-require('http').createServer().listen(3000);
-
 
