@@ -56,18 +56,23 @@ Edit settings.JSON changing values to match your requirements
 | moderationchannel | This is where moderation cases will go, such as bans, if set to null will try to find default channel | 
 
 ### Bot Token and User ID
-To start the bot you will require a Bot token and your own discord user ID. 
+To start the bot you will require a Bot token and your own discord user ID
 
 This will involve creating a new bot token which can be done on the discord dev website. Instructions to do so can be found [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
 
 Instructions to find your own user ID can be found [here](https://support.discordapp.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
 
-You will put these into environment variables. More info can be found [here](https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html) 
+You will put these into environment variables. More info can be found [here](https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html)
+
+### FFMPEG
+This bot requires FFMPEG to play music. If you are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
+
+I had originally included an FFMPEG node module that contained the binaries, but apparenty it only works locally on non windows machines. It worked if you installed globally
 
 ## Starting the Bot
-Just to be safe, navigate to the project folder and open a command prompt there. type npm install.
+Just to be safe, navigate to the project folder and open a command prompt there. type npm install
 
-Start a command line at the root of the projects folder (If you haven't already done so).
+Start a command line at the root of the projects folder (If you haven't already done so)
 
 You will need to start the bot with two environment variables: 
 ```
@@ -78,5 +83,5 @@ These will correspond to the values you retrieved earlier. There are many ways t
 ```
 TOKEN=token OWNER_ID=ownerid node AldoBot.js
 ```
-
+To save yourself time, add this command with your own bot token and owner id to the start script in package.json, being careful not to push the edited repo
 
