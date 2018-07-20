@@ -43,16 +43,11 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 ## Setup
 Clone this repo
 
-Edit settings.1.JSON filling in required information (all marked in file)
-
-This will involve creating a new bot token which can be done on the discord dev website. Instructions to do so can be found [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
-
-**IMPORTANT** rename the file from settings.1.JSON to just settings.JSON before starting the bot 
+Edit settings.JSON changing values to match your requirements 
 
 ### Settings
 | Settings   | Description |
 |------------|-------------|
-| ownerid    | The ID for YOUR discord account |
 | prefix     | Set the command prefix here default is ~, so ~play for example |
 | adminrolename | Put a custom admin role here |
 | modrolename| Put a custom mod role here | 
@@ -60,19 +55,28 @@ This will involve creating a new bot token which can be done on the discord dev 
 | defaultchannel | This is where bot will send message by default, if set to null will try to find default channel |
 | moderationchannel | This is where moderation cases will go, such as bans, if set to null will try to find default channel | 
 
-### Bot Token 
-If you are not hosting the bot exterally replace 'process.env.TOKEN' on line 74 of AldoBot.js with your bot token and remove line 77. 
-```
-//Login
-//Replace process.env.TOKEN with your own bot token 
-client.login(process.env.TOKEN);
+### Bot Token and User ID
+To start the bot you will require a Bot token and your own discord user ID. 
 
-//ZEIT NOW Fix
-require('http').createServer().listen(3000);
-```
+This will involve creating a new bot token which can be done on the discord dev website. Instructions to do so can be found [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
+
+Instructions to find your own user ID can be found [here](https://support.discordapp.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
+
+You will put these into environment variables. More info can be found [here](https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html) 
 
 ## Starting the Bot
-Just to be safe, navigate to the project folder and open a command prompt there. type npm install
+Just to be safe, navigate to the project folder and open a command prompt there. type npm install.
 
-Start a command line at the root of the projects folder (If you haven't already done so), and type npm start
+Start a command line at the root of the projects folder (If you haven't already done so).
+
+You will need to start the bot with two environment variables: 
+```
+TOKEN
+OWNDER_ID
+```
+These will correspond to the values you retrieved earlier. There are many ways to do this but a simple way is:
+```
+TOKEN=token OWNER_ID=ownerid node AldoBot.js
+```
+
 
