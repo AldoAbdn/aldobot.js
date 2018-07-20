@@ -10,25 +10,7 @@
 Imports, and initial setup 
 */
 const fs = require('fs');
-var settings;
-try{
-  settings = require('./settings');
-} catch(error) {
-  let settings = {
-    ownerid: process.env.OWNER_ID,
-    prefix: process.env.PREFIX,
-    adminrolename: process.env.ADMIN_ROLE,
-    modrolename: process.env.MOD_ROLE,
-    defaultrole: process.env.DEFAULT_ROLE,
-    muterole: process.env.MUTE_ROLE,
-    defaultchannel: process.env.DEFAULT_CHANNEL,
-    moderationchannel: process.env.MODERATION_CHANNEL
-  }
-  fs.writeFileSync("settings.json",JSON.stringify(settings), 'utf8',(err,data)=>{
-    console.log(err);
-  });
-  settings = require('./settings');
-}
+const settings = require('./settings');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const chalk = require('chalk');

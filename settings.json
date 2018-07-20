@@ -1,0 +1,9 @@
+{
+	"prefix": "~",
+	"adminrolename": "Reaper",
+	"modrolename": "Minion",
+	"defaultrole": "Pleb",
+	"muterole": "Silenced",
+	"defaultchannel": "bot-log",
+	"moderationchannel": "mod-log",
+}
