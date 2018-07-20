@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node AldoBot.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "npm install -g ffmpeg-binaries"
   },
   "author": "Alistair Quinn",
   "license": "MIT",
