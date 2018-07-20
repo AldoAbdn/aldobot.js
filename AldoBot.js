@@ -12,7 +12,7 @@ Imports, and initial setup
 const fs = require('fs');
 var settings;
 try{
-  settings = require('./settings.json');
+  settings = require('./settings');
 } catch(error) {
   let settings = {
     ownerid: process.env.OWNER_ID,
@@ -25,7 +25,7 @@ try{
     moderationchannel: process.env.MODERATION_CHANNEL
   }
   fs.writeFileSync("settings.json",JSON.stringify(settings));
-  settings = require('./settings.json');
+  settings = require('./settings');
 }
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -82,7 +82,7 @@ client.elevation = message => {
   if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
   const admin_role = message.guild.roles.find('name', settings.adminrolename);
   if (admin_role && message.member.roles.has(admin_role.id)) permlvl = 3;
-  if (message.author.id === settings.ownerid) permlvl = 4;
+  if (message.author.id === process.env.OWNER_ID) permlvl = 4;
   return permlvl;
 };
 
