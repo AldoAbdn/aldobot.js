@@ -24,7 +24,9 @@ try{
     defaultchannel: process.env.DEFAULT_CHANNEL,
     moderationchannel: process.env.MODERATION_CHANNEL
   }
-  fs.writeFileSync("settings.json",JSON.stringify(settings));
+  fs.writeFileSync("settings.json",JSON.stringify(settings), 'utf8',(err,data)=>{
+    console.log(err);
+  });
   settings = require('./settings');
 }
 const Discord = require('discord.js');
