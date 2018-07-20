@@ -77,7 +77,7 @@ Start a command line at the root of the projects folder (If you haven't already 
 You will need to start the bot with two environment variables: 
 ```
 TOKEN
-OWNDER_ID
+OWNER_ID
 ```
 These will correspond to the values you retrieved earlier. There are many ways to do this but a simple way is:
 ```
