@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     } else if (key != null){
         //Only key passed, returns value
         let value = metadb.getValue(userid,key);
-        if (value != undefined){
+        if (value != null){
             message.reply(key + ": " + value);
         } else {
             message.reply("No value stored for this key");
