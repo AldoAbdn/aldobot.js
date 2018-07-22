@@ -9,7 +9,7 @@ var connect = async function(){
 }
 
 exports.metaDataHelper = {
-    update:async (userid, object) =>{await connect();return await db.collection('meta').updateOne({_id:userid},object)},
+    update:async (userid, object) =>{await connect();return await db.collection('meta').updateOne({_id:userid},{$set:object,{upsert:true})},
     getObject:async (userid) => {await connect();return await db.collection('meta').findOne({_id:userid});},
     getValue:async (userid, key) => {await connect();var user = await db.collection('meta').findOne({_id:userid});return user[key];}
 }
