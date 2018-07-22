@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
         message.reply("Value stored with key: " + key);
     } else if (key != null){
         //Only key passed, returns value
-        let value = metadb.getValue(userid,key);
+        let value = await metadb.getValue(userid,key);
         if (value != null){
             message.reply(key + ": " + value);
         } else {
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
     } else {
         //If neither of above print meta object
         string = ``;
-        let user = metadb.getObject(userid);
+        let user = await metadb.getObject(userid);
         for (key in user){
             string += `\n${key}:${user[key]}`;
         }
