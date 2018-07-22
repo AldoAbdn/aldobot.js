@@ -3,7 +3,6 @@ const url = process.env.DB;
 var db;
 var connect = async function(){
     db = await mongodbClient.connect(url);
-    return await db;
 }
 
 exports.connect = connect;
