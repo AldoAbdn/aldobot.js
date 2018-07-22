@@ -5,7 +5,7 @@ exports.run = async(client, message, args) => {
     //retrieve message 
     var selectedMessage = message.channel.fetchMessage(messageid);
     //Add message to channel 
-    channel.sendMessage(`{selectedMessage.author} Wrote: \n\n {selectedMessage.content}`);
+    channel.send(`{selectedMessage.author} Wrote: \n\n {selectedMessage.content}`);
   };
   
   exports.conf = {

@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
   .setFooter(`Case ${caseNum}`);
   //If there is a moderation channel, post embed there
   if (log!=null){
-    return log.sendMessage({embed});
+    return log.send({embed});
   }
   //Create new channel
   var supportTicket = guild.createChannel("support-ticket-"+caseNum,'text');
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
     'VIEW_CHANNEL':true
   })
   supportTicket.setParent(supportcategory);
-  supportTicket.sendMessage(embed);
+  supportTicket.send(embed);
 };
 
 exports.conf = {
