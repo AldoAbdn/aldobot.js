@@ -1,4 +1,4 @@
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
   //Set variables
   const log = message.guild.channels.find('name', settings.supportlog) || message.guild.channels.find("name", settings.defaultchannel);
   var supportticket;

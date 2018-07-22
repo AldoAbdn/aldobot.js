@@ -1,6 +1,6 @@
 const settings = require('../settings.json');
 const {embedSan} = require('../util/embedSan.js');
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
   //Set variables
   const channels = message.guild.channels;
   const log = channels.find('name', settings.supportlog) || message.guild.channels.find("name", settings.defaultchannel);
