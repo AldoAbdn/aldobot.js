@@ -1,11 +1,12 @@
 const mongodbClient= require('mongodb').MongoClient;
 const url = process.env.DB;
 var db;
-
-exports.connect = async function(){
+var connect = async function(){
     db = await mongodbClient.connect(url);
     return await db;
 }
+
+exports.connect = connect;
 
 exports.metaDataHelper = {
     update:async (userid, object) =>{return await db.collection('meta').updateOne({_id:userid},object)},
