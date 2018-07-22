@@ -3,7 +3,8 @@ const url = process.env.DB;
 var db;
 var connect = async function(){
     if (db == undefined){
-        db = await mongodbClient.connect(url).db("aldobot");
+        db = await mongodbClient.connect(url);
+        db = db.db('aldobot');
     }    
 }
 
