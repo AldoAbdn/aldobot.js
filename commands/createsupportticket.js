@@ -5,7 +5,6 @@ const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   //Variables
   const user = message.mentions.users.first();
-  const issue = args.splice(1).join(" ");
   const guild = message.guild;
   const defaultrole = message.guild.roles.find('name',setings.defaultrole);
   const supportcategory = message.guild.channels.find("name", "support-tickets") || message.guild.createChannel('support-tickets','category');
