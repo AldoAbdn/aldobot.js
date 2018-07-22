@@ -4,6 +4,7 @@ var db;
 
 exports.connect = async function(){
     db = await mongodbClient.connect(url);
+    return await db;
 }
 
 exports.metaDataHelper = {
