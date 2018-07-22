@@ -9,8 +9,6 @@
 /*
 Imports, and initial setup 
 */
-const dbhelper = require('./util/db');
-async ()=>{await dbhelper.connect()};
 const fs = require('fs');
 const settings = require('./settings');
 const Discord = require('discord.js');
