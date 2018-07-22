@@ -1,5 +1,5 @@
 const {metadb} = require("./util/db").metaDataHelper;
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
     let userid = message.author.id;
     let key = args[0];
     let value;
