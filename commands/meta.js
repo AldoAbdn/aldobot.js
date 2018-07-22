@@ -1,5 +1,6 @@
+const {metadb} = require("./util/db").metaDataHelper;
 exports.run = (client, message, args) => {
-    let user = message.author;
+    let userid = message.author.id;
     let key = args[0];
     let value;
     //Concats args 
@@ -8,31 +9,28 @@ exports.run = (client, message, args) => {
     } else {
         value = null;
     }
-    //Checks if meta object is defined
-    if (user.meta == undefined){
-        user.meta = {};
-    }
     //Checks input gives appropriate response
     if (key != null && value != null){
         //Both values have been passed, sets value
-        user.meta[key] = value;
+        await metadb.update(userid,{key:value});
         message.reply("Value stored with key: " + key);
     } else if (key != null){
         //Only key passed, returns value
-        if (user.meta[key] != undefined){
-            message.reply(key + ": " +user.meta[key]);
+        let value = metadb.getValue(userid,key);
+        if (value != undefined){
+            message.reply(key + ": " + value);
         } else {
             message.reply("No value stored for this key");
         }
     } else {
         //If neither of above print meta object
         string = ``;
-        for (key in user.meta){
-            string += `\n${key}:${user.meta[key]}`;
+        let user = metadb.getObject(userid);
+        for (key in user){
+            string += `\n${key}:${user[key]}`;
         }
         message.reply(`:Meta Data:${string}`,{code:'asciidoc'});
     }
-
 };
   
 exports.conf = {

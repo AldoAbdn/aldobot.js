@@ -1,7 +1,8 @@
 exports.run = (client, message) => {
+    const currentlyPlaying = message.guild.currentlyPlaying;
     //If currently playing is set, reply with details
-    if (message.guild.currentlyPlaying){
-        message.reply(`:Now Playing:\n${client.guilds.get(message.guild.id).currentlyPlaying.title}`,{code:'asciidoc'});   
+    if (currentlyPlaying){
+        message.reply(`:Now Playing:\n${currentlyPlaying.title}`,{code:'asciidoc'});   
     } else {
         message.reply("Not Currently Playing Music");
     }

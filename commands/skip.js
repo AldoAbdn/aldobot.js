@@ -1,23 +1,26 @@
 exports.run = (client, message, args) => {
+  const voiceChannel = message.member.voiceChannel
+  var queue = message.guild.queue;
+  var dispatcher = message.guild.dispatcher;
   //If not in voice channel, return
-  if (!client.voiceConnections.find("channel",message.member.voiceChannel)){
+  if (!client.voiceConnections.find("channel",voiceChannel)){
     return;
   }
   //If no queue, set it
-  if (!message.guild.queue){
-    message.guild.queue = [];
+  if (!queue){
+    queue = [];
   }
   //Get passed in index
   let index = parseInt(args[0]);
   //If a valid index passed in, skip it from current queue
-  if (index > 0 && index <= message.guild.queue.length){
+  if (index > 0 && index <= queue.length){
     message.guild.queue.splice(index-1,1);
-  } else if(index < 0 || index > message.guild.queue.length){
+  } else if(index < 0 || index > queue.length){
     //Index invalid
     message.reply("Invalid Index");
-  } else if(message.guild.dispatcher){
+  } else if(dispatcher){
     //If no index passed, skip current playing song
-    message.guild.dispatcher.end();
+    dispatcher.end();
   } else {
     //No music
     message.reply("Not Currently Playing Music");

@@ -5,5 +5,6 @@
 	"defaultrole": "Pleb",
 	"muterole": "Silenced",
 	"defaultchannel": "bot-log",
-	"moderationchannel": "mod-log"
+	"moderationchannel": "mod-log",
+	"supportchannel": "support-tickets"
 }

@@ -3,6 +3,7 @@ const settings = require('../settings.json');
 exports.run = (client, message, args) => {
   //Setup
   const role = message.guild.roles.find("name",settings.defaultrole);
+  const id = message.channel.id;
   if (!client.lockit) client.lockit = [];
   const time = args.join(' ');
   const validUnlocks = ['release', 'unlock'];
@@ -14,8 +15,8 @@ exports.run = (client, message, args) => {
     }).then(() => {
       //Unlocks channel
       message.channel.send('Lockdown lifted.');
-      clearTimeout(client.lockit[message.channel.id]);
-      delete client.lockit[message.channel.id];
+      clearTimeout(client.lockit[id]);
+      delete client.lockit[id];
     }).catch(error => {
       console.log(error);
     });
@@ -26,12 +27,12 @@ exports.run = (client, message, args) => {
       //Loccks down channel for specified time
       message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
 
-        client.lockit[message.channel.id] = setTimeout(() => {
+        client.lockit[id] = setTimeout(() => {
           //Only for default role
           message.channel.overwritePermissions(role, {
             SEND_MESSAGES: null
           }).then(message.channel.send('Lockdown lifted.')).catch(console.error);
-          delete client.lockit[message.channel.id];
+          delete client.lockit[id];
         }, ms(time));
 
       }).catch(error => {

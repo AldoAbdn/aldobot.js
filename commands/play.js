@@ -1,34 +1,39 @@
 const {playQueue} = require('../util/playQueue.js');
 const yt = require('ytdl-core');
-
 exports.run = (client, message, args) => {
+  //Variables
+  var lock = message.guild.lock;
+  var volume = message.guild.volume;
+  var queue = message.guild.queue;
   //If no lock attribute, make one
-  if (message.guild.lock == null){
-    message.guild.lock = false;
+  if (lock == null){
+    lock = false;
   } 
   //If no volume attribute, make one
-  if (message.guild.volume == null){
-    message.guild.volume = 1;
+  if (volume == null){
+    volume = 1;
   }
   //If no queue attribute, make one
-  if (!message.guild.queue){
-    message.guild.queue = [];
+  if (!queue){
+    queue = [];
   }
   //Set variables
-  let url = args[0];
+  let urls = args[0].join(",");
   let replay = args[1];
-  //If url, get YT info and add to queue 
-  if (url) {
-    //Get YT info
-    yt.getInfo(url, function(err, info){
-      //If error, return message
-      if (err) {
-        message.reply("Invalid URL");
-        return;
-      }
-      //Push YT to queue
-      message.guild.queue.push(info);
-    })
+  for (var url of urls){
+    //If url, get YT info and add to queue 
+    if (url) {
+      //Get YT info
+      yt.getInfo(url, function(err, info){
+        //If error, return message
+        if (err) {
+          message.reply("Invalid URL");
+          return;
+        }
+        //Push YT to queue
+       queue.push(info);
+      })
+    }
   }
   //Play queue
   playQueue(client,message);

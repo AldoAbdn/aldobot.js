@@ -9,6 +9,8 @@
 /*
 Imports, and initial setup 
 */
+const dbhelper = require('./util/db');
+await dbhelper.connect();
 const fs = require('fs');
 const settings = require('./settings');
 const Discord = require('discord.js');
@@ -16,7 +18,6 @@ const client = new Discord.Client();
 const chalk = require('chalk');
 const moment = require('moment');
 require('./util/eventLoader')(client);
-
 
 const log = message => {
   console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message}`);

@@ -1,11 +1,12 @@
 exports.run = async (client, message, args) => {
   const guild = message.guild;
+  const voiceChannel = message.member.voiceChannel;
   //If no lock, bot isn't in a voice channel yet
   if (guild.lock == null){
       return;
   } 
   //Check if user is in same channel as bot
-  if(client.voiceConnections.find("channel",message.member.voiceChannel)){
+  if(client.voiceConnections.find("channel",voiceChannel)){
     //Toggles lock
     guild.lock = !guild.lock;
     message.reply(server.lock ? 'Bot Locked' : 'Bot Unlocked');

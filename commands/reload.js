@@ -1,5 +1,6 @@
 exports.run = (client, message, args) => {
-  let command;
+  var command;
+  const channel = message.channel;
   //Sets command to passed in command
   if (client.commands.has(args[0])) {
     command = args[0];
@@ -8,10 +9,10 @@ exports.run = (client, message, args) => {
   }
   //If no command return message
   if (!command) {
-    return message.channel.send(`I cannot find the command: ${args[0]}`);
+    return channel.send(`I cannot find the command: ${args[0]}`);
   } else {
     //Reloads command
-    message.channel.send(`Reloading: ${command}`)
+    channel.send(`Reloading: ${command}`)
       .then(m => {
         client.reload(command)
           .then(() => {

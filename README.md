@@ -32,6 +32,14 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Purge       | Purges X amount of messages from a given channel | purge (number) |
 | Reason      | Updates an unset moderator action | reason (case-number) (new-reason) |
 | Reload      | Reloads the command file, if it\'s been updated or modified | reload (commandname) |
+| Togglerole | toggles a given role on a user | togglerole (user) (role) |
+| Movemessage | Moves a message to a new channel | movemessage (channel) (messageid) | 
+
+### Customer Support
+| Createsupportticket | Creates a new support ticket case and channel | createsupportticket (user) (issue)|
+| Updatesupportticketissue | Updates issue of a support ticket | updatessupportticketissue (case) (issue) |
+| Updatesupportticketstatus | Updates status of a support ticket | updatesupportticketstatus (case) (update)| 
+| Completesupportticket | Deletes a closed support ticket | deletesupportticket (case) |
 
 ### Just for Fun
 | Command     | Description   | Usage |
@@ -39,6 +47,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Ping        | Ping/Pong command. I wonder what this does? /sarcasm | ping |
 | Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed | roll (max **optional**) |
 | Meta        | Lets a user store data, can be used to store traits for an RPG for example | meta (key) (value **optional**) |
+| Setgame | Sets bot current game | setgame (game) |
 
 ## Setup
 Clone this repo
@@ -64,6 +73,11 @@ Instructions to find your own user ID can be found [here](https://support.discor
 
 You will put these into environment variables. More info can be found [here](https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html)
 
+### Mongodb URL
+You can going to need either a local mongobd url or an external one. You will pass this to the application through an environment variable. Example of a local URL is [here](https://www.w3schools.com/nodejs/nodejs_mongodb_create_db.asp)
+
+Without a mongodb setup you will not be able to use the meta command. To disable the meta command open meta.js in the commands folder and set enabled to false in exports.conf
+
 ### FFMPEG
 This bot requires FFMPEG to play music. If you are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
 
@@ -74,14 +88,15 @@ Just to be safe, navigate to the project folder and open a command prompt there.
 
 Start a command line at the root of the projects folder (If you haven't already done so)
 
-You will need to start the bot with two environment variables: 
+You will need to start the bot with three environment variables: 
 ```
 TOKEN
 OWNER_ID
+DB
 ```
 These will correspond to the values you retrieved earlier. There are many ways to do this but a simple way is:
 ```
-TOKEN=token OWNER_ID=ownerid node AldoBot.js
+TOKEN=token OWNER_ID=ownerid DB=mongodburlhere node AldoBot.js
 ```
 To save yourself time, add this command with your own bot token and owner id to the start script in package.json, being careful not to push the edited repo
 

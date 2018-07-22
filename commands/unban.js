@@ -1,16 +1,23 @@
 exports.run = async(client, message, args) => {
   //Set variables
   const reason = args.slice(1).join(' ');
-  const user = await client.fetchUser(args[0]);
-  //Sets reason and unbanner
+  var userids = args[0].split(",");
+  var users = [];
+  const guild = message.guild;
+  for (var userid of userids){
+    users.append(await client.fetchUser(userid));
+  }
+  //Sets reason and unbanne
   client.unbanReason = reason;
   client.unbanAuth = message.author;
   //If no reason, returns
   if (reason.length < 1) return message.reply('You must supply a reason for the unban.');
-  //Must pass a user resolvable
-  if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').catch(console.error);
-  //Unbans user
-  message.guild.unban(user);
+    for (var user in users){
+    //Must pass a user resolvable
+    if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').catch(console.error);
+    //Unbans user
+    guild.unban(user);
+  }
 };
 
 exports.conf = {
