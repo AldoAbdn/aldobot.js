@@ -6,5 +6,6 @@
 	"muterole": "Silenced",
 	"defaultchannel": "bot-log",
 	"moderationchannel": "mod-log",
-	"supportchannel": "support-tickets"
+	"supportchannel": "support-tickets",
+	"supportcategory": "support-tickets-collection"
 }
