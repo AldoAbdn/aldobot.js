@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
   var logs;
   var caseLog;
   for (var caseNumber of caseNumbers){
-    supportticket = channels.find("name","support-ticket-")
+    supportticket = channels.find("name","support-ticket-"+caseNumber);
     logs = [log,supportticket];
     for (var channel of logs){
       //If channel is valid

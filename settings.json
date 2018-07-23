@@ -7,5 +7,5 @@
 	"defaultchannel": "bot-log",
 	"moderationchannel": "mod-log",
 	"supportchannel": "support-tickets",
-	"supportcategory": "support-tickets-collection"
+	"supportcategory": "support-tickets-log"
 }
