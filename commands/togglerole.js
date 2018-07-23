@@ -6,6 +6,7 @@ exports.run = async(client, message, args) => {
   for(var member of members){
     //Toggle role
     console.log(member.roles.has(role));
+    console.log(member.roles.array().length);
     
     if (member.roles.has(role)) {
       //Removes roll
