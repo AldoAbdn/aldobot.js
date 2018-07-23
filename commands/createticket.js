@@ -46,7 +46,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'createsupportticket',
+  name: 'createticket',
   description: 'Creates a new support ticket case and channel',
-  usage: 'createsupportticket <user> <issue>'
+  usage: 'createticket <user> <issue>'
 };

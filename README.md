@@ -36,10 +36,10 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Movemessage | Moves a message to a new channel | movemessage (channel) (messageid) | 
 
 ### Customer Support
-| Createsupportticket | Creates a new support ticket case and channel | createsupportticket (user) (issue)|
-| Updatesupportticketissue | Updates issue of a support ticket | updatessupportticketissue (case) (issue) |
-| Updatesupportticketstatus | Updates status of a support ticket | updatesupportticketstatus (case) (update)| 
-| Completesupportticket | Deletes a closed support ticket | deletesupportticket (case) |
+| Createticket | Creates a new support ticket case and channel | createticket (user) (issue)|
+| issue | Updates issue of a support ticket | issue (case) (issue) |
+| status | Updates status of a support ticket | status (case) (update)| 
+| Completeticket | Deletes a closed support ticket | completeticket (case) |
 
 ### Just for Fun
 | Command     | Description   | Usage |
