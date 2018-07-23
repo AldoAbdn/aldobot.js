@@ -29,7 +29,8 @@ exports.run = async (client, message, args) => {
           channel.fetchMessage(caseLog.id).then(logMsg => {
             let embed = logMsg.embeds[0];
             embedSan(embed);
-            embed.description = embed.description.replace(`Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`, newReason);
+            let index = embed.description.indexOf("Issue:");
+            embed.description = embed.description.substring(0,index+8)+" "+newReason;
             logMsg.edit({embed});
           });
         });

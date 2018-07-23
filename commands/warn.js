@@ -7,8 +7,10 @@ exports.run = async (client, message, args) => {
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
   //Get users
   const users = message.mentions.users;
+  //Channels
+  const channels = message.guild.channels;
   //Get case number and reason, form fancy embed
-  const log = message.gulid.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name", settings.defaultchannel);
+  const log = channels.find("name",settings.moderationchannel) || channels.find("name", settings.defaultchannel);
   var caseNum;
   var reason;
   for (var user of users){

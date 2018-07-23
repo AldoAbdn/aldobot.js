@@ -22,6 +22,9 @@ exports.run = async (client, message, args) => {
         log.fetchMessage(caseLog.id).then(logMsg => {
           const embed = logMsg.embeds[0];
           embedSan(embed);
+          let index = embed.description.indexOf("Reason:");
+          embed.description = embed.description.substring(0,index+9)+" "+newReason;
+          logMsg.edit({embed});
           embed.description = embed.description.replace(`Awaiting moderator's input. Use ${settings.prefix}reason ${caseNumber} <reason>.`, newReason);
           logMsg.edit({embed});
         });
