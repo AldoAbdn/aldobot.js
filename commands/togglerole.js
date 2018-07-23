@@ -1,7 +1,7 @@
 exports.run = async(client, message, args) => {
   //Set variables
   const members = message.mentions.members.array();
-  const role = message.mentions.roles[0];
+  const role = message.mentions.roles.first();
   const guild = message.guild;
   for(var member of members){
     //Toggle role
