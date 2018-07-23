@@ -4,11 +4,11 @@ exports.run = async(client, message, args) => {
   const role = args[1];
   const guild = message.guild;
   //Toggle role
-  if (guild.member(user).roles.has(role)) {
-    guild.member(user).removeRole(role).catch(console.error);
+  if (user.roles.has(role)) {
+    user.removeRole(role).catch(console.error);
   } else {
     //Removes roll
-    guild.member(user).removeRole(role).catch(console.error);
+    user.removeRole(role).catch(console.error);
   }
 };
 
