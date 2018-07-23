@@ -7,11 +7,11 @@ exports.run = async (client, message, args) => {
   const user = message.mentions.users.first();
   const guild = message.guild;
   const defaultrole = message.guild.roles.find('name',settings.defaultrole);
-  const supportcategory = message.guild.channels.find("name", settings.supportcategory) || message.guild.createChannel('support-tickets-category','category');
+  const supportcategory = message.guild.channels.find("name", settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
   if (message.mentions.users.size < 1) return message.reply('You must mention someone create a ticket for them.').catch(console.error);
   //Get case number and reason, form fancy embed
-  const log = message.guild.channels.find("name",settings.supportchannel) || message.guild.channels.find("name",settings.defaultchannel);
+  const log = guild.channels.find("name",settings.supportchannel) || guild.channels.find("name",settings.defaultchannel);
   parseUser(message, user);
   //Case number and reason 
   const caseNum = await caseNumber(client, log);
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
   .setFooter(`Case ${caseNum}`);
   //If there is a moderation channel, post embed there
   if (log!=null){
-    return log.send({embed});
+    log.send({embed});
   }
   //Create new channel
   var supportTicket = guild.createChannel("support-ticket-"+caseNum,'text');
