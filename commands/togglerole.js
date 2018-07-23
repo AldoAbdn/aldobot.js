@@ -1,7 +1,7 @@
 exports.run = async(client, message, args) => {
   //Set variables
   const users = message.mentions.users;
-  const role = message.mentions.role[0];
+  const role = message.mentions.roles[0];
   const guild = message.guild;
   var guildMember;
   for (var user of users){
