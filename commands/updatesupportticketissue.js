@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
   const channels = message.guild.channels;
   const log = channels.find('name', settings.supportchannel) || message.guild.channels.find("name", settings.defaultchannel);
   const caseNumbers = args[0].split(",");
-  const newReason = args.slice[1].join(" ");
+  const newReason = args.slice(1).join(" ");
   var supportticket;
   var logs;
   var caseLog;
