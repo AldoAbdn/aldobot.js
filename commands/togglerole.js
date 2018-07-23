@@ -1,9 +1,9 @@
 exports.run = async(client, message, args) => {
   //Set variables
-  const members = message.mentions.members;
+  const members = message.mentions.members.array();
   const role = message.mentions.roles[0];
   const guild = message.guild;
-  for (var member of members){
+  for(var member of members){
     //Toggle role
     if (member.roles.has(role)) {
       //Removes roll
