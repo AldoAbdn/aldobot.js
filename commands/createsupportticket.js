@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
     log.send({embed});
   }
   //Create new channel
-  var supportTicket = guild.createChannel("support-ticket-"+caseNum,'text');
+  var supportTicket = await guild.createChannel("support-ticket-"+caseNum,'text');
   supportTicket.send(embed);
   supportTicket.overwritePermissions(defaultrole,{
     'VIEW_CHANNEL':false
