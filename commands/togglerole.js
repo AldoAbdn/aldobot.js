@@ -8,10 +8,11 @@ exports.run = async(client, message, args) => {
     guildMember = guild.fetchMember(user);
     //Toggle role
     if (guildMember.roles.has(role)) {
-      guildMember.removeRole(role).catch(console.error);
-    } else {
       //Removes roll
       guildMember.removeRole(role).catch(console.error);
+    } else {
+      //Add role      
+      guildMember.addRole(role).catch(console.error);
     }
   }
 };
