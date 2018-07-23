@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
   for (var user of users){
     parseUser(message, user);
     //Case number and reason 
-    caseNum = await caseNumber(client, modlog);
+    caseNum = await caseNumber(client, log);
     reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
     //Nice embed
     const embed = new RichEmbed()
