@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
           channel.fetchMessage(caseLog.id).then(logMsg => {
             let embed = logMsg.embeds[0];
             embedSan(embed);
-            let index = embed.description.indexof("Status:");
+            let index = embed.description.indexOf("Status:");
             embed.description = embed.description.splice(0,index+7)+newReason;
             logMsg.edit({embed});
           });
