@@ -28,6 +28,7 @@ exports.run = async (client, message, args) => {
   }
   //Create new channel
   var supportTicket = guild.createChannel("support-ticket-"+caseNum,'text');
+  supportTicket.send(embed);
   supportTicket.overwritePermissions(defaultrole,{
     'VIEW_CHANNEL':false
   });
@@ -35,7 +36,6 @@ exports.run = async (client, message, args) => {
     'VIEW_CHANNEL':true
   })
   supportTicket.setParent(supportcategory);
-  supportTicket.send(embed);
 };
 
 exports.conf = {
