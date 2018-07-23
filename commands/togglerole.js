@@ -1,18 +1,16 @@
 exports.run = async(client, message, args) => {
   //Set variables
-  const users = message.mentions.users;
+  const members = message.mentions.members;
   const role = message.mentions.roles[0];
   const guild = message.guild;
-  var guildMember;
-  for (var user of users){
-    guildMember = guild.fetchMember(user);
+  for (var member of members){
     //Toggle role
-    if (guildMember.roles.has(role)) {
+    if (member.roles.has(role)) {
       //Removes roll
-      guildMember.removeRole(role).catch(console.error);
+      member.removeRole(role).catch(console.error);
     } else {
       //Add role      
-      guildMember.addRole(role).catch(console.error);
+      member.addRole(role).catch(console.error);
     }
   }
 };
