@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
   //Variables
   const user = message.mentions.users.first();
   const guild = message.guild;
-  const defaultrole = message.guild.roles.find('name',setings.defaultrole);
+  const defaultrole = message.guild.roles.find('name',settings.defaultrole);
   const supportcategory = message.guild.channels.find("name", "support-tickets") || message.guild.createChannel('support-tickets','category');
   //Checks if a user was mentioned
   if (message.mentions.users.size < 1) return message.reply('You must mention someone create a ticket for them.').catch(console.error);
