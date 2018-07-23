@@ -11,6 +11,7 @@ exports.run = async (client, message, args) => {
   var caseLog;
   for (var caseNumber of caseNumbers){
     supportticket = channels.find("name","support-ticket-")
+    logs = [log,supportticket];
     for (var channel of logs){
       //If channel is valid
       if (channel){

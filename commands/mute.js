@@ -4,7 +4,7 @@ const {parseUser} = require('../util/parseUser.js');
 const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   //Setup
-  const users = message.mentions.users;
+  const users = message.mentions.users.array();
   parseUser(message, user);
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name",settings.defaultchannel);
   const defaultRole = client.guilds.get(message.guild.id).roles.find('name', settings.defaultrole);
