@@ -5,12 +5,8 @@ exports.run = async(client, message, args) => {
   const guild = message.guild;
   for(var member of members){
     //Toggle role
-    console.log(member.roles.has(role));
-    console.log(member.roles.array().length);
-    
-    if (member.roles.has(role)) {
+    if (member.roles.find("name",role.name)){
       //Removes roll
-      console.log("Here");
       member.removeRole(role).catch(console.error);
     } else {
       //Add role      
