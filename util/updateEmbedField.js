@@ -1,4 +1,4 @@
-exports.updateEmbedField = (channels,caseNumber,field,newValue) => {
+exports.updateEmbedField = async (channels,caseNumber,field,newValue) => {
   for (var channel of channels){
     //If channel is valid
     if (channel){
