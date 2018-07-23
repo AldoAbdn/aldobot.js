@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
             let embed = logMsg.embeds[0];
             embedSan(embed);
             let index = embed.description.indexOf("Status:");
-            embed.description = embed.description.splice(0,index+7)+newReason;
+            embed.description = embed.description.substring(0,index+7)+newReason;
             logMsg.edit({embed});
           });
         });
