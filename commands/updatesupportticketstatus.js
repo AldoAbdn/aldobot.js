@@ -3,7 +3,7 @@ const {embedSan} = require('../util/embedSan.js');
 exports.run = async (client, message, args) => {
   //Set variables
   const channels = message.guild.channels;
-  const log = channels.find('name', settings.supportchannel) || message.guild.channels.find("name", settings.defaultchannel);
+  const log = channels.find('name', settings.supportchannel) || channels.find("name", settings.defaultchannel);
   const caseNumbers = args[0].split(",");
   const newReason = args.slice[1].join(" ");
   var supportticket;
