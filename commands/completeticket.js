@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
   for (var caseNumber of caseNumbers){
     //Get support ticket channel 
     supportticket = message.guild.channels.find("name","support-ticket-"+caseNumber);
-    logs = [log,supportticket];
+    logs = [log];
     updateEmbedField(logs,client.user.id,caseNumber,query,"COMPLETED");
     //Delete support channel 
     supportticket.delete("Completed");
