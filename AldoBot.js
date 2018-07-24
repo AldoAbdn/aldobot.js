@@ -25,7 +25,6 @@ async function setup(){
 
   //DB Setup
   let dbhelper = DBHelper.DBHelper;
-  console.log(dbhelper.url + " " + dbhelper.dbname);
   await dbhelper.connect();
   client.DBHelper = dbhelper;
 
