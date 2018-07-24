@@ -46,15 +46,15 @@ exports.run = async (client, message, args) => {
 };
   
 exports.conf = {
-enabled: true,
-guildOnly: false,
-aliases: [],
-category: "Just for Fun",
-permLevel: 0
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  category: "Just for Fun",
+  permLevel: 0
 };
 
 exports.help = {
-name: 'meta',
-description: 'Lets a user store data, can be used to store traits for an RPG for example',
-usage: 'meta <key> <value>(optional)'
+  name: 'meta',
+  description: 'Lets a user store data, can be used to store traits for an RPG for example',
+  usage: 'meta <key> <value>(optional)'
 };

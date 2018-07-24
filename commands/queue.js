@@ -7,16 +7,16 @@ exports.run = (client, message) => {
   message.reply(createQueueString(queue),{code:'asciidoc'});
 };
   
-  exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: [],
-    category: "Music",
-    permLevel: 0
-  };
-  
-  exports.help = {
-    name: 'queue',
-    description: 'Shows current song queue',
-    usage: 'queue'
-  };
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  category: "Music",
+  permLevel: 0
+};
+
+exports.help = {
+  name: 'queue',
+  description: 'Shows current song queue',
+  usage: 'queue'
+};
