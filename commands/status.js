@@ -1,6 +1,5 @@
 const {updateEmbedField} = require('../util/updateEmbedField.js');
 const settings = require('../settings.json');
-const {embedSan} = require('../util/embedSan.js');
 exports.run = async (client, message, args) => {
   //Set variables
   const channels = message.guild.channels;

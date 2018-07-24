@@ -26,7 +26,7 @@ exports.updateEmbedField = async (channels,authorID,caseNumber,field,newValue) =
           } else {
             secondHalf = "";
           }
-          embed.description = firstHalf+" "+newValue+secondHalf;
+          embed.description = firstHalf+" "+newValue+"\n"+secondHalf;
           logMsg.edit({embed});
         });
       });
