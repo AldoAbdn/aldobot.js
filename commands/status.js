@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
   for (var caseNumber of caseNumbers){
     supportticket = channels.find("name","support-ticket-"+caseNumber);
     logs = [log,supportticket];
-    updateEmbedField(logs,caseNumber,query,newReason);
+    updateEmbedField(logs,client.user.id,caseNumber,query,newReason);
   }
 };
 

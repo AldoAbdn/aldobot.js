@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
   const newReason = args.slice[1].join(" ");
   const query = "**Reason:**";
   for (var caseNumber of caseNumbers){
-    updateEmbedField([log],caseNumber,query,newReason);
+    updateEmbedField([log],client.user.id,caseNumber,query,newReason);
   }
 };
 

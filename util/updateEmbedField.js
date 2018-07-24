@@ -1,11 +1,11 @@
-exports.updateEmbedField = async (channels,caseNumber,field,newValue) => {
+exports.updateEmbedField = async (channels,authorID,caseNumber,field,newValue) => {
   for (var channel of channels){
     //If channel is valid
     if (channel){
       //Fetch last 100 messages
       await channel.fetchMessages({limit:100}).then((messages) => {
         //Gets matching case log 
-        caseLog = messages.filter(m => m.author.id === client.user.id &&
+        caseLog = messages.filter(m => m.author.id === authorID &&
           m.embeds[0] &&
           m.embeds[0].type === 'rich' &&
           m.embeds[0].footer &&
