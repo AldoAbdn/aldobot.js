@@ -1,4 +1,6 @@
-const mongodbClient= require('mongodb').MongoClient;
+const mongodb = require('mongodb');
+const mongodbClient= mongodb.MongoClient;
+const ObjectID = mongodb.ObjectID;
 const url = process.env.DB;
 const dbname = process.env.DBNAME;
 
@@ -25,10 +27,10 @@ class CollectionManager {
     }
 
     async updateObject(userid, object){
-        return await this.db.collection(this.collectionname).updateOne({_id:userid},{$set:object});
+        return await this.db.collection(this.collectionname).updateOne({_id:ObjectID(userid)},{$set:object});
     }
     async getObject(userid){
-        return await this.db.collection(this.collectionname).findOne({_id:userid});
+        return await this.db.collection(this.collectionname).findOne({_id:ObjectID(userid)});
     }
 }
 
