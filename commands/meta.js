@@ -1,8 +1,8 @@
-const metadb = require("../util/db").metaDataHelper;
 exports.run = async (client, message, args) => {
     let userid = message.author.id;
     let key = args[0];
     let value;
+    let metadb = client.DBHelper.metaCollectionManager;
     //Concats args 
     if (args.length >= 2){
         value = args.slice(1).join(" ");
@@ -12,11 +12,12 @@ exports.run = async (client, message, args) => {
     //Checks input gives appropriate response
     if (key != null && value != null){
         //Both values have been passed, sets value
-        await metadb.update(userid,{key:value});
+        await metadb.updateObject(userid,{key:value});
         message.reply("Value stored with key: " + key);
     } else if (key != null){
         //Only key passed, returns value
-        let value = await metadb.getValue(userid,key);
+        let user = await metadb.getObject(userid,key);
+        let value = user[key];
         if (value != null){
             message.reply(key + ": " + value);
         } else {

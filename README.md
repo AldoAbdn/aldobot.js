@@ -88,15 +88,16 @@ Just to be safe, navigate to the project folder and open a command prompt there.
 
 Start a command line at the root of the projects folder (If you haven't already done so)
 
-You will need to start the bot with three environment variables: 
+You will need to start the bot with these environment variables: 
 ```
 TOKEN
 OWNER_ID
 DB
+DBNAME
 ```
 These will correspond to the values you retrieved earlier. There are many ways to do this but a simple way is:
 ```
-TOKEN=token OWNER_ID=ownerid DB=mongodburlhere node AldoBot.js
+TOKEN=token OWNER_ID=ownerid DB=mongodburlhere DBNAME=nameofdbhere node AldoBot.js
 ```
 To save yourself time, add this command with your own bot token and owner id to the start script in package.json, being careful not to push the edited repo
 

@@ -1,6 +1,5 @@
 const ms = require('ms');
-const settings = require('../settings.json');
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, perms, settings) => {
   //Setup
   const role = message.guild.roles.find("name",settings.defaultrole);
   const id = message.channel.id;

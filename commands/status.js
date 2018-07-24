@@ -1,6 +1,5 @@
 const {updateEmbedField} = require('../util/updateEmbedField.js');
-const settings = require('../settings.json');
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, perms, settings) => {
   //Set variables
   const channels = message.guild.channels;
   const log = channels.find('name', settings.supportchannel) || channels.find("name", settings.defaultchannel);

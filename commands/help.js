@@ -1,5 +1,4 @@
-const settings = require('../settings.json');
-exports.run = (client, message, params) => {
+exports.run = (client, message, params, perms, settings) => {
   if (!params[0]) {
     //Prints list of all commands if none was specified
     const commandNames = Array.from(client.commands.keys());
