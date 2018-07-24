@@ -27,10 +27,10 @@ class CollectionManager {
     }
 
     async updateObject(userid, object){
-        return await this.db.collection(this.collectionname).updateOne({_id:userid},{$set:object});
+        return await this.db.collection(this.collectionname).updateOne({id:userid},{$set:object});
     }
     async getObject(userid){
-        return await this.db.collection(this.collectionname).find({_id:userid}).toArray()[0];
+        return await this.db.collection(this.collectionname).findOne({id:userid});
     }
 }
 
