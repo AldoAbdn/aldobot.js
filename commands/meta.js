@@ -10,7 +10,9 @@ exports.run = async (client, message, args) => {
         value = null;
     }
     //Checks input gives appropriate response
-    if (key != null && value != null){
+    if (key.toLowerCase() == "_id"){
+        message.reply("Invaid Key");
+    }else if (key != null && value != null){
         //Both values have been passed, sets value
         let object = {};
         object[key] = value;
@@ -34,7 +36,9 @@ exports.run = async (client, message, args) => {
         let user = await metadb.getObject(userid);
         if (user != null){
             for (key in user){
-                string += `\n${key}:${user[key]}`;
+                if (key != "_id"){
+                    string += `\n${key}:${user[key]}`;
+                }
             }
         }
         message.reply(`:Meta Data:${string}`,{code:'asciidoc'});
