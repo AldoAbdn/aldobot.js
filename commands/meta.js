@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
         value = null;
     }
     //Checks input gives appropriate response
-    if (key.toLowerCase() == "_id"){
+    if (key != null && key.toLowerCase() == "_id"){
         message.reply("Invaid Key");
     }else if (key != null && value != null){
         //Both values have been passed, sets value
