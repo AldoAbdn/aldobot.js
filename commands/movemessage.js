@@ -1,11 +1,11 @@
 exports.run = async(client, message, args) => {
     //Set variables
-    const channel = args[0];
+    const channel = message.mentions.channels.first();
     const messageid = args[1];
     //retrieve message 
     var selectedMessage = message.channel.fetchMessage(messageid);
     //Add message to channel 
-    channel.send(`{selectedMessage.author} Wrote: \n\n {selectedMessage.content}`);
+    channel.send(`${selectedMessage.author} Wrote: \n\n ${selectedMessage.content}`);
   };
   
   exports.conf = {

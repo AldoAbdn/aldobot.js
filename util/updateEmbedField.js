@@ -16,8 +16,16 @@ exports.updateEmbedField = async (channels,caseNumber,field,newValue) => {
         channel.fetchMessage(caseLog.id).then(logMsg => {
           let embed = logMsg.embeds[0];
           embedSan(embed);
-          let index = embed.description.indexof(field);
-          embed.description = embed.description.substring(0,index+field.length)+" "+newValue;
+          let index = embed.description.indexOf(field);
+          let firstHalf = embed.description.substring(0,index+field.length);
+          let secondHalf = embed.description.substring(index+field.length+1);
+          let endIndex = secondHalf.indexOf("**");
+          if (endIndex != -1){
+            secondHalf = secondHalf.substring(endIndex);
+          } else {
+            secondHalf = "";
+          }
+          embed.description = firstHalf+" "+newValue+secondHalf;
           logMsg.edit({embed});
         });
       });
