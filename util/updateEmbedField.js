@@ -1,3 +1,4 @@
+const {embedSan} = require('../util/embedSan.js');
 exports.updateEmbedField = async (channels,authorID,caseNumber,field,newValue) => {
   for (var channel of channels){
     //If channel is valid
