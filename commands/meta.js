@@ -12,7 +12,8 @@ exports.run = async (client, message, args) => {
     //Checks input gives appropriate response
     if (key != null && value != null){
         //Both values have been passed, sets value
-        await metadb.updateObject(userid,{key:value});
+        let result = await metadb.updateObject(userid,{key:value});
+        console.log(result);
         message.reply("Value stored with key: " + key);
     } else if (key != null){
         //Only key passed, returns value
