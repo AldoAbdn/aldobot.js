@@ -14,6 +14,7 @@ class DBHelper {
     async connect(){
         var db = await mongodbClient.connect(this.url);
         this.db = db.db(this.dbname);
+        this.metaCollectionManager = new CollectionManager(this.db,'meta');
     }
 }
 
