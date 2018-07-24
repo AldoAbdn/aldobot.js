@@ -20,6 +20,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [],
+  category: "Customer Support",
   permLevel: 3
 };
 

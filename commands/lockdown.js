@@ -44,6 +44,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['ld'],
+  category: "Server Management",
   permLevel: 2
 };
 

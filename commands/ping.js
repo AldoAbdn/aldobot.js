@@ -11,6 +11,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [],
+  category: "Just for Fun",
   permLevel: 0
 };
 

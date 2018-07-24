@@ -14,6 +14,7 @@ exports.run = async(client, message, args) => {
     enabled: true,
     guildOnly: false,
     aliases: [],
+    category: "Server Management",
     permLevel: 2
   };
   

@@ -47,6 +47,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['unmute'],
+  category: "Server Management",
   permLevel: 2
 };
 

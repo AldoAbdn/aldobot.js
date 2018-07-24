@@ -11,6 +11,7 @@ exports.run = (client, message) => {
     enabled: true,
     guildOnly: false,
     aliases: [],
+    category: "Music",
     permLevel: 0
   };
   

@@ -12,6 +12,7 @@ exports.run = async (client, message, args, perms, settings) => {
 
 exports.conf = {
   aliases: [],
+  category: "Server Management",
   permLevel: 2
 };
 

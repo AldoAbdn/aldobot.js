@@ -12,6 +12,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [],
+  category: "Server Management",
   permLevel: 2
 };
 

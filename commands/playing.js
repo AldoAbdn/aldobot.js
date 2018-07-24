@@ -12,6 +12,7 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: [],
+    category: "Music",
     permLevel: 0
 };
 
