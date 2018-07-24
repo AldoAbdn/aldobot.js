@@ -17,7 +17,10 @@ exports.run = async (client, message, args) => {
     } else if (key != null){
         //Only key passed, returns value
         let user = await metadb.getObject(userid);
-        let value = user[key];
+        let value = null;
+        if (user != null){
+            value = user[key];
+        }
         if (value != null){
             message.reply(key + ": " + value);
         } else {
@@ -27,8 +30,10 @@ exports.run = async (client, message, args) => {
         //If neither of above print meta object
         string = ``;
         let user = await metadb.getObject(userid);
-        for (key in user){
-            string += `\n${key}:${user[key]}`;
+        if (user != null){
+            for (key in user){
+                string += `\n${key}:${user[key]}`;
+            }
         }
         message.reply(`:Meta Data:${string}`,{code:'asciidoc'});
     }
