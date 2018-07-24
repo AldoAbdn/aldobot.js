@@ -7,7 +7,7 @@ class DBHelper {
         this.url = url;
         this.dbname = dbname;
         //Add custom collection managers here 
-        this.metaCollectionManager = new CollectionManager(db,'meta');
+        this.metaCollectionManager = new CollectionManager(this.db,'meta');
         this.db = null;
     }
 
