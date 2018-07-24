@@ -1,7 +1,8 @@
 exports.groupArrayByValue = function(array, property){
-    let newArray = [];
+    let newObject = [];
     for (var item of array){
-        if (!newArray[item[property]]) newArray[item[property]] = [];
-        newArray[item[property]].push(item);
+        if (!newObject[item[property]]) newObject[item[property]] = [];
+        newObject[item[property]].push(item);
     }
+    return newObject
 }
