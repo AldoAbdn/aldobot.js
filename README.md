@@ -34,6 +34,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Reload      | Reloads the command file, if it\'s been updated or modified | reload (commandname) |
 | Togglerole | toggles a given role on a user | togglerole (user) (role) |
 | Movemessage | Moves a message to a new channel | movemessage (channel) (messageid) | 
+| Nickname | Sets a users nickname | nickname (mention) (nickname) |
 
 ### Customer Support
 | Command     | Description   | Usage |
