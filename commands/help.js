@@ -12,7 +12,7 @@ exports.run = (client, message, params, perms, settings) => {
       string += commands[group].map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n');
       stringArray.push(string);
     }
-    for (var string of stringsArray){
+    for (var string of stringArray){
       message.channel.send(string, {code:'asciidoc',split:true});
     }
   } else {
