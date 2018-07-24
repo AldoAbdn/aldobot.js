@@ -2,7 +2,7 @@ const {updateEmbedField} = require('../util/updateEmbedField.js');
 const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   //Set variables
-  const log = message.guild.channels.find('name', settings.supportlog) || message.guild.channels.find("name", settings.defaultchannel);
+  const log = message.guild.channels.find('name', settings.supportchannel) || message.guild.channels.find("name", settings.defaultchannel);
   var supportticket;
   const caseNumbers = args[0].split(",");
   const query = "**Status:**";
