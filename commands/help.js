@@ -5,12 +5,16 @@ exports.run = (client, message, params, perms, settings) => {
     const commandNames = Array.from(client.commands.keys());
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     const commands = groupCommandsByCategory(client.commands.array(),'category');
-    var string = `= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]$`;
+    var stringArray = [];
+    stringArray.push(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]`);
     for (var group in commands){
-      string += `\n\n==${group}==\n\n`;
+      let string = `\n\n == ${group} == \n\n`;
       string += commands[group].map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n');
+      stringArray.push(string);
     }
-    message.channel.send(string, {code:'asciidoc',split:true});
+    for (var string of stringsArray){
+      message.channel.send(string, {code:'asciidoc',split:true});
+    }
   } else {
     //Prints description of specified command
     let command = params[0];
