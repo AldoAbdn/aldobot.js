@@ -36,6 +36,8 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Movemessage | Moves a message to a new channel | movemessage (channel) (messageid) | 
 
 ### Customer Support
+| Command     | Description   | Usage |
+| ----------- | ------------- | ----- |
 | Createticket | Creates a new support ticket case and channel | createticket (user) (issue)|
 | issue | Updates issue of a support ticket | issue (case) (issue) |
 | status | Updates status of a support ticket | status (case) (update)| 
