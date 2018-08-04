@@ -26,8 +26,9 @@ exports.run = async (client, message, args) => {
     .setFooter(`Case ${caseNum}`);
     //If there is a moderation channel, post embed there
     if (log!=null){
-      return log.send({embed});
+      log.send({embed});
     }
+    return 
   }
 };
 
