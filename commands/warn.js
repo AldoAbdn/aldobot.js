@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
   //Checks if a user was mentioned
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
   //Get users
-  const users = message.mentions.users;
+  const users = message.mentions.users.array();
   //Channels
   const channels = message.guild.channels;
   //Get case number and reason, form fancy embed
