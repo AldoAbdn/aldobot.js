@@ -28,7 +28,6 @@ exports.run = async (client, message, args) => {
     if (log!=null){
       log.send({embed});
     }
-    return 
   }
 };
 
