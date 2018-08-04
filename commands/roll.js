@@ -3,12 +3,13 @@ exports.run = async (client, message, args) => {
     let max = parseInt(args[0]);
     let randomInt = 1;
     //Random roll, max is passed
-    if (max){
+    if(max <= 1) {
+        message.reply(`Ooops! I can only roll for a valid integer that is greater than 1`);
+    }
+    else if (max){
         randomInt = Math.floor(Math.random() * max) + 1;
         message.reply(`You rolled: ${randomInt}`);
-    } else if(max <= 1) {
-        message.reply(`Ooops! I can only roll for a valid integer that is greater than 1`);
-    }else {
+    } else {
         randomInt = Math.floor(Math.random() * 20) + 1;
         message.reply(`You rolled: ${randomInt}`);
     }
