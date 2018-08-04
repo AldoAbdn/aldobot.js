@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
   //Get case number and reason, form fancy embed
   const log = channels.find("name",settings.moderationchannel) || channels.find("name", settings.defaultchannel);
   var caseNum;
-  var reason = args.splice(2, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
+  var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   for (var user of users){
     parseUser(message, user);
     //Case number and reason 
