@@ -4,7 +4,6 @@ const {parseUser} = require('../util/parseUser.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
   const users = message.mentions.users.array();
-  parseUser(message, user);
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name",settings.defaultchannel);
   const defaultRole = client.guilds.get(message.guild.id).roles.find('name', settings.defaultrole);
   const muteRole = client.guilds.get(message.guild.id).roles.find('name', settings.muterole);
@@ -13,31 +12,33 @@ exports.run = async (client, message, args, perms, settings) => {
   var caseNum;
   var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   for (var user of users){
-    caseNum = await caseNumber(client, log);
-    //Fancy reply
-    const embed = new RichEmbed()
-      .setColor(0x00AE86)
-      .setTimestamp()
-      .setDescription(`**Action:** Un/mute\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
-      .setFooter(`Case ${caseNum}`);
-    //Bot checks if it has correct permissions
-    if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').catch(console.error);
-    //Checks if user has mute role, and if they do removes it
-    if (message.guild.member(user).roles.has(muteRole.id)) {
-      message.guild.member(user).removeRole(muteRole).catch(console.error);
-      message.guild.member(user).addRole(defaultRole).then(() => {
-        if (log!=null){
-          log.send({embed}).catch(console.error);;
-        }
-      });
-    } else {
-      //Adds mute role
-      message.guild.member(user).removeRole(defaultRole).catch(console.error);
-      message.guild.member(user).addRole(muteRole).then(() => {
-        if (log){
-          log.send({embed}).catch(console.error);;
-        }
-      });
+    if(parseUser(message, user)){
+      caseNum = await caseNumber(client, log);
+      //Fancy reply
+      const embed = new RichEmbed()
+        .setColor(0x00AE86)
+        .setTimestamp()
+        .setDescription(`**Action:** Un/mute\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+        .setFooter(`Case ${caseNum}`);
+      //Bot checks if it has correct permissions
+      if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').catch(console.error);
+      //Checks if user has mute role, and if they do removes it
+      if (message.guild.member(user).roles.has(muteRole.id)) {
+        message.guild.member(user).removeRole(muteRole).catch(console.error);
+        message.guild.member(user).addRole(defaultRole).then(() => {
+          if (log!=null){
+            log.send({embed}).catch(console.error);;
+          }
+        });
+      } else {
+        //Adds mute role
+        message.guild.member(user).removeRole(defaultRole).catch(console.error);
+        message.guild.member(user).addRole(muteRole).then(() => {
+          if (log){
+            log.send({embed}).catch(console.error);;
+          }
+        });
+      }
     }
   }
 };

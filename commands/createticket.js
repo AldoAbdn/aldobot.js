@@ -11,7 +11,7 @@ exports.run = async (client, message, args, perms, settings) => {
   if (message.mentions.users.size < 1) return message.reply('You must mention someone create a ticket for them.').catch(console.error);
   //Get case number and reason, form fancy embed
   const log = guild.channels.find("name",settings.supportchannel) || guild.channels.find("name",settings.defaultchannel);
-  parseUser(message, user);
+  if(!parseUser(message, user))return;
   //Case number and reason 
   const caseNum = await caseNumber(client, log);
   const issue = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`;

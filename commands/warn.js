@@ -14,18 +14,19 @@ exports.run = async (client, message, args) => {
   var caseNum;
   var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   for (var user of users){
-    parseUser(message, user);
-    //Case number and reason 
-    caseNum = await caseNumber(client, log);
-    //Nice embed
-    const embed = new RichEmbed()
-    .setColor(0x00AE86)
-    .setTimestamp()
-    .setDescription(`**Action:** Warning\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
-    .setFooter(`Case ${caseNum}`);
-    //If there is a moderation channel, post embed there
-    if (log!=null){
-      log.send({embed});
+    if(parseUser(message, user)){
+      //Case number and reason 
+      caseNum = await caseNumber(client, log);
+      //Nice embed
+      const embed = new RichEmbed()
+      .setColor(0x00AE86)
+      .setTimestamp()
+      .setDescription(`**Action:** Warning\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+      .setFooter(`Case ${caseNum}`);
+      //If there is a moderation channel, post embed there
+      if (log!=null){
+        log.send({embed});
+      }
     }
   }
 };

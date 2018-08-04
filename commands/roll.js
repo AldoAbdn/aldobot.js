@@ -1,6 +1,3 @@
-const {RichEmbed} = require('discord.js');
-const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
 exports.run = async (client, message, args) => {
     //Set Variables
     let max = parseInt(args[0]);
