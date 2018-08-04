@@ -7,11 +7,9 @@ exports.run = async (client, message, args, perms, settings) => {
   parseUser(message, user);
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guildchannels.find("name",settings.defaultchannel);
   var caseNum;
-  var reason;
+  var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to ban them.').catch(console.error);
   for(var user of users){
-    //Check reason 
-    reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
     //Get case number 
     caseNum = await(caseNumber, log);
     //Ban
@@ -23,7 +21,7 @@ exports.run = async (client, message, args, perms, settings) => {
     .setDescription(`**Action:** Ban\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
     .setFooter(`Case ${caseNum}`);
     if (log!=null){
-      return log.send({embed});
+      log.send({embed});
     }
   }
 };

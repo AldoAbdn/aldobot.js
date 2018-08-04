@@ -11,10 +11,9 @@ exports.run = async (client, message, args, perms, settings) => {
   if (!muteRole) return message.reply('I cannot find a mute role').catch(console.error);
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').catch(console.error);
   var caseNum;
-  var reason; 
+  var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   for (var user of users){
     caseNum = await caseNumber(client, log);
-    reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
     //Fancy reply
     const embed = new RichEmbed()
       .setColor(0x00AE86)
@@ -28,7 +27,7 @@ exports.run = async (client, message, args, perms, settings) => {
       message.guild.member(user).removeRole(muteRole).catch(console.error);
       message.guild.member(user).addRole(defaultRole).then(() => {
         if (log!=null){
-          return log.send({embed}).catch(console.error);;
+          log.send({embed}).catch(console.error);;
         }
       });
     } else {
@@ -36,7 +35,7 @@ exports.run = async (client, message, args, perms, settings) => {
       message.guild.member(user).removeRole(defaultRole).catch(console.error);
       message.guild.member(user).addRole(muteRole).then(() => {
         if (log){
-          return log.send({embed}).catch(console.error);;
+          log.send({embed}).catch(console.error);;
         }
       });
     }

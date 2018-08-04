@@ -17,7 +17,6 @@ exports.run = async (client, message, args) => {
     parseUser(message, user);
     //Case number and reason 
     caseNum = await caseNumber(client, log);
-
     //Nice embed
     const embed = new RichEmbed()
     .setColor(0x00AE86)

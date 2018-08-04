@@ -23,7 +23,7 @@ exports.run = async (client, message, args, perms, settings) => {
     .setDescription(`**Action:** Kick\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
     .setFooter(`Case ${caseNum}`);
     if (log!=null){
-      return log.send({embed});
+      log.send({embed});
     }
   }
 };
