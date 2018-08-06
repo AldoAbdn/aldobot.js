@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
     queue = [];
   }
   //Set variables
-  let urls = args[0].join(",");
+  let urls = args[0].split(",");
   let replay = args[1];
   for (var url of urls){
     //If url, get YT info and add to queue 
