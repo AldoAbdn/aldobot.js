@@ -31,6 +31,7 @@ exports.playQueue = (client,message) => {
                 });      
                 postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
               }
+              return;
             } else if(guild.currentlyPlaying){
               console.log('currentPlaying');
               let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
