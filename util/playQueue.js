@@ -26,6 +26,7 @@ exports.playQueue = (client,message) => {
                   delete message.guild.dispatcher;
                   if (guild.end === true){
                     exports.playQueue(client, message);
+                    guild.end = false;
                   }
                 });
                 guild.dispatcher.on('error', e=>{
