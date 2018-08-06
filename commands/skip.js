@@ -1,7 +1,9 @@
+const play = require("play.js");
 exports.run = (client, message, args) => {
   const voiceChannel = message.member.voiceChannel
   var queue = message.guild.queue;
   var dispatcher = message.guild.dispatcher;
+
   //If not in voice channel, return
   if (!client.voiceConnections.find("channel",voiceChannel)){
     return;
@@ -20,8 +22,9 @@ exports.run = (client, message, args) => {
     message.reply("Invalid Index");
   } else if(dispatcher){
     //If no index passed, skip current playing song
-    message.guild.end = true;
-    dispatcher.end();
+    //message.guild.end = true;
+    //dispatcher.end();
+    play.run(client,message,null);
   } else {
     //No music
     message.reply("Not Currently Playing Music");

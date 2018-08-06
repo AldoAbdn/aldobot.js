@@ -36,7 +36,6 @@ exports.run = async(client, message, args) => {
         }
     }
   }
-  message.guild.end = true;
   //Play queue
   playQueue(client,message);
 };
