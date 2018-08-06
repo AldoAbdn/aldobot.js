@@ -17,7 +17,7 @@ exports.playQueue = (client,message) => {
               console.log(guild.queue.length);
               guild.lastPlayed = guild.currentlyPlaying;
               guild.currentlyPlaying = guild.queue.shift();
-              guild.log(guild.queue.length);
+              client.log(guild.queue.length);
               if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
                 guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
                 guild.dispatcher.on('end', () => {
