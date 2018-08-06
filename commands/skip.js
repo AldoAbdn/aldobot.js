@@ -24,7 +24,7 @@ exports.run = (client, message, args) => {
     //If no index passed, skip current playing song
     //message.guild.end = true;
     //dispatcher.end();
-    play.run(client,message,null);
+    play.run(client,message,[]);
   } else {
     //No music
     message.reply("Not Currently Playing Music");
