@@ -22,10 +22,10 @@ exports.run = (client, message, args) => {
   }
   //Set variables
   let urls = args[0].split(",");
-  let replay = args[1];
   for (var url of urls){
     //If url, get YT info and add to queue 
     if (url) {
+      console.log(url)
       //Get YT info
       yt.getInfo(url, function(err, info){
         //If error, return message
