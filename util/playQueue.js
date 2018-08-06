@@ -14,7 +14,7 @@ exports.playQueue = (client,message) => {
               }
               return;
             } else if (guild.queue.length > 0){
-              console.log(guild.queue);
+              console.log(guild.queue.length);
               console.log(guild.currentlyPlaying);
               guild.lastPlayed = guild.currentlyPlaying;
               guild.currentlyPlaying = guild.queue.shift();
