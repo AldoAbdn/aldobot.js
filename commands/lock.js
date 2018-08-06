@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
   if(client.voiceConnections.find("channel",voiceChannel)){
     //Toggles lock
     guild.lock = !guild.lock;
-    message.reply(server.lock ? 'Bot Locked' : 'Bot Unlocked');
+    message.reply(guild.lock ? 'Bot Locked' : 'Bot Unlocked');
   } else {
     //You have to be in same channel
     message.reply("Must be in the same voice channel as the bot to lock it in a voice channel");
