@@ -2,7 +2,6 @@ const yt = require('ytdl-core');
 const {postToDefault} = require('../util/postToDefault.js');
 exports.playQueue = (client,message) => {
   const guild = message.guild;
-  console.log(guild.queue.length);
     if (message.member.voiceChannel) {
         if (guild.lock && !client.voiceConnections.find("channel",message.member.voiceChannel)){
           return;

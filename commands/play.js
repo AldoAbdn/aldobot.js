@@ -28,7 +28,6 @@ exports.run = async(client, message, args) => {
   for (var url of urls){
     //If url, get YT info and add to queue 
     if (url) {
-      console.log(url)
       //Get YT info
       let info = await yt.getInfo(url);
         //Push YT to queue

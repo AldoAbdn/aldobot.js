@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {   
     //Set variables
-    const volume = message.guild.volume;
+    var volume = message.guild.volume;
     const dispatcher = message.guild.dispatcher;
     let newVolume = parseInt(args[0]);
     //If no volume set, set it
