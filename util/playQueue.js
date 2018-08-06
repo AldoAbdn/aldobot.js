@@ -28,7 +28,6 @@ exports.playQueue = (client,message) => {
                   if (guild.end === true){
                     console.log('end');
                     exports.playQueue(client, message);
-                    guild.end = false;
                   }
                 });
                 guild.dispatcher.on('error', e=>{
@@ -39,6 +38,7 @@ exports.playQueue = (client,message) => {
                 });      
                 postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
               }
+              guild.end = false;
               return;
             } else if(guild.currentlyPlaying){
               console.log('currentPlaying');
