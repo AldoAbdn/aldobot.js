@@ -1,6 +1,6 @@
 const {playQueue} = require('../util/playQueue.js');
 const yt = require('ytdl-core');
-exports.run = (client, message, args) => {
+exports.run = async(client, message, args) => {
   //Variables
   var lock = message.guild.lock;
   var volume = message.guild.volume;
@@ -27,17 +27,11 @@ exports.run = (client, message, args) => {
     if (url) {
       console.log(url)
       //Get YT info
-      yt.getInfo(url, function(err, info){
-        //If error, return message
-        if (err) {
-          message.reply("Invalid URL");
-          return;
-        }
+      let info = await yt.getInfo(url);
         //Push YT to queue
-       queue.push(info);
-       console.log(queue.length);
-       console.log(message.guild.queue.length);
-      })
+        if (info != null){
+          queue.push(info);
+        }
     }
   }
   //Play queue
