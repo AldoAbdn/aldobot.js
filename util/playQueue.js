@@ -23,7 +23,6 @@ exports.playQueue = (client,message) => {
                 console.log('Played');
                 guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
                 guild.dispatcher.on('end', () => {
-                  delete message.guild.dispatcher;
                   exports.playQueue(client, message);
                 });
                 guild.dispatcher.on('error', e=>{
