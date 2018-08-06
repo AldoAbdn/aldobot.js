@@ -20,7 +20,7 @@ exports.run = (client, message, args) => {
     message.reply("Invalid Index");
   } else if(dispatcher){
     //If no index passed, skip current playing song
-    console.log('Skip');
+    message.guild.end = true;
     dispatcher.end();
   } else {
     //No music
