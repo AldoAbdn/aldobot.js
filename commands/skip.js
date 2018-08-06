@@ -1,4 +1,4 @@
-const play = require("play.js");
+const play = require("../commands/play.js");
 exports.run = (client, message, args) => {
   const voiceChannel = message.member.voiceChannel
   var queue = message.guild.queue;
