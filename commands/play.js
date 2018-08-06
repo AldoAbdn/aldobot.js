@@ -21,7 +21,10 @@ exports.run = async(client, message, args) => {
     queue = message.guild.queue;
   }
   //Set variables
-  let urls = args[0].split(",");
+  let urls = [];
+  if (args[0]){
+    urls = args[0].split(",");
+  }
   for (var url of urls){
     //If url, get YT info and add to queue 
     if (url) {
