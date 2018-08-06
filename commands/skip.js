@@ -21,6 +21,7 @@ exports.run = (client, message, args) => {
   } else if(dispatcher){
     //If no index passed, skip current playing song
     console.log('Skip');
+    message.guild.currentlyPlaying = null;
     dispatcher.end();
   } else {
     //No music
