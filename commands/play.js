@@ -35,6 +35,8 @@ exports.run = (client, message, args) => {
         }
         //Push YT to queue
        queue.push(info);
+       console.log(queue.length);
+       console.log(message.guild.queue.length);
       })
     }
   }
