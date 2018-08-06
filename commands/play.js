@@ -7,15 +7,18 @@ exports.run = (client, message, args) => {
   var queue = message.guild.queue;
   //If no lock attribute, make one
   if (lock == null){
-    lock = false;
+    message.guild.lock = false;
+    lock = message.guild.lock
   } 
   //If no volume attribute, make one
   if (volume == null){
-    volume = 1;
+    message.guild.volume = 1;
+    volume = message.guild.volume;
   }
   //If no queue attribute, make one
   if (!queue){
-    queue = [];
+    message.guild.queue = [];
+    queue = message.guild.queue;
   }
   //Set variables
   let urls = args[0].split(",");
