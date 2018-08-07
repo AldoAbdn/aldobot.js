@@ -5,6 +5,7 @@ exports.run = async(client, message, args) => {
   var users = [];
   const guild = message.guild;
   for (var userid of userids){
+    console.log(userid);
     users.push(await client.fetchUser(userid));
   }
   //Sets reason and unbanne
