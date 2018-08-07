@@ -3,7 +3,7 @@ exports.run = (client, message, args) => {
     const dispatcher = message.guild.dispatcher;
     let newVolume = parseInt(args[0]);
     //If no volume set, set it
-    if (volume == null){
+    if (message.guild.volume == null){
         volume = 1;
     }
     //If no args passed, return current volume
