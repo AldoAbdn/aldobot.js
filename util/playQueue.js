@@ -25,11 +25,14 @@ exports.playQueue = (client,message) => {
                 if (guild.dispatcher!=undefined){
                   delete guild.dispatcher;
                 }
+                //Set playing to true on new stream
                 guild.playing = true;
                 guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
                 guild.dispatcher.on('end', () => {
                   delete guild.dispatcher;
+                  //Check for stop event
                   if (guild.playing){
+                    //Delay to fix bug in discord.js 
                     setTimeout(()=>{
                       exports.playQueue(client,message);
                     },1000)
