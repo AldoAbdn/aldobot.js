@@ -28,6 +28,9 @@ exports.playQueue = (client,message) => {
                 guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
                 guild.dispatcher.on('end', () => {
                   delete message.guild.dispatcher;
+                  setTimeout(()=>{
+                    exports.playQueue(client,message);
+                  },1000)
                 });
                 guild.dispatcher.on('error', e=>{
                   console.log('Error:'+e);
@@ -37,7 +40,6 @@ exports.playQueue = (client,message) => {
                 });      
                 postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
               }
-              guild.end = false;
               return;
             } else if(guild.currentlyPlaying){
               console.log('currentPlaying');
