@@ -49,7 +49,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 |-------------|---------------|-------|
 | Ping        | Ping/Pong command. I wonder what this does? /sarcasm | ping |
 | Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed | roll (max **optional**) |
-| Meta        | Lets a user store data, can be used to store traits for an RPG for example | meta (key) (value **optional**) |
+| Meta        | Lets a user store data, can be used to store traits for an RPG for example, if pass a string for key that has a - infront of it this will remove that key form your meta data | meta (key) (value **optional**) |
 | Setgame | Sets bot current game | setgame (game) |
 
 ## Setup
@@ -77,14 +77,12 @@ Instructions to find your own user ID can be found [here](https://support.discor
 You will put these into environment variables. More info can be found [here](https://www.twilio.com/blog/2017/08/working-with-environment-variables-in-node-js.html)
 
 ### Mongodb URL
-You can going to need either a local mongobd url or an external one. You will pass this to the application through an environment variable. Example of a local URL is [here](https://www.w3schools.com/nodejs/nodejs_mongodb_create_db.asp)
+You are going to need either a local mongobd url or an external one. You will pass this to the application through an environment variable. Example of a local URL is [here](https://www.w3schools.com/nodejs/nodejs_mongodb_create_db.asp)
 
 Without a mongodb setup you will not be able to use the meta command. To disable the meta command open meta.js in the commands folder and set enabled to false in exports.conf
 
 ### FFMPEG
-This bot requires FFMPEG to play music. If you are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
-
-I had originally included an FFMPEG node module that contained the binaries, but apparenty it only works locally on non windows machines. It worked if you installed globally
+This bot requires FFMPEG to play music. There are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
 
 ## Starting the Bot
 Just to be safe, navigate to the project folder and open a command prompt there. type npm install
