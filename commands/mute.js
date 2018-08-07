@@ -18,7 +18,7 @@ exports.run = async (client, message, args, perms, settings) => {
       const embed = new RichEmbed()
         .setColor(0x00AE86)
         .setTimestamp()
-        .setDescription(`**Action:** Un/mute\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+        .setDescription(`**Action:** Un/mute\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
         .setFooter(`Case ${caseNum}`);
       //Bot checks if it has correct permissions
       if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').catch(console.error);
