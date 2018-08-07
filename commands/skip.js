@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
   } else if(index < 0 || index > guild.queue.length){
     //Index invalid
     message.reply("Invalid Index");
-  } else if(dispatcher){
+  } else if(guild.dispatcher){
     //If no index passed, skip current playing song
     guild.dispatcher.end();
   } else {
