@@ -12,11 +12,12 @@ exports.run = async (client, message, args) => {
   //Get case number and reason, form fancy embed
   const log = channels.find("name",settings.moderationchannel) || channels.find("name", settings.defaultchannel);
   var caseNum;
-  var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
+  var reason;
   for (var member of members){
     if(compareMemberRoles(message.member, member)){
       //Case number and reason 
       caseNum = await caseNumber(client, log);
+      reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //Nice embed
       const embed = new RichEmbed()
       .setColor(0x00AE86)

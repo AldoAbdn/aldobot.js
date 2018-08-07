@@ -10,10 +10,11 @@ exports.run = async (client, message, args, perms, settings) => {
   if (!muteRole) return message.reply('I cannot find a mute role').catch(console.error);
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').catch(console.error);
   var caseNum;
-  var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
+  var reason;
   for (var member of members){
     if(compareMemberRoles(message.member, member)){
       caseNum = await caseNumber(client, log);
+      reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //Fancy reply
       const embed = new RichEmbed()
         .setColor(0x00AE86)
