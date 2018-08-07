@@ -1,23 +1,21 @@
 exports.run = (client, message, args) => {
   const voiceChannel = message.member.voiceChannel
   const guild = message.guild;
-  var queue = message.guild.queue;
-  var dispatcher = message.guild.dispatcher;
 
   //If not in voice channel, return
   if (!client.voiceConnections.find("channel",voiceChannel)){
     return;
   }
   //If no queue, set it
-  if (!queue){
-    queue = [];
+  if (!guild.queue){
+    guild.queue = [];
   }
   //Get passed in index
   let index = parseInt(args[0]);
   //If a valid index passed in, skip it from current queue
-  if (index > 0 && index <= queue.length){
+  if (index > 0 && index <= guild.queue.length){
     guild.queue.splice(index-1,1);
-  } else if(index < 0 || index > queue.length){
+  } else if(index < 0 || index > guild.queue.length){
     //Index invalid
     message.reply("Invalid Index");
   } else if(dispatcher){

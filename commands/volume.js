@@ -1,6 +1,5 @@
 exports.run = (client, message, args) => {   
     //Set variables
-    var volume = message.guild.volume;
     const dispatcher = message.guild.dispatcher;
     let newVolume = parseInt(args[0]);
     //If no volume set, set it
@@ -9,7 +8,7 @@ exports.run = (client, message, args) => {
     }
     //If no args passed, return current volume
     if (args.length == 0) {
-        message.reply("Volume is:" + (volume * 100));
+        message.reply("Volume is:" + (message.guild.volume * 100));
     }
     else if (!Number.isInteger(newVolume) || newVolume < 0){
         //Not valid, return error
@@ -17,9 +16,8 @@ exports.run = (client, message, args) => {
         return;
     } else if (dispatcher) {
         //Set volume
-        volume = newVolume/100;
-        dispatcher.setVolume(volume);
-        messate.guild.volume = volume;
+        message.guild.volume = newVolume/100;
+        dispatcher.setVolume(message.guild.volume);
     }
 };
   

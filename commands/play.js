@@ -1,24 +1,17 @@
 const {playQueue} = require('../util/playQueue.js');
 const yt = require('ytdl-core');
 exports.run = async(client, message, args) => {
-  //Variables
-  var lock = message.guild.lock;
-  var volume = message.guild.volume;
-  var queue = message.guild.queue;
   //If no lock attribute, make one
-  if (lock == null){
+  if (message.guild.lock == null){
     message.guild.lock = false;
-    lock = message.guild.lock
   } 
   //If no volume attribute, make one
-  if (volume == null){
+  if (message.guild.volume == null){
     message.guild.volume = 1;
-    volume = message.guild.volume;
   }
   //If no queue attribute, make one
-  if (!queue){
+  if (!message.guild.queue){
     message.guild.queue = [];
-    queue = message.guild.queue;
   }
   //Set variables
   let urls = [];
@@ -32,7 +25,7 @@ exports.run = async(client, message, args) => {
       let info = await yt.getInfo(url);
         //Push YT to queue
         if (info != null){
-          queue.push(info);
+          message.guild.queue.push(info);
         }
     }
   }
