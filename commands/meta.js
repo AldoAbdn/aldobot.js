@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
         message.reply("Value stored with key: " + key);
     } else if (key != null){
         //Unsets value
-        if (key.charAt(0).equals("-")){
+        if (key.charAt(0)=='-'){
             key = key.substring(1);
             object[key] = 1;
             await metadb.unsetObject(userid,object);

@@ -16,12 +16,9 @@ exports.playQueue = (client,message) => {
               }
               return;
             } else if (guild.queue.length > 0){
-              console.log(guild.queue.length);
               guild.lastPlayed = guild.currentlyPlaying;
               guild.currentlyPlaying = guild.queue.shift();
-              console.log(guild.queue.length);
               if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
-                console.log('Played');
                 if (guild.dispatcher!=undefined){
                   delete guild.dispatcher;
                 }
