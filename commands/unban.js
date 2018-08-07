@@ -13,7 +13,8 @@ exports.run = async(client, message, args) => {
   client.unbanAuth = message.author;
   //If no reason, returns
   if (reason.length < 1) return message.reply('You must supply a reason for the unban.');
-    for (var user in users){
+  for (var user in users){
+    console.log(user.tag);
     //Must pass a user resolvable
     if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').catch(console.error);
     //Unbans user
