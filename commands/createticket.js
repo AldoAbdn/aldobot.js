@@ -1,17 +1,17 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
+const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Variables
-  const user = message.mentions.users.first();
+  const member = message.mentions.members.first();
   const guild = message.guild;
   const defaultrole = message.guild.roles.find('name',settings.defaultrole);
   const supportcategory = message.guild.channels.find("name", settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone create a ticket for them.').catch(console.error);
+  if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').catch(console.error);
   //Get case number and reason, form fancy embed
   const log = guild.channels.find("name",settings.supportchannel) || guild.channels.find("name",settings.defaultchannel);
-  if(!parseUser(message, user))return;
+  if(!compareMemberRoles(message.member, member))return;
   //Case number and reason 
   const caseNum = await caseNumber(client, log);
   const issue = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`;
@@ -19,7 +19,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const embed = new RichEmbed()
   .setColor(0x00AE86)
   .setTimestamp()
-  .setDescription(`**Action:** Support Ticket\n**Target:** ${user.tag}\n**Support Specialist:** ${message.author.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
+  .setDescription(`**Action:** Support Ticket\n**Target:** ${member.user.tag}\n**Support Specialist:** ${message.author.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
   .setFooter(`Case ${caseNum}`);
   //If there is a moderation channel, post embed there
   if (log!=null){

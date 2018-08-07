@@ -1,9 +1,9 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
+const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
-  const users = message.mentions.users.array();
+  const members = message.mentions.members.array();
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name",settings.defaultchannel);
   const defaultRole = client.guilds.get(message.guild.id).roles.find('name', settings.defaultrole);
   const muteRole = client.guilds.get(message.guild.id).roles.find('name', settings.muterole);
@@ -11,8 +11,8 @@ exports.run = async (client, message, args, perms, settings) => {
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').catch(console.error);
   var caseNum;
   var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
-  for (var user of users){
-    if(parseUser(message, user)){
+  for (var member of members){
+    if(compareMemberRoles(message.member, member)){
       caseNum = await caseNumber(client, log);
       //Fancy reply
       const embed = new RichEmbed()
@@ -23,17 +23,17 @@ exports.run = async (client, message, args, perms, settings) => {
       //Bot checks if it has correct permissions
       if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').catch(console.error);
       //Checks if user has mute role, and if they do removes it
-      if (message.guild.member(user).roles.has(muteRole.id)) {
-        message.guild.member(user).removeRole(muteRole).catch(console.error);
-        message.guild.member(user).addRole(defaultRole).then(() => {
+      if (member.roles.has(muteRole.id)) {
+        member.removeRole(muteRole).catch(console.error);
+        member.addRole(defaultRole).then(() => {
           if (log!=null){
             log.send({embed}).catch(console.error);;
           }
         });
       } else {
         //Adds mute role
-        message.guild.member(user).removeRole(defaultRole).catch(console.error);
-        message.guild.member(user).addRole(muteRole).then(() => {
+        member.removeRole(defaultRole).catch(console.error);
+        member.addRole(muteRole).then(() => {
           if (log){
             log.send({embed}).catch(console.error);;
           }

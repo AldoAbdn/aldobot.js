@@ -1,20 +1,20 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
+const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 const settings = require('../settings.json');
 exports.run = async (client, message, args) => {
   //Checks if a user was mentioned
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
+  if (message.mentions.members.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
   //Get users
-  const users = message.mentions.users.array();
+  const members = message.mentions.members.array();
   //Channels
   const channels = message.guild.channels;
   //Get case number and reason, form fancy embed
   const log = channels.find("name",settings.moderationchannel) || channels.find("name", settings.defaultchannel);
   var caseNum;
   var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
-  for (var user of users){
-    if(parseUser(message, user)){
+  for (var member of members){
+    if(compareMemberRoles(message.member, member)){
       //Case number and reason 
       caseNum = await caseNumber(client, log);
       //Nice embed

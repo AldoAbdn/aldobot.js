@@ -1,19 +1,19 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
+const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
-  const users = message.mentions.users.array();
+  const members = message.mentions.members.array();
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guildchannels.find("name",settings.defaultchannel);
   var caseNum;
   var reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone to ban them.').catch(console.error);
-  for(var user of users){
-    if(parseUser(message, user)){
+  if (message.mentions.members.size < 1) return message.reply('You must mention someone to ban them.').catch(console.error);
+  for(var member of members){
+    if(compareMemberRoles(message.member, member)){
       //Get case number 
       caseNum = await(caseNumber, log);
       //Ban
-      message.guild.member(user).ban(reason);
+      member.ban(reason);
       //Fancy display of ban
       const embed = new RichEmbed()
       .setColor(0x00AE86)

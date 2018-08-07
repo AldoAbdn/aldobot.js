@@ -1,21 +1,21 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
+const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
-  const users = message.mentions.users.array();
+  const members = message.mentions.members.array();
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name", settings.defaultchannel);
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').catch(console.error);
   var caseNum; 
   var reason;
-  for (var user of users){
-    if(parseUser(message, user)){
+  for (var member of members){
+    if(compareMemberRoles(message.member, member)){
       //Case number
       caseNum = await caseNumber(client, log);
       //Reason
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //Kick  
-      message.guild.member(user).kick(reason);
+      member.kick(reason);
       //Fancy reply of kick
       const embed = new RichEmbed()
       .setColor(0x00AE86)

@@ -10,7 +10,6 @@ exports.playQueue = (client,message) => {
           .then(connection => {
             console.log("connected");
             if (guild.dispatcher) {
-              
               if (guild.dispatcher.paused){
                 guild.dispatcher.resume();
               }
