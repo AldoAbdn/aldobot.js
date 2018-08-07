@@ -18,7 +18,7 @@ exports.run = async (client, message, args, perms, settings) => {
       const embed = new RichEmbed()
       .setColor(0x00AE86)
       .setTimestamp()
-      .setDescription(`**Action:** Ban\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+      .setDescription(`**Action:** Ban\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
       .setFooter(`Case ${caseNum}`);
       if (log!=null){
         log.send({embed});

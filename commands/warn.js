@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
       const embed = new RichEmbed()
       .setColor(0x00AE86)
       .setTimestamp()
-      .setDescription(`**Action:** Warning\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+      .setDescription(`**Action:** Warning\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
       .setFooter(`Case ${caseNum}`);
       //If there is a moderation channel, post embed there
       if (log!=null){
