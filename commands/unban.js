@@ -4,6 +4,7 @@ exports.run = async(client, message, args) => {
   var userids = args[0].split(",");
   var users = [];
   const guild = message.guild;
+  console.log(userids);
   for (var userid of userids){
     let user = await client.fetchUser(userid);
     users.push(user);
