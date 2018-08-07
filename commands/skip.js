@@ -1,4 +1,3 @@
-const play = require("../commands/play.js");
 exports.run = (client, message, args) => {
   const voiceChannel = message.member.voiceChannel
   var queue = message.guild.queue;
@@ -25,7 +24,6 @@ exports.run = (client, message, args) => {
     //message.guild.end = true;
     //dispatcher.end();
     message.guild.dispatcher.end();
-    play.run(client,message,[]);
   } else {
     //No music
     message.reply("Not Currently Playing Music");
