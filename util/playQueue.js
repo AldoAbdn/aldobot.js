@@ -8,7 +8,6 @@ exports.playQueue = (client,message) => {
         }
         message.member.voiceChannel.join()
           .then(connection => {
-            console.log("connected");
             if (guild.dispatcher) {
               if (guild.dispatcher.paused){
                 guild.dispatcher.resume();
@@ -24,6 +23,8 @@ exports.playQueue = (client,message) => {
                 //Set playing to true on new stream
                 guild.playing = true;
                 guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
+                //Set current volume
+                guild.dispatcher.setVolume(guild.volume);
                 guild.dispatcher.on('end', () => {
                   delete guild.dispatcher;
                   //Check for stop event
