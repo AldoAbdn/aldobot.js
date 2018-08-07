@@ -3,7 +3,7 @@ exports.compareMemberRoles = (callingMember, mentionedMember) => {
     message.channel.send('You cannot do that to yourself, why did you try?');
     return false;
   } else if (mentionedMember) {
-    if (mentionedMember.highestRole.position >= callingMemberhighestRole.position) {
+    if (mentionedMember.highestRole.position >= callingMember.highestRole.position) {
       message.channel.send('The targeted member has a higher or equal role position than you.');
       return false;
     } else {
