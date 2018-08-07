@@ -1,9 +1,11 @@
 exports.run = (client, message, args) => {   
+  //Variables
+  const guild = message.guild; 
   //Disonnects bot from voice channel, sets currently playing to null
-  if (client.voiceConnections.find(val => val.channel.guild.id == message.guild.id)){
-    client.voiceConnections.find(val => val.channel.guild.id == message.guild.id).disconnect();
-    message.guild.currentlyPlaying = null;
-    
+  if (client.voiceConnections.find(val => val.channel.guild.id == guild.id)){
+    guild.playing = false;
+    client.voiceConnections.find(val => val.channel.guild.id == guild.id).disconnect();
+    guild.currentlyPlaying = null;
   }
 };
   

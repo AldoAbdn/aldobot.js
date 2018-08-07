@@ -1,5 +1,6 @@
 exports.run = (client, message, args) => {
   const voiceChannel = message.member.voiceChannel
+  const guild = message.guild;
   var queue = message.guild.queue;
   var dispatcher = message.guild.dispatcher;
 
@@ -15,7 +16,7 @@ exports.run = (client, message, args) => {
   let index = parseInt(args[0]);
   //If a valid index passed in, skip it from current queue
   if (index > 0 && index <= queue.length){
-    message.guild.queue.splice(index-1,1);
+    guild.queue.splice(index-1,1);
   } else if(index < 0 || index > queue.length){
     //Index invalid
     message.reply("Invalid Index");
@@ -23,7 +24,7 @@ exports.run = (client, message, args) => {
     //If no index passed, skip current playing song
     //message.guild.end = true;
     //dispatcher.end();
-    message.guild.dispatcher.end();
+    guild.dispatcher.end();
   } else {
     //No music
     message.reply("Not Currently Playing Music");

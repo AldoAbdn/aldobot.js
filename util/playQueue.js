@@ -25,12 +25,15 @@ exports.playQueue = (client,message) => {
                 if (guild.dispatcher!=undefined){
                   delete guild.dispatcher;
                 }
+                guild.playing = true;
                 guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
                 guild.dispatcher.on('end', () => {
-                  delete message.guild.dispatcher;
-                  setTimeout(()=>{
-                    exports.playQueue(client,message);
-                  },1000)
+                  delete guild.dispatcher;
+                  if (guild.playing){
+                    setTimeout(()=>{
+                      exports.playQueue(client,message);
+                    },1000)
+                  }
                 });
                 guild.dispatcher.on('error', e=>{
                   console.log('Error:'+e);
