@@ -6,6 +6,7 @@ exports.run = (client, message, args) => {
     //If no volume set, set it
     if (volume == null){
         volume = 1;
+        console.log('here');
     }
     //If no args passed, return current volume
     if (args.length == 0) {
