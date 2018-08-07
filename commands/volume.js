@@ -20,6 +20,7 @@ exports.run = (client, message, args) => {
         //Set volume
         volume = newVolume/100;
         dispatcher.setVolume(volume);
+        messate.guild.volume = volume;
     }
 };
   
