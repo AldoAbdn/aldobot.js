@@ -14,21 +14,29 @@ exports.run = async (client, message, args) => {
         message.reply("Invaid Key");
     }else if (key != null && value != null){
         //Both values have been passed, sets value
-        let object = {};
+        let object = {};      
         object[key] = value;
-        await metadb.updateObject(userid,object);
+        await metadb.setObject(userid,object);
         message.reply("Value stored with key: " + key);
     } else if (key != null){
-        //Only key passed, returns value
-        let user = await metadb.getObject(userid);
-        let value = null;
-        if (user != null){
-            value = user[key];
-        }
-        if (value != null){
-            message.reply(key + ": " + value);
+        //Unsets value
+        if (key.charAt(0).equals("-")){
+            key = key.substring(1);
+            object[key] = 1;
+            await metadb.unsetObject(userid,object);
+            message.reply("Key " + key + " removed");
         } else {
-            message.reply("No value stored for this key");
+            //Only key passed, returns value
+            let user = await metadb.getObject(userid);
+            let value = null;
+            if (user != null){
+                value = user[key];
+            }
+            if (value != null){
+                message.reply(key + ": " + value);
+            } else {
+                message.reply("No value stored for this key");
+            }
         }
     } else {
         //If neither of above print meta object
