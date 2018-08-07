@@ -22,6 +22,7 @@ exports.run = async (client, message, args) => {
         //Unsets value
         if (key.charAt(0)=='-'){
             key = key.substring(1);
+            var object = {};
             object[key] = 1;
             await metadb.unsetObject(userid,object);
             message.reply("Key " + key + " removed");
