@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     }
     else if (max){
 
-        if(multiplier == null || multiplier==NaN){
+        if(multiplier == null || isNaN(multiplier)){
             multiplier = 1
         } else if (multiplier < 0){
             message.reply("Invalid Multiplier");
