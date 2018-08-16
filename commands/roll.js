@@ -8,6 +8,7 @@ exports.run = async (client, message, args) => {
         message.reply(`Ooops! I can only roll for a valid integer that is greater than 1`);
     }
     else if (max){
+        console.log(multiplier);
         if(multiplier == null || multiplier==NaN){
             multiplier = 1
         } else if (multiplier < 0){
