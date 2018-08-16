@@ -48,7 +48,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Command     | Description   | Usage |
 |-------------|---------------|-------|
 | Ping        | Ping/Pong command. I wonder what this does? /sarcasm | ping |
-| Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed | roll (max **optional**) |
+| Roll | Simulates rolling a dice. Returns a random number between 1 and the number passed, can be rolled multiple times by adding multiplier | roll (max **optional**) (multipler **optional**)|
 | Meta        | Lets a user store data, can be used to store traits for an RPG for example, if pass a string for key that has a - infront of it this will remove that key form your meta data | meta (key) (value **optional**) |
 | Setgame | Sets bot current game | setgame (game) |
 
