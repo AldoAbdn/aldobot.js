@@ -1,11 +1,12 @@
-exports.run = async (client, message, args) => {
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = async (client, message, args, perms, settings) => {
     //Set Variables
     let max = parseInt(args[0]);
     let multiplier = parseInt(args[1]);
     let randomInts = []
     //Random roll, max is passed
     if(max <= 1) {
-        message.reply(`Ooops! I can only roll for a valid integer that is greater than 1`);
+        message.reply(`Ooops! I can only roll for a valid integer that is greater than 1`).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
     else if (max){
         if(multiplier == null || isNaN(multiplier)){
@@ -17,10 +18,10 @@ exports.run = async (client, message, args) => {
         for (var i = 0;i < multiplier;i++){
             randomInts.push(Math.floor(Math.random() * max) + 1);
         }
-        message.reply(`You rolled: ${randomInts.join(",")} Total:${randomInts.reduce((first,second)=>first+second,0)}`);
+        message.reply(`You rolled: ${randomInts.join(",")} Total:${randomInts.reduce((first,second)=>first+second,0)}`).then(msg=>deleteMessage(msg,settings.messagetimeout));
     } else {
         randomInt = Math.floor(Math.random() * 20) + 1;
-        message.reply(`You rolled: ${randomInt}`);
+        message.reply(`You rolled: ${randomInt}`).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
 };
 

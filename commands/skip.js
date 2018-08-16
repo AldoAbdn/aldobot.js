@@ -1,4 +1,5 @@
-exports.run = (client, message, args) => {
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = (client, message, args, perms, settings) => {
   const voiceChannel = message.member.voiceChannel
   const guild = message.guild;
 
@@ -17,13 +18,13 @@ exports.run = (client, message, args) => {
     guild.queue.splice(index-1,1);
   } else if(index < 0 || index > guild.queue.length){
     //Index invalid
-    message.reply("Invalid Index");
+    message.reply("Invalid Index").then(msg=>deleteMessage(msg,settings.messagetimeout));
   } else if(guild.dispatcher){
     //If no index passed, skip current playing song
     guild.dispatcher.end();
   } else {
     //No music
-    message.reply("Not Currently Playing Music");
+    message.reply("Not Currently Playing Music").then(msg=>deleteMessage(msg,settings.messagetimeout));
   }
 };
 

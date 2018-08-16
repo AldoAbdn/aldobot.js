@@ -1,6 +1,7 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {compareMemberRoles} = require('../util/compareMemberRoles.js');
+const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Variables
   const member = message.mentions.members.first();
@@ -8,7 +9,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const defaultrole = message.guild.roles.find('name',settings.defaultrole);
   const supportcategory = message.guild.channels.find("name", settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
-  if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').catch(console.error);
+  if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   //Get case number and reason, form fancy embed
   const log = guild.channels.find("name",settings.supportchannel) || guild.channels.find("name",settings.defaultchannel);
   if(!compareMemberRoles(message.member, member))return;

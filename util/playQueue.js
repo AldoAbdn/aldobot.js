@@ -1,5 +1,7 @@
 const yt = require('ytdl-core');
+const {deleteMessage} = require('../util/messageManagement.js');
 const {postToDefault} = require('../util/postToDefault.js');
+const settings = require('../settings.json');
 exports.playQueue = (client,message) => {
   const guild = message.guild;
     if (message.member.voiceChannel) {
@@ -59,7 +61,7 @@ exports.playQueue = (client,message) => {
               }
               yt.getInfo(url, function(err, info){
                 if (err) {
-                  message.reply("Invalid URL");
+                  message.reply("Invalid URL").then(msg=>deleteMessage(msg,settings.messagetimeout));
                 }
                 guild.queue.push(info);
                 exports.playQueue(client,message);
@@ -68,6 +70,6 @@ exports.playQueue = (client,message) => {
           })
           .catch(console.error);
       } else {
-        message.reply('You need to join a voice channel before play command can be issued');
+        message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
       }
 };

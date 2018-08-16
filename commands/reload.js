@@ -1,4 +1,4 @@
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, perms, settings) => {
   var command;
   const channel = message.channel;
   //Sets command to passed in command
@@ -9,7 +9,7 @@ exports.run = (client, message, args) => {
   }
   //If no command return message
   if (!command) {
-    return channel.send(`I cannot find the command: ${args[0]}`);
+    return channel.send(`I cannot find the command: ${args[0]}`).then(msg=>deleteMessage(msg,settings.messagetimeout));
   } else {
     //Reloads command
     channel.send(`Reloading: ${command}`)
@@ -21,6 +21,7 @@ exports.run = (client, message, args) => {
           .catch(e => {
             m.edit(`Command reload failed: ${command}\n\`\`\`${e.stack}\`\`\``);
           });
+          deleteMessage(m,settings.messagetimeout)
       });
   }
 };

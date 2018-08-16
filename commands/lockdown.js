@@ -1,4 +1,5 @@
 const ms = require('ms');
+const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = (client, message, args, perms, settings) => {
   //Setup
   const role = message.guild.roles.find("name",settings.defaultrole);
@@ -6,7 +7,7 @@ exports.run = (client, message, args, perms, settings) => {
   if (!client.lockit) client.lockit = [];
   const time = args.join(' ');
   const validUnlocks = ['release', 'unlock'];
-  if (!time) return message.reply('You must set a duration for the lockdown in either hours, minutes or seconds');
+  if (!time) return message.reply('You must set a duration for the lockdown in either hours, minutes or seconds').then(msg=>deleteMessage(msg,settings.messagetimeout));
   //Checks if time includes a keywork, release or unlock
   if (validUnlocks.includes(time)) {
     message.channel.overwritePermissions(role, {

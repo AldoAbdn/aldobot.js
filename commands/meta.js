@@ -1,4 +1,5 @@
-exports.run = async (client, message, args) => {
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = async (client, message, args, perms, settings) => {
     let userid = message.author.id;
     let key = args[0];
     let value;
@@ -11,13 +12,13 @@ exports.run = async (client, message, args) => {
     }
     //Checks input gives appropriate response
     if (key != null && (key.toLowerCase() == "_id" || (key.charAt(0)=='-'&&value!=null))){
-        message.reply("Invaid Key");
+        message.reply("Invaid Key").then(msg=>deleteMessage(msg,settings.messagetimeout));
     }else if (key != null && value != null){
         //Both values have been passed, sets value
         let object = {};      
         object[key] = value;
         await metadb.setObject(userid,object);
-        message.reply("Value stored with key: " + key);
+        message.reply("Value stored with key: " + key).then(msg=>deleteMessage(msg,settings.messagetimeout));
     } else if (key != null){
         //Unsets value
         if (key.charAt(0)=='-'){
@@ -25,7 +26,7 @@ exports.run = async (client, message, args) => {
             var object = {};
             object[key] = 1;
             await metadb.unsetObject(userid,object);
-            message.reply("Key " + key + " removed");
+            message.reply("Key " + key + " removed").then(msg=>deleteMessage(msg,settings.messagetimeout));
         } else {
             //Only key passed, returns value
             let user = await metadb.getObject(userid);
@@ -34,9 +35,9 @@ exports.run = async (client, message, args) => {
                 value = user[key];
             }
             if (value != null){
-                message.reply(key + ": " + value);
+                message.reply(key + ": " + value).then(msg=>deleteMessage(msg,settings.messagetimeout));
             } else {
-                message.reply("No value stored for this key");
+                message.reply("No value stored for this key").then(msg=>deleteMessage(msg,settings.messagetimeout));
             }
         }
     } else {
@@ -50,7 +51,7 @@ exports.run = async (client, message, args) => {
                 }
             }
         }
-        message.reply(`:Meta Data:${string}`,{code:'asciidoc'});
+        message.reply(`:Meta Data:${string}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
 };
   

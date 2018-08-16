@@ -1,10 +1,10 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {compareMemberRoles} = require('../util/compareMemberRoles.js');
-const settings = require('../settings.json');
-exports.run = async (client, message, args) => {
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = async (client, message, args, perms, settings) => {
   //Checks if a user was mentioned
-  if (message.mentions.members.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
+  if (message.mentions.members.size < 1) return message.reply('You must mention someone to warn them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   //Get users
   const members = message.mentions.members.array();
   //Channels

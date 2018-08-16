@@ -1,4 +1,5 @@
-exports.run = (client, message, args) => {   
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = (client, message, args, perms, settings) => {   
     //Set variables
     const dispatcher = message.guild.dispatcher;
     let newVolume = parseInt(args[0]);
@@ -8,11 +9,11 @@ exports.run = (client, message, args) => {
     }
     //If no args passed, return current volume
     if (args.length == 0) {
-        message.reply("Volume is:" + (message.guild.volume * 100));
+        message.reply("Volume is:" + (message.guild.volume * 100)).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
     else if (!Number.isInteger(newVolume) || newVolume < 0){
         //Not valid, return error
-        message.reply("Volume must be an integer between 0 and 100 inclusive");
+        message.reply("Volume must be an integer between 0 and 100 inclusive").then(msg=>deleteMessage(msg,settings.messagetimeout));
         return;
     } else if (dispatcher) {
         //Set volume

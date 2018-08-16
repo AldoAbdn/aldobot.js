@@ -1,11 +1,12 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {compareMemberRoles} = require('../util/compareMemberRoles.js');
+const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
   const members = message.mentions.members.array();
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name", settings.defaultchannel);
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').catch(console.error);
+  if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   var caseNum; 
   var reason;
   for (var member of members){

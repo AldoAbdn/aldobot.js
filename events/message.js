@@ -1,10 +1,11 @@
 const settings = require('../settings.json');
+const {deleteMessage} = require('../util/messageManagement.js');
 module.exports = message => {
   const client = message.client;
   if (message.author.bot) return;
   else if (!message.content.startsWith(settings.prefix)){
     if (message.content.toLowerCase().includes("nobody") && message.content.toLowerCase().includes("suspects")){
-      message.reply("https://www.youtube.com/watch?v=LTmONNEUXjI");
+      message.reply("https://www.youtube.com/watch?v=LTmONNEUXjI").then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
     return;
   } 
@@ -20,6 +21,7 @@ module.exports = message => {
   if (cmd) {
     if (perms < cmd.conf.permLevel) return;
     cmd.run(client, message, params, perms, settings);
+    deleteMessage(message,settings.messagetimeout);
   }
 
 };

@@ -6,5 +6,6 @@
 	"muterole": "PUT MUTE ROLE HERE",
 	"defaultchannel": "PUT A SPECIFIED CHANNEL NAME OR NULL HERE",
 	"moderationchannel": "PUT MODERATION CASE LOG CHANNEL HERE", 
-	"supportchannel": "PUT SUPPORT TICKET CHANNEL HERE"
+	"supportchannel": "PUT SUPPORT TICKET CHANNEL HERE",
+	"messagetimeout": "PUT MESSAGE DELETE TIMEOUT HERE"
 }

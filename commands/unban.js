@@ -1,4 +1,5 @@
-exports.run = async(client, message, args) => {
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = async(client, message, args, perms, settings) => {
   //Set variables
   const reason = args.slice(1).join(' ');
   var userids = args[0].split(",");
@@ -11,10 +12,10 @@ exports.run = async(client, message, args) => {
   client.unbanReason = reason;
   client.unbanAuth = message.author;
   //If no reason, returns
-  if (reason.length < 1) return message.reply('You must supply a reason for the unban.');
+  if (reason.length < 1) return message.reply('You must supply a reason for the unban.').then(msg=>deleteMessage(msg,settings.messagetimeout));
   for (var user of users){
     //Must pass a user resolvable
-    if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').catch(console.error);
+    if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
     //Unbans user
     guild.unban(user);
   }

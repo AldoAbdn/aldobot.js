@@ -7,8 +7,8 @@ exports.run = async (client, message, args, perms, settings) => {
   const log = message.guild.channels.find("name",settings.moderationchannel) || message.guild.channels.find("name",settings.defaultchannel);
   const defaultRole = client.guilds.get(message.guild.id).roles.find('name', settings.defaultrole);
   const muteRole = client.guilds.get(message.guild.id).roles.find('name', settings.muterole);
-  if (!muteRole) return message.reply('I cannot find a mute role').catch(console.error);
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').catch(console.error);
+  if (!muteRole) return message.reply('I cannot find a mute role').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   var caseNum;
   var reason;
   for (var member of members){
@@ -22,7 +22,7 @@ exports.run = async (client, message, args, perms, settings) => {
         .setDescription(`**Action:** Un/mute\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
         .setFooter(`Case ${caseNum}`);
       //Bot checks if it has correct permissions
-      if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').catch(console.error);
+      if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
       //Checks if user has mute role, and if they do removes it
       if (member.roles.has(muteRole.id)) {
         member.removeRole(muteRole).catch(console.error);

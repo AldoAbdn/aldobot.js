@@ -1,4 +1,5 @@
-exports.run = async (client, message, args) => {
+const {deleteMessage} = require('../util/messageManagement.js');
+exports.run = async (client, message, args, perms, settings) => {
   const guild = message.guild;
   const voiceChannel = message.member.voiceChannel;
   //If no lock, bot isn't in a voice channel yet
@@ -9,10 +10,10 @@ exports.run = async (client, message, args) => {
   if(client.voiceConnections.find("channel",voiceChannel)){
     //Toggles lock
     guild.lock = !guild.lock;
-    message.reply(guild.lock ? 'Bot Locked' : 'Bot Unlocked');
+    message.reply(guild.lock ? 'Bot Locked' : 'Bot Unlocked').then(msg=>deleteMessage(msg,settings.messagetimeout));
   } else {
     //You have to be in same channel
-    message.reply("Must be in the same voice channel as the bot to lock it in a voice channel");
+    message.reply("Must be in the same voice channel as the bot to lock it in a voice channel").then(msg=>deleteMessage(msg,settings.messagetimeout));
   }
 };
 

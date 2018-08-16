@@ -7,5 +7,6 @@
 	"defaultchannel": "bot-log",
 	"moderationchannel": "mod-log",
 	"supportchannel": "support-tickets",
-	"supportcategory": "support-tickets-log"
+	"supportcategory": "support-tickets-log",
+	"messagetimeout": "180000"
 }

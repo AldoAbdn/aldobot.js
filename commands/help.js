@@ -1,4 +1,5 @@
 const {groupCommandsByCategory} = require('../util/groupCommandsByCategory');
+const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = (client, message, params, perms, settings) => {
   if (!params[0]) {
     //Prints list of all commands if none was specified
@@ -13,14 +14,14 @@ exports.run = (client, message, params, perms, settings) => {
       stringArray.push(string);
     }
     for (var string of stringArray){
-      message.channel.send(string, {code:'asciidoc',split:true});
+      message.channel.send(string, {code:'asciidoc',split:true}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   } else {
     //Prints description of specified command
     let command = params[0];
     if (client.commands.has(command)) {
       command = client.commands.get(command);
-      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`, {code:'asciidoc',split:true});
+      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`, {code:'asciidoc',split:true}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   }
 };
