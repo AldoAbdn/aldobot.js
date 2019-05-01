@@ -15,5 +15,5 @@ exports.conf = {
 exports.help = {
   name: 'nickname',
   description: 'Sets a users nickname',
-  usage: 'togglerole <user> <nickname>'
+  usage: 'nickname <user> <nickname>'
 };

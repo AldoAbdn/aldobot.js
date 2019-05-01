@@ -21,5 +21,5 @@ exports.conf = {
 exports.help = {
   name: 'movemessage',
   description: 'Moves a message to another channel',
-  usage: 'togglerole <channel> <messageid>'
+  usage: 'movemessage <channel> <messageid>'
 };
