@@ -1,5 +1,5 @@
 const {deleteMessage} = require('../util/messageManagement.js');
-exports.compareMemberRoles = (callingMember, mentionedMember) => {
+exports.compareMemberRoles = (callingMember, mentionedMember,message) => {
   if (callingMember.id === mentionedMember.id) {
     message.channel.send('You cannot do that to yourself, why did you try?').then(msg=>deleteMessage(msg,settings.messagetimeout));
     return false;
