@@ -26,7 +26,6 @@ exports.run = (client, message, args, perms, settings) => {
     }).then(() => {
       //Loccks down channel for specified time
       message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
-
         client.lockit[id] = setTimeout(() => {
           //Only for default role
           message.channel.overwritePermissions(role, {
@@ -34,7 +33,6 @@ exports.run = (client, message, args, perms, settings) => {
           }).then(message.channel.send('Lockdown lifted.')).catch(console.error);
           delete client.lockit[id];
         }, ms(time));
-
       }).catch(error => {
         console.log(error);
       });
