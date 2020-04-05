@@ -1,3 +1,5 @@
+const deleteMessage = require('../util/messageManagement').deleteMessage;
+
 exports.run = (client, message, args, perms, settings) => {
   const startTime = message.createdTimestamp;
   message.channel.send('Ping?')

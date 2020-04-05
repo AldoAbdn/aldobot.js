@@ -14,7 +14,7 @@ async function setup(){
   const settings = require('./settings');
   const Discord = require('discord.js');
   const DBHelper = require('./util/db.js');
-  const client = new Discord.Client();
+  const client = new Discord.Client({ useUnifiedTopology: true });
   const chalk = require('chalk');
   const moment = require('moment');
   require('./util/eventLoader')(client);
@@ -68,10 +68,10 @@ async function setup(){
     /* This function should resolve to an ELEVATION level which
        is then sent to the command handler for verification*/
     let permlvl = 0;
-    const mod_role = message.guild.roles.find('name', settings.modrolename);
-    if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
-    const admin_role = message.guild.roles.find('name', settings.adminrolename);
-    if (admin_role && message.member.roles.has(admin_role.id)) permlvl = 3;
+    const mod_role = message.guild.roles.cache.find(role => role.name === settings.modrolename);
+    if (mod_role && message.member.roles.cache.has(mod_role.id)) permlvl = 2;
+    const admin_role = message.guild.roles.cache.find(role => role.name === settings.adminrolename);
+    if (admin_role && message.member.roles.cache.has(admin_role.id)) permlvl = 3;
     if (message.author.id === process.env.OWNER_ID) permlvl = 4;
     return permlvl;
   };

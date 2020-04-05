@@ -3,6 +3,6 @@ exports.deleteMessage = (message,timeout)=>{
         timeout = parseInt(timeout);
     }
     if(timeout!=null || !isNaN(timeout)){
-        message.delete(timeout);
+        message.delete({timeout});
     }
 }

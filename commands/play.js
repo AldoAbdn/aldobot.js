@@ -1,5 +1,5 @@
 const {playQueue} = require('../util/playQueue.js');
-const yt = require('ytdl-core');
+const yt = require('ytdl-core-discord');
 exports.run = async(client, message, args) => {
   //If no lock attribute, make one
   if (message.guild.lock == null){

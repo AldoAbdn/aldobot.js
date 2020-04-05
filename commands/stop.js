@@ -2,11 +2,12 @@ exports.run = (client, message, args) => {
   //Variables
   const guild = message.guild; 
   //Disonnects bot from voice channel, sets currently playing to null
-  if (client.voiceConnections.find(val => val.channel.guild.id == guild.id)){
+  const voiceChannel = client.voice.connections.find(connection => connection.channel.guild.id === guild.id);
+  if (voiceChannel){
     //Stop playQueue firing on end event
     guild.playing = false;
     //Disconnects voice channel
-    client.voiceConnections.find(val => val.channel.guild.id == guild.id).disconnect();
+    voiceChannel.disconnect();
     guild.currentlyPlaying = null;
   }
 };

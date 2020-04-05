@@ -1,75 +1,77 @@
-const yt = require('ytdl-core');
+const yt = require('ytdl-core-discord');
 const {deleteMessage} = require('../util/messageManagement.js');
 const {postToDefault} = require('../util/postToDefault.js');
 const settings = require('../settings.json');
 exports.playQueue = (client,message) => {
   const guild = message.guild;
-    if (message.member.voiceChannel) {
-        if (guild.lock && !client.voiceConnections.find("channel",message.member.voiceChannel)){
-          return;
-        }
-        message.member.voiceChannel.join()
-          .then(connection => {
-            if (guild.dispatcher) {
-              if (guild.dispatcher.paused){
-                guild.dispatcher.resume();
-              }
-              return;
-            } else if (guild.queue.length > 0){
-              guild.lastPlayed = guild.currentlyPlaying;
-              guild.currentlyPlaying = guild.queue.shift();
-              if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
-                if (guild.dispatcher!=undefined){
-                  delete guild.dispatcher;
-                }
-                //Set playing to true on new stream
-                guild.playing = true;
-                guild.dispatcher = connection.playStream(yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5}),{volume:guild.volume});
-                //Set current volume
-                guild.dispatcher.setVolume(guild.volume);
-                guild.dispatcher.on('end', () => {
-                  delete guild.dispatcher;
-                  //Check for stop event
-                  if (guild.playing){
-                    //Delay to fix bug in discord.js 
-                    setTimeout(()=>{
-                      exports.playQueue(client,message);
-                    },1000)
-                  }
-                });
-                guild.dispatcher.on('error', e=>{
-                  console.log('Error:'+e);
-                 });
-                guild.dispatcher.on('debug', info=>{
-                  console.log('Debug:' +info);
-                });      
-                postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
-              }
-              return;
-            } else if(guild.currentlyPlaying){
-              console.log('currentPlaying');
-              let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
-              for (let vid of guild.currentlyPlaying.related_videos){
-                if (guild.lastPlayed && vid.title != undefined && vid.title != guild.lastPlayed.title){
-                  if (vid.id){
-                    url = "https://www.youtube.com/watch?v=" + vid.id;
-                  } else {
-                    url = "https://www.youtube.com/watch?v=" + vid.video_id;
-                  }
-                  break;
-                }
-              }
-              yt.getInfo(url, function(err, info){
-                if (err) {
-                  message.reply("Invalid URL").then(msg=>deleteMessage(msg,settings.messagetimeout));
-                }
-                guild.queue.push(info);
-                exports.playQueue(client,message);
-              });
-            }
-          })
-          .catch(console.error);
-      } else {
-        message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
+  const member = message.member;
+  if (member.voice.channel) {
+      if (guild.lock && !client.connections.find(voiceConnection => voiceConnection === member.voice.connection)){
+        return;
       }
+      member.voice.channel.join()
+        .then(async voiceConnection => {
+          if (guild.dispatcher) {
+            if (guild.dispatcher.paused){
+              guild.dispatcher.resume();
+            }
+            return;
+          } else if (guild.queue.length > 0){
+            guild.lastPlayed = guild.currentlyPlaying;
+            guild.currentlyPlaying = guild.queue.shift();
+            if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
+              if (guild.dispatcher!=undefined){
+                delete guild.dispatcher;
+              }
+              //Set playing to true on new stream
+              guild.playing = true;
+              let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5})
+              guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
+              //Set current volume
+              guild.dispatcher.setVolume(guild.volume);
+              guild.dispatcher.on('end', () => {
+                delete guild.dispatcher;
+                //Check for stop event
+                if (guild.playing){
+                  //Delay to fix bug in discord.js 
+                  setTimeout(()=>{
+                    exports.playQueue(client,message);
+                  },1000)
+                }
+              });
+              guild.dispatcher.on('error', e=>{
+                console.log('Error:'+e);
+                });
+              guild.dispatcher.on('debug', info=>{
+                console.log('Debug:' +info);
+              });      
+              postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
+            }
+            return;
+          } else if(guild.currentlyPlaying){
+            console.log('currentPlaying');
+            let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
+            for (let vid of guild.currentlyPlaying.related_videos){
+              if (guild.lastPlayed && vid.title != undefined && vid.title != guild.lastPlayed.title){
+                if (vid.id){
+                  url = "https://www.youtube.com/watch?v=" + vid.id;
+                } else {
+                  url = "https://www.youtube.com/watch?v=" + vid.video_id;
+                }
+                break;
+              }
+            }
+            yt.getInfo(url, function(err, info){
+              if (err) {
+                message.reply("Invalid URL").then(msg=>deleteMessage(msg,settings.messagetimeout));
+              }
+              guild.queue.push(info);
+              exports.playQueue(client,message);
+            });
+          }
+        })
+        .catch(console.error);
+    } else {
+      message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
+    }
 };
