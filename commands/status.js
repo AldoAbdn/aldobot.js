@@ -10,7 +10,7 @@ exports.run = async (client, message, args, perms, settings) => {
   var logs;
   var caseLog;
   for (var caseNumber of caseNumbers){
-    supportticket = .cache.find(channel => channel.name === ,"support-ticket-"+caseNumber);
+    supportticket = message.guild.channels.cache.find(channel => channel.name === "support-ticket-"+caseNumber);
     logs = [log,supportticket];
     updateEmbedField(logs,client.user.id,caseNumber,query,newReason);
   }

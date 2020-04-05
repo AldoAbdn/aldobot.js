@@ -10,7 +10,7 @@ exports.run = async (client, message, args, perms, settings) => {
   //Channels
   const channels = message.guild.channels;
   //Get case number and reason, form fancy embed
-  const log = .cache.find(channel => channel.name === ,settings.moderationchannel) || .cache.find(channel => channel.name === , settings.defaultchannel);
+  const log = channels.cache.find(channel => channel.name === settings.moderationchannel) || channels.cache.find(channel => channel.name === settings.defaultchannel);
   var caseNum;
   var reason;
   for (var member of members){
