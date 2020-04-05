@@ -7,7 +7,7 @@ exports.run = async (client, message, args, perms, settings) => {
       return;
   } 
   //Check if user is in same channel as bot
-  if(client.voiceConnections.find("channel",voiceChannel)){
+  if(client.voiceConnections.cache.find(channel => channel.channel === voiceChannel)){
     //Toggles lock
     guild.lock = !guild.lock;
     message.reply(guild.lock ? 'Bot Locked' : 'Bot Unlocked').then(msg=>deleteMessage(msg,settings.messagetimeout));

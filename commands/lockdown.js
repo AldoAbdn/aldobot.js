@@ -2,7 +2,7 @@ const ms = require('ms');
 const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = (client, message, args, perms, settings) => {
   //Setup
-  const role = message.guild.roles.find("name",settings.defaultrole);
+  const role = message.guild.roles.cache.find(role => role.name === settings.defaultrole);
   const id = message.channel.id;
   if (!client.lockit) client.lockit = [];
   const time = args.join(' ');

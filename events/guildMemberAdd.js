@@ -5,6 +5,6 @@ module.exports = member => {
 	let guild = member.guild;
 	postToDefault(guild,`Please welcome ${member.user.username} to the server`);
 	//Set default role
-	let role = member.guild.roles.find("name", settings.defaultrole);
+	let role = member.guild.roles.cache.find(role => role.name === settings.defaultrole);
 	member.addRole(role).catch(console.error);
 }

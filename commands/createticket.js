@@ -6,12 +6,12 @@ exports.run = async (client, message, args, perms, settings) => {
   //Variables
   const member = message.mentions.members.first();
   const guild = message.guild;
-  const defaultrole = message.guild.roles.find('name',settings.defaultrole);
-  const supportcategory = message.guild.channels.find("name", settings.supportcategory) || guild.createChannel('support-tickets-category','category');
+  const defaultrole = message.guild.roles.cache.find(role=>role === settings.defaultrole);
+  const supportcategory = message.guild.channels.cache.find(channel=> channel.name === settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   //Get case number and reason, form fancy embed
-  const log = guild.channels.find("name",settings.supportchannel) || guild.channels.find("name",settings.defaultchannel);
+  const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   if(!compareMemberRoles(message.member, member,message))return;
   //Case number and reason 
   const caseNum = await caseNumber(client, log);

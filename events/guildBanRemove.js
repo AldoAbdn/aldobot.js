@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const {deleteMessage} = require('../util/messageManagement.js');
 const settings = require('../settings.json');
 module.exports = (guild, user) => {
-  const defaultchannel = guild.channels.find("name", settings.defaultchannel);
-  const modlog = guild.channels.find("name", settings.moderationchannel) || defaultchannel;
+  const defaultchannel = guild.cache.find(channel => channel.name === , settings.defaultchannel);
+  const modlog = guild.cache.find(channel => channel.name === , settings.moderationchannel) || defaultchannel;
   defaultchannel.send(`${user.tag} was just unbanned`).then(msg=>deleteMessage(msg,settings.messagetimeout));
   const embed = new Discord.RichEmbed()
     .setColor(0x00AE86)
