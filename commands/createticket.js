@@ -29,12 +29,16 @@ exports.run = async (client, message, args, perms, settings) => {
   //Create new channel
   var supportTicket = await guild.channels.create("support-ticket-"+caseNum,{type:'text'});
   supportTicket.send(embed);
-  supportTicket.overwritePermissions(defaultrole,{
-    'VIEW_CHANNEL':false
-  });
-  supportTicket.overwritePermissions(user, {
-    'VIEW_CHANNEL':true
-  })
+  supportTicket.overwritePermissions([
+    {
+      id: defaultrole.id,
+      deny: ['VIEW_CHANNEL']
+    },
+    {
+      id: user.id,
+      allow: ['VIEW_CHANNEL']
+    }
+  ], "Makes Text Channel Private");
   supportTicket.setParent(supportcategory);
 };
 
