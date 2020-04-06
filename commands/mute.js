@@ -4,7 +4,7 @@ const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
   const members = message.mentions.members.array();
-  const log = message.guild.cache.find(channel => channel.name === ,settings.moderationchannel) || message.guild.cache.find(channel => channel.name === ,settings.defaultchannel);
+  const log = message.guild.cache.find(channel => channel.name === settings.moderationchannel) || message.guild.cache.find(channel => channel.name === settings.defaultchannel);
   const defaultRole = client.guilds.get(message.guild.id).roles.cache.find(role=>role ===  settings.defaultrole);
   const muteRole = client.guilds.get(message.guild.id).roles.cache.find(role=>role ===  settings.muterole);
   if (!muteRole) return message.reply('I cannot find a mute role').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
