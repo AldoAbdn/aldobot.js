@@ -6,7 +6,6 @@ exports.run = async (client, message, args, perms, settings) => {
   const caseNumbers = args[0].split(",");
   const query = "**Status:**";
   var logs;
-  var caselog;
   for (var caseNumber of caseNumbers){
     //Get support ticket channel 
     supportticket = message.guild.channels.cache.find(channel => channel.name === support-ticket-"+caseNumber");
