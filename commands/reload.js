@@ -1,3 +1,5 @@
+const {deleteMessage} = require('../util/messageManagement.js');
+
 exports.run = (client, message, args, perms, settings) => {
   var command;
   const channel = message.channel;
