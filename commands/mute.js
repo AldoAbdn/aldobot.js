@@ -1,4 +1,4 @@
-const {RichEmbed} = require('discord.js');
+const {MessageEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 exports.run = async (client, message, args, perms, settings) => {
@@ -16,7 +16,7 @@ exports.run = async (client, message, args, perms, settings) => {
       caseNum = await caseNumber(client, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //Fancy reply
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
         .setColor(0x00AE86)
         .setTimestamp()
         .setDescription(`**Action:** Un/mute\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)

@@ -1,4 +1,4 @@
-const {RichEmbed} = require('discord.js');
+const {MessageEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 const {deleteMessage} = require('../util/messageManagement.js');
@@ -17,7 +17,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const caseNum = await caseNumber(client, log);
   const issue = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`;
   //Nice embed
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
   .setColor(0x00AE86)
   .setTimestamp()
   .setDescription(`**Action:** Support Ticket\n**Target:** ${member.user.tag}\n**Support Specialist:** ${message.author.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)

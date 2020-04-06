@@ -1,4 +1,4 @@
-const {RichEmbed} = require('discord.js');
+const {MessageEmbed} = require('discord.js');
 const {caseNumber} = require('../util/caseNumber.js');
 const {compareMemberRoles} = require('../util/compareMemberRoles.js');
 const {deleteMessage} = require('../util/messageManagement.js');
@@ -17,7 +17,7 @@ exports.run = async (client, message, args, perms, settings) => {
       //Ban
       member.ban(reason);
       //Fancy display of ban
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
       .setColor(0x00AE86)
       .setTimestamp()
       .setDescription(`**Action:** Ban\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
