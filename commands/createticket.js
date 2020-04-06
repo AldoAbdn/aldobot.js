@@ -12,7 +12,7 @@ exports.run = async (client, message, args, perms, settings) => {
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   //Get case number and reason, form fancy embed
   const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
-  if(!compareMemberRoles(message.member, member,message))return;
+  if(!compareMemberRoles(message.member, member, message))return;
   //Case number and reason 
   const caseNum = await caseNumber(client, log);
   const issue = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`;
