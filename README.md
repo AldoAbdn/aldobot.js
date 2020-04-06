@@ -81,8 +81,8 @@ You are going to need either a local mongobd url or an external one. You will pa
 
 Without a mongodb setup you will not be able to use the meta command. To disable the meta command open meta.js in the commands folder and set enabled to false in exports.conf
 
-### FFMPEG
-This bot requires FFMPEG to play music. There are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
+### Music Via Opus/FFMPEG
+This bot uses node-opus to play music, but falls back on FFMPEG. This bot may requir FFMPEG to play music. There are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
 
 ## Starting the Bot
 Just to be safe, navigate to the project folder and open a command prompt there. type npm install
