@@ -5,7 +5,7 @@ async function caseNumber(client, modlog) {
     m.embeds[0].type === 'rich' &&
     m.embeds[0].footer &&
     m.embeds[0].footer.text.startsWith('Case')
-  ).first();
+  )[0];
   if (!log) return 1;
   const thisCase = /Case\s(\d+)/.exec(log.embeds[0].footer.text);
   return thisCase ? parseInt(thisCase[1]) + 1 : 1;
