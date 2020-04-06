@@ -11,10 +11,10 @@ exports.run = (client, message, args, perms, settings) => {
   }
   //If no command return message
   if (!command) {
-    return channel.send(`I cannot find the command: ${args[0]}`).then(msg=>deleteMessage(msg,settings.messagetimeout));
+    return message.reply(`I cannot find the command: ${args[0]}`).then(m=>deleteMessage(m, settings.messagetimeout));
   } else {
     //Reloads command
-    channel.send(`Reloading: ${command}`)
+    message.reply(`Reloading: ${command}`)
       .then(m => {
         client.reload(command)
           .then(() => {
