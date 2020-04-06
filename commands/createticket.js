@@ -6,7 +6,7 @@ exports.run = async (client, message, args, perms, settings) => {
   //Variables
   const member = message.mentions.members.first();
   const guild = message.guild;
-  const defaultrole = message.guild.roles.cache.find(role=>role === settings.defaultrole);
+  const defaultrole = message.guild.roles.cache.find(role=>role.name === settings.defaultrole);
   const supportcategory = message.guild.channels.cache.find(channel=> channel.name === settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
