@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {
     const game = args.join(" ");
-    client.user.setGame(game);
+    client.user.setActivity(game);
 };
 
 exports.conf = {
