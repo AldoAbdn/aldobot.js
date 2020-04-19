@@ -9,7 +9,7 @@ exports.playQueue = (client,message) => {
         return;
       }
       member.voice.channel.join()
-        .then(async voiceConnection => {
+        .then(voiceConnection => {
           voiceConnection.on('error', e=>{
             console.log('Error'+e);
           })
@@ -33,7 +33,7 @@ exports.playQueue = (client,message) => {
     }
 };
 
-function playSong(guild, voiceConnection){
+async function playSong(guild, voiceConnection){
   guild.lastPlayed = guild.currentlyPlaying;
   guild.currentlyPlaying = guild.queue.shift();
   if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
