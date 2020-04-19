@@ -4,7 +4,7 @@ exports.run = (client, message, args, perms, settings) => {
   const guild = message.guild;
 
   //If not in voice channel, return
-  if (!client.voice.connections.find(voiceConnection => voiceConnection.channel.id == voiceChannel.id))
+  if (!client.voice.connections.find(voiceConnection => voiceConnection.channel.id == voiceChannel.id)){
     return;
   }
   //If no queue, set it
