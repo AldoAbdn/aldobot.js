@@ -21,7 +21,7 @@ exports.playQueue = (client,message) => {
             return;
           // Play Next Song
           } else if (guild.queue.length > 0){
-            playSong(guild, voiceConnection);
+            playSong(guild, voiceConnection).catch(error=>console.err);
           // Add Song To Queue
           } else if(guild.currentlyPlaying){
             addToQueue(guild, message);
@@ -59,6 +59,7 @@ async function playSong(guild, voiceConnection){
       console.log('Debug:' +info);
     });      
     postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
+  }
 }
 
 function addToQueue(guild, message){
