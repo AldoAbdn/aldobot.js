@@ -41,7 +41,6 @@ async function playSong(client, message, guild, voiceConnection){
     let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5});
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
     guild.dispatcher.on('finish', () => {
-      console.log('Song End');
       if(guild.dispatcher){
         delete guild.dispatcher;
       }
@@ -72,15 +71,13 @@ function addToQueue(guild, message){
       break;
     }
   }
-  yt.getInfo(url, function(err, info){
-    if (err) {
-      message.reply("Invalid URL").then(msg=>deleteMessage(msg,settings.messagetimeout));
-    } else {
+  yt.getInfo(url).then(info=>{
       guild.queue.push(info);
       message.reply(exports.createQueueString(guild.queue));
       exports.playQueue(client,message);
-    }
-  });
+    }).error(error=>{
+        message.reply(error).then(msg=>deleteMessage(msg,settings.messagetimeout));
+    });
 }
 
 exports.createQueueString = (queue) => {
