@@ -21,7 +21,7 @@ exports.playQueue = (client,message) => {
             playSong(client, message, guild, voiceConnection).catch(error=>console.log('Error'+error));
           // Add Song To Queue
           } else if(guild.currentlyPlaying){
-            addToQueue(guild, message);
+            addToQueue(client, guild, message);
           } else {
             guild.playing = false;
           }
@@ -59,7 +59,7 @@ async function playSong(client, message, guild, voiceConnection){
   }
 }
 
-function addToQueue(guild, message){
+function addToQueue(client, guild, message){
   let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
   for (let vid of guild.currentlyPlaying.related_videos){
     if (guild.lastPlayed && vid.title != undefined && vid.title != guild.lastPlayed.title){
