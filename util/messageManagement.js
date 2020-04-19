@@ -12,7 +12,7 @@ exports.deleteMessage = (message,timeout)=>{
 exports.postToDefault = (guild,string) => {
     const defaultChannel = guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
     if (defaultChannel){
-        defaultChannel.send(string,{code:'asciidoc'}).then(msg=>deleteMessage(msg, settings.messagetimeout));
+        defaultChannel.send(string,{code:'asciidoc'}).then(msg=>exports.deleteMessage(msg, settings.messagetimeout));
         return true;
     } else {
         return false;
@@ -21,7 +21,7 @@ exports.postToDefault = (guild,string) => {
 
 exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
     if (callingMember.id === mentionedMember.id) {
-      message.channel.send('You cannot do that to yourself, why did you try?').then(msg=>deleteMessage(msg,settings.messagetimeout));
+      message.channel.send('You cannot do that to yourself, why did you try?').then(msg=>exports.deleteMessage(msg,settings.messagetimeout));
       return false;
     } else if (mentionedMember) {
       if (mentionedMember.roles.highest.position >= callingMember.roles.highest.position) {

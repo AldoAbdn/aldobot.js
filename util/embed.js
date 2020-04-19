@@ -1,4 +1,3 @@
-const {embedSan} = require('./embedSan.js');
 exports.updateEmbedField = async (channels,authorID,caseNumber,field,newValue) => {
   for (var channel of channels){
     //If channel is valid
@@ -16,7 +15,7 @@ exports.updateEmbedField = async (channels,authorID,caseNumber,field,newValue) =
         //Replace parts of message with new reason
         channel.fetchMessage(caseLog.id).then(logMsg => {
           let embed = logMsg.embeds[0];
-          embedSan(embed);
+          exports.embedSan(embed);
           let index = embed.description.indexOf(field);
           let firstHalf = embed.description.substring(0,index+field.length);
           let secondHalf = embed.description.substring(index+field.length+1);
