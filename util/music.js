@@ -21,7 +21,7 @@ exports.playQueue = (client,message) => {
             return;
           // Play Next Song
           } else if (guild.queue.length > 0){
-            playSong(guild, voiceConnection).catch(error=>console.err);
+            playSong(guild, voiceConnection).catch(error=>console.log('Error'+e));
           // Add Song To Queue
           } else if(guild.currentlyPlaying){
             addToQueue(guild, message);
