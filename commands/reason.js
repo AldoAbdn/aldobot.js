@@ -1,7 +1,7 @@
-const {updateEmbedField} = require('../util/updateEmbedField.js');
+const {updateEmbedField} = require('../util/embed.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Set variables
-  const log = message.guild.channels.cache.find(channel=>channel ===  settings.moderationchannel) || message.guild.channels.cache.find(CHANGEME=>channel ===  settings.defaultchannel);
+  const log = message.guild.channels.cache.find(channel=>channel.name ===  settings.moderationchannel) || message.guild.channels.cache.find(channel=>channel.name ===  settings.defaultchannel);
   const caseNumbers = args[0].split(",");
   const newReason = args.slice(1).join(" ");
   const query = "**Reason:**";

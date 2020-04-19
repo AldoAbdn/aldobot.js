@@ -8,3 +8,42 @@ exports.deleteMessage = (message,timeout)=>{
         console.log("Failed to delete message: " + message);
     }
 }
+
+exports.postToDefault = (guild,string) => {
+    const defaultChannel = guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
+    if (defaultChannel){
+        defaultChannel.send(string,{code:'asciidoc'}).then(msg=>deleteMessage(msg, settings.messagetimeout));
+        return true;
+    } else {
+        return false;
+    }
+};
+
+exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
+    if (callingMember.id === mentionedMember.id) {
+      message.channel.send('You cannot do that to yourself, why did you try?').then(msg=>deleteMessage(msg,settings.messagetimeout));
+      return false;
+    } else if (mentionedMember) {
+      if (mentionedMember.roles.highest.position >= callingMember.roles.highest.position) {
+        message.channel.send('The targeted member has a higher or equal role position than you.').then(msg=>deleteMessage(msg,settings.messagetimeout));
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  };
+
+exports.caseNumber = async (client, modlog) => {
+    const messages = await modlog.messages.cache;
+    const log = messages.filter(m => m.author.id === client.user.id &&
+      m.embeds[0] &&
+      m.embeds[0].type === 'rich' &&
+      m.embeds[0].footer &&
+      m.embeds[0].footer.text.startsWith('Case')
+    ).first();
+    if (!log) return 1;
+    const thisCase = /Case\s(\d+)/.exec(log.embeds[0].footer.text);
+    return thisCase ? parseInt(thisCase[1]) + 1 : 1;
+  }

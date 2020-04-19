@@ -1,7 +1,5 @@
 const {MessageEmbed} = require('discord.js');
-const {caseNumber} = require('../util/caseNumber.js');
-const {compareMemberRoles} = require('../util/compareMemberRoles.js');
-const {deleteMessage} = require('../util/messageManagement.js');
+const {deleteMessage,compareMemberRoles,caseNumber} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
   const members = message.mentions.members.array();

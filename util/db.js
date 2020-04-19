@@ -1,6 +1,5 @@
 const mongodb = require('mongodb');
 const mongodbClient= mongodb.MongoClient;
-const ObjectID = mongodb.ObjectID;
 const url = process.env.DB;
 const dbname = process.env.DBNAME;
 

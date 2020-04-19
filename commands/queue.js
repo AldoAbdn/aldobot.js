@@ -1,4 +1,4 @@
-const {createQueueString} = require('../util/createQueueString.js');
+const {createQueueString} = require('../util/music.js');
 const {deleteMessage} = require('../util/messageManagement');
 exports.run = (client, message, args, perms, settings) => {
   var queue = message.guild.queue;

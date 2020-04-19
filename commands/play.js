@@ -1,4 +1,4 @@
-const {playQueue} = require('../util/playQueue.js');
+const {playQueue} = require('../util/music.js');
 const yt = require('ytdl-core-discord');
 exports.run = async(client, message, args) => {
   //If no lock attribute, make one

@@ -1,5 +1,5 @@
 const settings = require('../settings.json');
-const {postToDefault} = require('../util/postToDefault.js');
+const {postToDefault} = require('../util/messageManagement.js');
 module.exports = member => {
 	//Welcome message
 	let guild = member.guild;

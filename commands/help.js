@@ -1,4 +1,4 @@
-const {groupCommandsByCategory} = require('../util/groupCommandsByCategory');
+const {groupCommandsByCategory} = require('../util/group.js');
 const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = (client, message, params, perms, settings) => {
   if (!params[0]) {

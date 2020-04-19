@@ -1,4 +1,4 @@
-const {updateEmbedField} = require('../util/updateEmbedField.js');
+const {updateEmbedField} = require('../util/embed.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Set variables
   const log = message.guild.channels.cache.find(channel => channel.name === settings.supportchannel) || message.guild.channels.cache.find(channel => channel.name === settings.defaultchannel);

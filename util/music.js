@@ -1,6 +1,5 @@
 const yt = require('ytdl-core-discord');
-const {deleteMessage} = require('../util/messageManagement.js');
-const {postToDefault} = require('../util/postToDefault.js');
+const {deleteMessage, postToDefault} = require('./messageManagement.js');
 const settings = require('../settings.json');
 exports.playQueue = (client,message) => {
   const guild = message.guild;
@@ -25,10 +24,9 @@ exports.playQueue = (client,message) => {
               }
               //Set playing to true on new stream
               guild.playing = true;
-              let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5})
+              let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5});
               guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
-              //Set current volume
-              guild.dispatcher.setVolume(guild.volume);
+              console.log(guild.dispatcher);
               guild.dispatcher.on('end', () => {
                 delete guild.dispatcher;
                 //Check for stop event
@@ -41,7 +39,7 @@ exports.playQueue = (client,message) => {
               });
               guild.dispatcher.on('error', e=>{
                 console.log('Error:'+e);
-                });
+              });
               guild.dispatcher.on('debug', info=>{
                 console.log('Debug:' +info);
               });      
@@ -74,4 +72,12 @@ exports.playQueue = (client,message) => {
     } else {
       message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
+};
+
+exports.createQueueString = (queue) => {
+  let str = ":Current Queue:\n";
+  queue.forEach(video => {
+      str += video.title + "\n";
+  });
+  return str;
 };

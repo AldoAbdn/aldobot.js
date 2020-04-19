@@ -1,7 +1,5 @@
 const {MessageEmbed} = require('discord.js');
-const {caseNumber} = require('../util/caseNumber.js');
-const {compareMemberRoles} = require('../util/compareMemberRoles.js');
-const {deleteMessage} = require('../util/messageManagement.js');
+const {deleteMessage,compareMemberRoles,caseNumber} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Variables
   const member = message.mentions.members.first();
@@ -25,7 +23,7 @@ exports.run = async (client, message, args, perms, settings) => {
   //If there is a moderation channel, post embed there
   if (log!=null){
     log.send({embed});
-  }
+  } 
   //Create new channel
   var supportTicket = await guild.channels.create("support-ticket-"+caseNum,{type:'text'});
   supportTicket.send(embed);
