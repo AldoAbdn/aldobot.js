@@ -22,6 +22,8 @@ exports.playQueue = (client,message) => {
           // Add Song To Queue
           } else if(guild.currentlyPlaying){
             addToQueue(guild, message);
+          } else {
+            guild.playing = false;
           }
         })
         .catch(console.error);
@@ -40,9 +42,9 @@ async function playSong(guild, voiceConnection){
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
     guild.dispatcher.on('end', () => {
       delete guild.dispatcher;
+      console.log('Song End');
       //Check for stop event
       if (guild.playing){
-        guild.playing = false;
         //Delay to fix bug in discord.js 
         setTimeout(()=>{
           exports.playQueue(client,message);
