@@ -10,9 +10,6 @@ exports.playQueue = (client,message) => {
       }
       member.voice.channel.join()
         .then(voiceConnection => {
-          voiceConnection.on('error', e=>{
-            console.log('Error'+e);
-          })
           // Resume
           if (guild.dispatcher) {
             if (guild.dispatcher.paused){
@@ -54,10 +51,7 @@ async function playSong(guild, voiceConnection){
     });
     guild.dispatcher.on('error', e=>{
       console.log('Error:'+e);
-    });
-    guild.dispatcher.on('debug', info=>{
-      console.log('Debug:' +info);
-    });      
+    });     
     postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
   }
 }

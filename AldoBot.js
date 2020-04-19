@@ -15,7 +15,6 @@ async function setup(){
   const Discord = require('discord.js');
   const DBHelper = require('./util/db.js');
   const client = new Discord.Client({ useUnifiedTopology: true });
-  const chalk = require('chalk');
   const moment = require('moment');
   require('./util/eventLoader')(client);
   
