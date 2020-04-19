@@ -10,11 +10,13 @@ exports.playQueue = (client,message) => {
       }
       member.voice.channel.join()
         .then(async voiceConnection => {
+          // Resume
           if (guild.dispatcher) {
             if (guild.dispatcher.paused){
               guild.dispatcher.resume();
             }
             return;
+          // Play Next Song
           } else if (guild.queue.length > 0){
             guild.lastPlayed = guild.currentlyPlaying;
             guild.currentlyPlaying = guild.queue.shift();
@@ -46,8 +48,8 @@ exports.playQueue = (client,message) => {
               postToDefault(guild,`:Now Playing:\n${guild.currentlyPlaying.title}`);
             }
             return;
+          // Add Song To Queue
           } else if(guild.currentlyPlaying){
-            console.log('currentPlaying');
             let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
             for (let vid of guild.currentlyPlaying.related_videos){
               if (guild.lastPlayed && vid.title != undefined && vid.title != guild.lastPlayed.title){

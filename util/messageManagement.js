@@ -1,3 +1,4 @@
+const settings = require('../settings.json');
 exports.deleteMessage = (message,timeout)=>{
     if(typeof timeout === 'string' || timeout instanceof String){
         timeout = parseInt(timeout);
