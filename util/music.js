@@ -18,7 +18,7 @@ exports.playQueue = (client,message) => {
             return;
           // Play Next Song
           } else if (guild.queue.length > 0){
-            playSong(client, guild, voiceConnection).catch(error=>console.log('Error'+e));
+            playSong(client, message, guild, voiceConnection).catch(error=>console.log('Error'+error));
           // Add Song To Queue
           } else if(guild.currentlyPlaying){
             addToQueue(guild, message);
@@ -32,7 +32,7 @@ exports.playQueue = (client,message) => {
     }
 };
 
-async function playSong(client, guild, voiceConnection){
+async function playSong(client, message, guild, voiceConnection){
   guild.lastPlayed = guild.currentlyPlaying;
   guild.currentlyPlaying = guild.queue.shift();
   if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
