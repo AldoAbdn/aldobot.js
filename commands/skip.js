@@ -1,10 +1,10 @@
 const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = (client, message, args, perms, settings) => {
-  const memberVoiceConnection = message.member.voice.connection;
+  const voiceChannel = message.member.voice.channel;
   const guild = message.guild;
 
   //If not in voice channel, return
-  if (!client.voice.connections.find(voiceConnection => voiceConnection === memberVoiceConnection)){
+  if (!client.voice.connections.find(voiceConnection => voiceConnection.channel.id == voiceChannel.id))
     return;
   }
   //If no queue, set it
