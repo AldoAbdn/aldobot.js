@@ -40,7 +40,7 @@ async function playSong(guild, voiceConnection){
     guild.playing = true;
     let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5});
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
-    guild.dispatcher.on('end', () => {
+    guild.dispatcher.on('finish', () => {
       console.log('Song End');
       //Check for stop event
       if (guild.playing){
