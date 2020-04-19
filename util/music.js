@@ -18,7 +18,7 @@ exports.playQueue = (client,message) => {
             return;
           // Play Next Song
           } else if (guild.queue.length > 0){
-            playSong(guild, voiceConnection).catch(error=>console.log('Error'+e));
+            playSong(client, guild, voiceConnection).catch(error=>console.log('Error'+e));
           // Add Song To Queue
           } else if(guild.currentlyPlaying){
             addToQueue(guild, message);
@@ -32,7 +32,7 @@ exports.playQueue = (client,message) => {
     }
 };
 
-async function playSong(guild, voiceConnection){
+async function playSong(client, guild, voiceConnection){
   guild.lastPlayed = guild.currentlyPlaying;
   guild.currentlyPlaying = guild.queue.shift();
   if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
@@ -74,6 +74,7 @@ function addToQueue(guild, message){
       message.reply("Invalid URL").then(msg=>deleteMessage(msg,settings.messagetimeout));
     } else {
       guild.queue.push(info);
+      message.reply(exports.createQueueString(guild.queue));
       exports.playQueue(client,message);
     }
   });
