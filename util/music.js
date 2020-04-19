@@ -42,6 +42,9 @@ async function playSong(client, message, guild, voiceConnection){
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
     guild.dispatcher.on('finish', () => {
       console.log('Song End');
+      if(guild.dispatcher){
+        delete guild.dispatcher;
+      }
       //Check for stop event
       if (guild.playing){
         //Delay to fix bug in discord.js 
