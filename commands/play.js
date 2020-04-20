@@ -1,5 +1,5 @@
 const {playQueue, createQueueString} = require('../util/music.js');
-const {isUrl} = require('../util/string.js');
+const {isURL} = require('../util/string.js');
 const yt = require('ytdl-core-discord');
 const ytSearch = require('youtube-search');
 exports.run = async(client, message, args) => {
@@ -17,7 +17,7 @@ exports.run = async(client, message, args) => {
   }
   //Set variables
   let urls = [];
-  if (args[0] && args.length == 1 && isUrl(args[0])){
+  if (args[0] && args.length == 1 && isURL(args[0])){
     for (var url of urls){
       //If url, get YT info and add to queue 
       if (url) {
