@@ -23,7 +23,7 @@ exports.run = async(client, message, args) => {
     //Push YT to queue
     if (info != null){
       message.guild.queue.push(info);
-      if(message.guild.queue.length > 1){
+      if(message.guild.currentPlaying){
         message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
       } else {
         message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
@@ -43,7 +43,7 @@ exports.run = async(client, message, args) => {
       //Push YT to queue
       if (info != null){
         message.guild.queue.push(info);
-        if(message.guild.queue.length > 1){
+        if(message.guild.currentPlaying){
           message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
         } else {
           message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
