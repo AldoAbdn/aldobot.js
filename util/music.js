@@ -44,6 +44,7 @@ async function playSong(client, message, guild, voiceConnection){
       if(guild.dispatcher){
         delete guild.dispatcher;
       }
+      guild.currentlyPlaying = null;
       //Check for stop event
       if (guild.playing){
         //Delay to fix bug in discord.js 

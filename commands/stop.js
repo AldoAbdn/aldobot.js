@@ -10,7 +10,6 @@ exports.run = (client, message, args) => {
     guild.dispatcher.end();
     //Disconnects voice channel
     voiceChannel.disconnect();
-    guild.currentlyPlaying = null;
   }
 };
   
