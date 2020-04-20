@@ -73,7 +73,11 @@ function playRelatedVideos(client, guild, message, settings){
   }
   yt.getInfo(url).then(info=>{
       guild.queue.push(info);
-      message.reply(exports.createQueueString(guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      if(message.guild.queue.length > 1){
+        message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      } else {
+        message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
+      }
       exports.playQueue(client,message);
     }).error(error=>{
         message.reply(error).then(msg=>deleteMessage(msg,settings.messagetimeout));

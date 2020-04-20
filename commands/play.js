@@ -23,7 +23,11 @@ exports.run = async(client, message, args) => {
     //Push YT to queue
     if (info != null){
       message.guild.queue.push(info);
-      message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      if(message.guild.queue.length > 1){
+        message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      } else {
+        message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
+      }
     }
   } else if(args.length > 0){
     let query = args.join(" ");
@@ -39,7 +43,11 @@ exports.run = async(client, message, args) => {
       //Push YT to queue
       if (info != null){
         message.guild.queue.push(info);
-        message.reply(createQueueString(message.guild.queue),{code:'asciidoc'});
+        if(message.guild.queue.length > 1){
+          message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+        } else {
+          message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
+        }
       } 
     }
   }
