@@ -1,5 +1,7 @@
-const {playQueue} = require('../util/music.js');
+const {playQueue, createQueueString} = require('../util/music.js');
+const {isUrl} = require('../util/string.js');
 const yt = require('ytdl-core-discord');
+const ytSearch = require('youtube-search');
 exports.run = async(client, message, args) => {
   //If no lock attribute, make one
   if (message.guild.lock == null){
@@ -15,18 +17,35 @@ exports.run = async(client, message, args) => {
   }
   //Set variables
   let urls = [];
-  if (args[0]){
-    urls = args[0].split(",");
-  }
-  for (var url of urls){
-    //If url, get YT info and add to queue 
-    if (url) {
-      //Get YT info
-      let info = await yt.getInfo(url);
+  if (args[0] && args.length == 1 && isUrl(args[0])){
+    for (var url of urls){
+      //If url, get YT info and add to queue 
+      if (url) {
+        //Get YT info
+        let info = await yt.getInfo(url);
         //Push YT to queue
         if (info != null){
           message.guild.queue.push(info);
-        }
+          message.reply(createQueueString(guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+        } 
+      }
+    }
+  } else if(args.length > 0){
+    let query = args.join(" ");
+    let options = {
+      maxResults: 1,
+      key: process.env.YT_API_KEY
+    };
+    let {results} = await ytSearch(query, options);
+    if(results != null){
+      let video = results[0];
+      let url = video.link;
+      let info = await yt.getInfo(url);
+      //Push YT to queue
+      if (info != null){
+        message.guild.queue.push(info);
+        message.reply(createQueueString(guild.queue),{code:'asciidoc'});
+      } 
     }
   }
   //Play queue
@@ -43,6 +62,6 @@ exports.conf = {
 
 exports.help = {
   name: 'play',
-  description: 'Plays music from a YouTube link',
-  usage: 'play <URL>'
+  description: 'Plays music from a YouTube link or search',
+  usage: 'play <URL> / play <SEARCH>'
 };

@@ -10,7 +10,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 ### Music
 | Command       | Description   | Usage |
 | ------------- | ------------- | ----- |
-| Play          | Plays music from a YouTube Link  | play (URL) |
+| Play          | Plays music from a YouTube Link, or search term  | play (URL) / play(PUT SEARCH HERE) |
 | Pause  | Pauses audio  | pause |
 | Skip | Skips a song. Pass a track index to remove a specific track in the queue, or leave index blank to skip the currently playing song | skip (index **optional**) |
 | Stop | Makes the bot leave the audio channel, clears the queue | stop |
@@ -84,6 +84,9 @@ Without a mongodb setup you will not be able to use the meta command. To disable
 ### Music Via Opus/FFMPEG
 This bot uses node-opus to play music, but falls back on FFMPEG. This bot may requir FFMPEG to play music. There are many ways to do this and will depend on your operating system. If you are self hosting the bot on your own machine, simply install FFMPEG and ensure it is set properly in PATH variable. For Heroku hosting, try this [buildpack](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) 
 
+### Youtube API Key
+This bot allows you to play music by either passing a YouTube video URL or a search term. To do this you are required to provide an API key. If you don't you will still be able to play music via URL just not by search term. 
+
 ## Starting the Bot
 Just to be safe, navigate to the project folder and open a command prompt there. type npm install
 
@@ -95,10 +98,11 @@ TOKEN
 OWNER_ID
 DB
 DBNAME
+YT_API_KEY
 ```
 These will correspond to the values you retrieved earlier. There are many ways to do this but a simple way is:
 ```
-TOKEN=token OWNER_ID=ownerid DB=mongodburlhere DBNAME=nameofdbhere node AldoBot.js
+TOKEN=token OWNER_ID=ownerid DB=mongodburlhere DBNAME=nameofdbhere YT_API_KEY node AldoBot.js
 ```
 To save yourself time, add this command with your own bot token and owner id to the start script in package.json, being careful not to push the edited repo
 

@@ -1,6 +1,6 @@
 {
   "name": "aldobot",
-  "version": "3.6.6",
+  "version": "3.6.7",
   "description": "Discord bot created using Discord.js",
   "main": "AldoBot.js",
   "repository": {
@@ -28,6 +28,7 @@
     "opusscript": "0.0.6",
     "sodium": "^3.0.2",
     "utf-8-validate": "^5.0.2",
+    "youtube-search": "^1.1.4",
     "ytdl-core-discord": "^1.1.0",
     "zlib-sync": "^0.1.6"
   }
