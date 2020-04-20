@@ -1,4 +1,5 @@
 const {playQueue, createQueueString} = require('../util/music.js');
+const {deleteMessage} = require('../util/messageManagement.js');
 const {isURL} = require('../util/string.js');
 const yt = require('ytdl-core-discord');
 const ytSearch = require('youtube-search');
