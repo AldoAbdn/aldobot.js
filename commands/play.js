@@ -19,16 +19,20 @@ exports.run = async(client, message, args) => {
   //Set variables
   if (args[0] && args.length == 1 && isURL(args[0])){
     let url = args[0];
-    //Get YT info
-    let info = await yt.getInfo(url);
-    //Push YT to queue
-    if (info != null){
-      message.guild.queue.push(info);
-      if(message.guild.currentPlaying){
-        message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
-      } else {
-        message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
+    try {
+      //Get YT info
+      let info = await yt.getInfo(url);
+      //Push YT to queue
+      if (info != null){
+        message.guild.queue.push(info);
+        if(message.guild.currentPlaying){
+          message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+        } else {
+          message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
+        }
       }
+    } catch(error){
+      message.reply(error).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   } else if(args.length > 0){
     let query = args.join(" ");
@@ -40,16 +44,20 @@ exports.run = async(client, message, args) => {
     if(results != null){
       let video = results[0];
       let url = video.link;
-      let info = await yt.getInfo(url);
-      //Push YT to queue
-      if (info != null){
-        message.guild.queue.push(info);
-        if(message.guild.currentPlaying){
-          message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
-        } else {
-          message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
-        }
-      } 
+      try {
+        let info = await yt.getInfo(url);
+        //Push YT to queue
+        if (info != null){
+          message.guild.queue.push(info);
+          if(message.guild.currentPlaying){
+            message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+          } else {
+            message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
+          }
+        } 
+      } catch(error){
+        message.reply(error).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      }
     }
   }
   //Play queue

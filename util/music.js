@@ -80,7 +80,7 @@ function playRelatedVideos(client, guild, message, settings){
         message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
       }
       exports.playQueue(client,message);
-    }).error(error=>{
+    }).catch(error=>{
         message.reply(error).then(msg=>deleteMessage(msg,settings.messagetimeout));
     });
 }
