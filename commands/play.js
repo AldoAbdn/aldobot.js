@@ -23,7 +23,7 @@ exports.run = async(client, message, args) => {
     //Push YT to queue
     if (info != null){
       message.guild.queue.push(info);
-      message.reply(createQueueString(guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   } else if(args.length > 0){
     let query = args.join(" ");
