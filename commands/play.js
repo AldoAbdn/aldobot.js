@@ -16,19 +16,14 @@ exports.run = async(client, message, args) => {
     message.guild.queue = [];
   }
   //Set variables
-  let urls = [];
   if (args[0] && args.length == 1 && isURL(args[0])){
-    for (var url of urls){
-      //If url, get YT info and add to queue 
-      if (url) {
-        //Get YT info
-        let info = await yt.getInfo(url);
-        //Push YT to queue
-        if (info != null){
-          message.guild.queue.push(info);
-          message.reply(createQueueString(guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
-        } 
-      }
+    let url = args[0];
+    //Get YT info
+    let info = await yt.getInfo(url);
+    //Push YT to queue
+    if (info != null){
+      message.guild.queue.push(info);
+      message.reply(createQueueString(guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   } else if(args.length > 0){
     let query = args.join(" ");
@@ -37,6 +32,9 @@ exports.run = async(client, message, args) => {
       key: process.env.YT_API_KEY
     };
     let {results} = await ytSearch(query, options);
+    console.log(results);
+    console.log(args);
+    console.log(isURL(args[0]));
     if(results != null){
       let video = results[0];
       let url = video.link;
