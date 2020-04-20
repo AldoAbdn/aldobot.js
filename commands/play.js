@@ -32,9 +32,6 @@ exports.run = async(client, message, args) => {
       key: process.env.YT_API_KEY
     };
     let {results} = await ytSearch(query, options);
-    console.log(results);
-    console.log(args);
-    console.log(isURL(args[0]));
     if(results != null){
       let video = results[0];
       let url = video.link;
@@ -42,7 +39,7 @@ exports.run = async(client, message, args) => {
       //Push YT to queue
       if (info != null){
         message.guild.queue.push(info);
-        message.reply(createQueueString(guild.queue),{code:'asciidoc'});
+        message.reply(createQueueString(message.guild.queue),{code:'asciidoc'});
       } 
     }
   }
