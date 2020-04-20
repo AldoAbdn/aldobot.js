@@ -14,14 +14,14 @@ exports.run = (client, message, params, perms, settings) => {
       stringArray.push(string);
     }
     for (var string of stringArray){
-      message.channel.send(string, {code:'asciidoc',split:true}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      message.reply(string, {code:'asciidoc',split:true}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   } else {
     //Prints description of specified command
     let command = params[0];
     if (client.commands.has(command)) {
       command = client.commands.get(command);
-      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`, {code:'asciidoc',split:true}).then(msg=>deleteMessage(msg,settings.messagetimeout));
+      message.reply(`= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`, {code:'asciidoc',split:true}).then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
   }
 };

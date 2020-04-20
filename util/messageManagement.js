@@ -22,11 +22,11 @@ exports.postToDefault = (guild,string) => {
 
 exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
     if (callingMember.id === mentionedMember.id) {
-      message.channel.send('You cannot do that to yourself, why did you try?').then(msg=>exports.deleteMessage(msg,settings.messagetimeout));
+      message.reply('You cannot do that to yourself, why did you try?').then(msg=>exports.deleteMessage(msg,settings.messagetimeout));
       return false;
     } else if (mentionedMember) {
       if (mentionedMember.roles.highest.position >= callingMember.roles.highest.position) {
-        message.channel.send('The targeted member has a higher or equal role position than you.').then(msg=>deleteMessage(msg,settings.messagetimeout));
+        message.reply('The targeted member has a higher or equal role position than you.').then(msg=>exports.deleteMessage(msg,settings.messagetimeout));
         return false;
       } else {
         return true;
