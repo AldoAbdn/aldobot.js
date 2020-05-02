@@ -37,7 +37,7 @@ exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
   };
 
 exports.caseNumber = async (client, modlog) => {
-    const messages = modlog.messages.cache;
+    const messages = await modlog.awaitMessages(m=>true, {limit:10});
     const log = messages.filter(m => m.author.id === client.user.id &&
       m.embeds[0] &&
       m.embeds[0].type === 'rich' &&
