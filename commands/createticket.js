@@ -4,8 +4,8 @@ exports.run = async (client, message, args, perms, settings) => {
   //Variables
   const member = message.mentions.members.first();
   const guild = message.guild;
-  const defaultrole = message.guild.roles.cache.find(role=>role.name === settings.defaultrole);
-  const supportcategory = message.guild.channels.cache.find(channel=> channel.name === settings.supportcategory) || guild.createChannel('support-tickets-category','category');
+  const defaultrole = guild.roles.cache.find(role=>role.name === settings.defaultrole);
+  const supportcategory = guild.channels.cache.find(channel=> channel.name === settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   //Get case number and reason, form fancy embed
@@ -25,9 +25,7 @@ exports.run = async (client, message, args, perms, settings) => {
     log.send({embed});
   } 
   //Create new channel
-  var supportTicket = await guild.channels.create("support-ticket-"+caseNum,{type:'text'});
-  supportTicket.send(embed);
-  supportTicket.overwritePermissions([
+  let permissionOverwites = ([
     {
       id: defaultrole.id,
       deny: ['VIEW_CHANNEL']
@@ -37,7 +35,8 @@ exports.run = async (client, message, args, perms, settings) => {
       allow: ['VIEW_CHANNEL']
     }
   ], "Makes Text Channel Private");
-  supportTicket.setParent(supportcategory);
+  var supportTicket = await guild.channels.create("support-ticket-"+caseNum,{type:'text', parent: supportcategory, permissionOverwites});
+  supportTicket.send(embed);
 };
 
 exports.conf = {

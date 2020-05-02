@@ -37,14 +37,14 @@ exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
   };
 
 exports.caseNumber = async (client, modlog) => {
-    const messages = await modlog.messages.cache;
+    const messages = modlog.messages.cache;
     const log = messages.filter(m => m.author.id === client.user.id &&
       m.embeds[0] &&
       m.embeds[0].type === 'rich' &&
       m.embeds[0].footer &&
       m.embeds[0].footer.text.startsWith('Case')
     ).first();
-    if (!log) return 1;
+    if (!log) return 0;
     const thisCase = /Case\s(\d+)/.exec(log.embeds[0].footer.text);
     return thisCase ? parseInt(thisCase[1]) + 1 : 1;
   }
