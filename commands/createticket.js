@@ -16,12 +16,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   if(!compareMemberRoles(message.member, member, message))return;
   //Case number and reason 
-  try {
-    const caseNum = await caseNumber(client, log);
-  } catch (error){
-    console.log(error);
-    const caseNum = 1;
-  }
+  const caseNum = await caseNumber(client, log);
   const issue = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`;
   //Nice embed
   const embed = new MessageEmbed()
