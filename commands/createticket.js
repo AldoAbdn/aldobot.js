@@ -31,7 +31,7 @@ exports.run = async (client, message, args, perms, settings) => {
       deny: ['VIEW_CHANNEL']
     },
     {
-      id: user.id,
+      id: member.user.id,
       allow: ['VIEW_CHANNEL']
     }
   ], "Makes Text Channel Private");
