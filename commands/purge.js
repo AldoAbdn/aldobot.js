@@ -3,7 +3,7 @@ exports.run = (client, message, args) => {
   const messagecount = parseInt(args.join(' '));
   const channel = message.channel;
   //Fetch messages, include the command itself, delete them
-  channel.bulkDelete(messagecount);
+  channel.bulkDelete(messagecount + 1);
 };
 
 exports.conf = {
