@@ -2,6 +2,9 @@ exports.run = (client, message, args) => {
   //Get count
   const messagecount = parseInt(args.join(' '));
   const channel = message.channel;
+  // Check size
+  if (messagecount >= 100)
+    message.reply('Message count must be less than 100');
   //Fetch messages, include the command itself, delete them
   channel.bulkDelete(messagecount + 1);
 };
