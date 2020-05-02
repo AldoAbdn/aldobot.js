@@ -9,7 +9,7 @@ exports.run = async (client, message, args, perms, settings) => {
   //Checks if a user was mentioned
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   if (message.mentions.members.size > 1) return message.reply('Can only create a ticket for one user');
-  const user = message.mentions.member.first();
+  const user = message.mentions.members.first();
   // Get Support Specialist
   const specialist = message.author;
   //Get case number and reason, form fancy embed
