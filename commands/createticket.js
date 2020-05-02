@@ -8,6 +8,10 @@ exports.run = async (client, message, args, perms, settings) => {
   const supportcategory = guild.channels.cache.find(channel=> channel.name === settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  if (message.mentions.members.size > 1) return message.reply('Can only create a ticket for one user');
+  const user = message.mentions.member.first();
+  // Get Support Specialist
+  const specialist = message.author;
   //Get case number and reason, form fancy embed
   const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   if(!compareMemberRoles(message.member, member, message))return;
@@ -18,7 +22,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const embed = new MessageEmbed()
   .setColor(0x00AE86)
   .setTimestamp()
-  .setDescription(`**Action:** Support Ticket\n**Target:** ${member.user.tag}\n**Support Specialist:** ${message.author.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
+  .setDescription(`**Action:** Support Ticket\n**Target:** ${user.tag}\n**Support Specialist:** ${specialist.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
   .setFooter(`Case ${caseNum}`);
   //If there is a moderation channel, post embed there
   if (log!=null){
@@ -31,7 +35,7 @@ exports.run = async (client, message, args, perms, settings) => {
       deny: ['VIEW_CHANNEL']
     },
     {
-      id: member.user.id,
+      id: user.id,
       allow: ['VIEW_CHANNEL']
     }
   ], "Makes Text Channel Private");
