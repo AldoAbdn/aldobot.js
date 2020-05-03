@@ -8,8 +8,8 @@ exports.run = async (client, message, args, perms, settings) => {
   const defaultrole = guild.roles.cache.find(role=>role.name === settings.defaultrole);
   const supportcategory = guild.channels.cache.find(channel=> channel.name === settings.supportcategory) || guild.createChannel('support-tickets-category','category');
   //Checks if a user was mentioned
-  if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
-  if (message.mentions.members.size > 1) return message.reply('Can only create a ticket for one user');
+  if (message.mentions.members.array().length < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  if (message.mentions.members.array().length > 1) return message.reply('Can only create a ticket for one user');
   //Get case number and reason, form fancy embed
   const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   if(!compareMemberRoles(message.member, member, message))return;
