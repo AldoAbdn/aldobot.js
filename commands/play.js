@@ -3,7 +3,7 @@ const {deleteMessage} = require('../util/messageManagement.js');
 const {isURL} = require('../util/string.js');
 const yt = require('ytdl-core-discord');
 const ytSearch = require('youtube-search');
-exports.run = async(client, message, args) => {
+exports.run = async(client, message, args, perms, settings) => {
   //If no lock attribute, make one
   if (message.guild.lock == null){
     message.guild.lock = false;
