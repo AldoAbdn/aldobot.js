@@ -1,16 +1,15 @@
 const {updateEmbedField} = require('../util/embed.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Set variables
-  const channels = message.guild.channels;
-  const log = channels.cache.find(channel=>channel.name ===  settings.supportchannel) || channels.cache.find(channel => channel.name === settings.defaultchannel);
+  const channels = message.guild.channels.cache;
+  const log = channels.find(channel=>channel.name ===  settings.supportchannel) || channels.cache.find(channel => channel.name === settings.defaultchannel);
   const caseNumbers = args[0].split(",");
   const newReason = args.slice(1).join(" ");
   const query = "**Status:**";
   var supportticket;
   var logs;
-  var caseLog;
   for (var caseNumber of caseNumbers){
-    supportticket = message.guild.channels.cache.find(channel => channel.name === "support-ticket-"+caseNumber);
+    supportticket = channels.find(channel => channel.name === "support-ticket-"+caseNumber);
     logs = [log,supportticket];
     updateEmbedField(logs,client.user.id,caseNumber,query,newReason);
   }
