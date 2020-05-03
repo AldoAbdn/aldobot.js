@@ -38,11 +38,10 @@ exports.run = async(client, message, args, perms, settings) => {
     let query = args.join(" ");
     let options = {
       maxResults: 1,
-      key: process.env.YT_API_KEY
+      key: process.env.YT_API_KEY,
+      type: 'video'
     };
     let {results} = await ytSearch(query, options);
-    console.log(results);
-    console.log(query);
     if(results != null){
       try {
         let video = results[0];
@@ -51,7 +50,7 @@ exports.run = async(client, message, args, perms, settings) => {
         //Push YT to queue
         if (info != null){
           message.guild.queue.push(info);
-          if(message.guild.currentPlaying){
+          if(message.guild.currentPlaying != null || message.guild.queue.length > 1){
             message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
           } else {
             message.reply(`:Now Playing:\n${info.title}`,{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));   
