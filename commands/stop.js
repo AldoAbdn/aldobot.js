@@ -7,7 +7,8 @@ exports.run = (client, message, args) => {
     //Stop playQueue firing on end event
     guild.playing = false;
     //End Dispatcher
-    guild.dispatcher.end();
+    if(guild.dispatcher)
+      guild.dispatcher.end();
     //Disconnects voice channel
     voiceChannel.disconnect();
   }

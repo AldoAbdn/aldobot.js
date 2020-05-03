@@ -42,6 +42,7 @@ exports.run = async(client, message, args, perms, settings) => {
     };
     let {results} = await ytSearch(query, options);
     console.log(results);
+    console.log(query);
     if(results != null){
       try {
         let video = results[0];
