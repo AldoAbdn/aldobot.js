@@ -3,7 +3,8 @@ exports.updateEmbedField = async (channels,authorID,caseNumber,field,newValue) =
     //If channel is valid
     if (channel){
         //Gets matching case log 
-        caseLog = channel.messages.cache.filter(m => m.author.id === authorID &&
+        const caseLogs = channel.messages.fetch({limit:10});
+        const caseLog = caseLogs.filter(m => m.author.id === authorID &&
           m.embeds[0] &&
           m.embeds[0].type === 'rich' &&
           m.embeds[0].footer &&

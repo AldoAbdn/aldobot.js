@@ -14,7 +14,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   if(!compareMemberRoles(message.member, member, message))return;
   //Case number and reason 
-  const caseNum = caseNumber(client, log);
+  const caseNum = await caseNumber(client, log);
   const issue = args.splice(1, args.length).join(' ') || '';
   //Nice embed
   const embed = new MessageEmbed()

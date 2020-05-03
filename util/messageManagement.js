@@ -36,17 +36,18 @@ exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
     }
   };
 
-exports.caseNumber = (client, modlog) => {
+exports.caseNumber = async (client, modlog) => {
   // Get's the latest log
-  const log = modlog.messages.cache.filter(m => 
+  const supportTickets = await modlog.messages.fetch({limit:10});
+  const supportTicket = supportTickets.filter(m => 
     m.author.id === client.user.id &&
     m.embeds[0] &&
     m.embeds[0].type === 'rich' &&
     m.embeds[0].footer &&
     m.embeds[0].footer.text.startsWith('Case')).first();
   // Returns the next case number
-  if(log) {
-    const thisCase = /Case\s(\d+)/.exec(log.embeds[0].footer.text);
+  if(supportTicket) {
+    const thisCase = /Case\s(\d+)/.exec(supportTicket.embeds[0].footer.text);
     return thisCase ? parseInt(thisCase[1]) + 1 : 1;
   } else 
     return 1;
