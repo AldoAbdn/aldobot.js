@@ -36,7 +36,7 @@ exports.compareMemberRoles = (callingMember, mentionedMember, message) => {
     }
   };
 
-exports.caseNumber = async (client, modlog) => {
+exports.caseNumber = (client, modlog) => {
   // Get's the latest log
   const log = modlog.messages.cache.filter(m => 
     m.author.id === client.user.id &&
