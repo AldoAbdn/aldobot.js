@@ -44,7 +44,6 @@ exports.caseNumber = (client, modlog) => {
     m.embeds[0].type === 'rich' &&
     m.embeds[0].footer &&
     m.embeds[0].footer.text.startsWith('Case')).first();
-  console.log(log);
   // Returns the next case number
   if(log) {
     const thisCase = /Case\s(\d+)/.exec(log.embeds[0].footer.text);

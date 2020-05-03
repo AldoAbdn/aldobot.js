@@ -2,6 +2,7 @@ const {MessageEmbed} = require('discord.js');
 const {deleteMessage,compareMemberRoles,caseNumber} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Variables
+  const specialist = message.author;
   const member = message.mentions.members.first();
   const guild = message.guild;
   const defaultrole = guild.roles.cache.find(role=>role.name === settings.defaultrole);
@@ -9,23 +10,17 @@ exports.run = async (client, message, args, perms, settings) => {
   //Checks if a user was mentioned
   if (message.mentions.members.size < 1) return message.reply('You must mention someone create a ticket for them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   if (message.mentions.members.size > 1) return message.reply('Can only create a ticket for one user');
-  const user = message.mentions.members.first();
-  // Get Support Specialist
-  const specialist = message.author;
   //Get case number and reason, form fancy embed
   const log = guild.channels.cache.find(channel => channel.name === settings.supportchannel) || guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   if(!compareMemberRoles(message.member, member, message))return;
-  console.log('roles fine');
   //Case number and reason 
   const caseNum = caseNumber(client, log);
-  console.log('Case Num');
-  console.log(caseNum);
-  const issue = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}updatesupportticketissue ${caseNum} <issue>.`;
+  const issue = args.splice(1, args.length).join(' ') || '';
   //Nice embed
   const embed = new MessageEmbed()
   .setColor(0x00AE86)
   .setTimestamp()
-  .setDescription(`**Action:** Support Ticket\n**Target:** ${user.tag}\n**Support Specialist:** ${specialist.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
+  .setDescription(`**Action:** Support Ticket\n**Target:** ${member.tag}\n**Support Specialist:** ${specialist.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
   .setFooter(`Case ${caseNum}`);
   //If there is a moderation channel, post embed there
   if (log!=null){
@@ -40,7 +35,7 @@ exports.run = async (client, message, args, perms, settings) => {
       deny: ['VIEW_CHANNEL']
     },
     {
-      id: user.id,
+      id: member.id,
       allow: ['VIEW_CHANNEL']
     }
   ], "Makes Text Channel Private");
