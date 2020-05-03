@@ -6,13 +6,13 @@ exports.run = (client, message, args) => {
   if (messagecount >= 100)
     message.reply('Message count must be less than 100');
   //Fetch messages, include the command itself, delete them
-  channel.bulkDelete(messagecount + 1);
+  channel.bulkDelete(messagecount + 1).catch(error=>message.reply(error));
 };
 
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ['delete'],
   category: "Server Management",
   permLevel: 2
 };
