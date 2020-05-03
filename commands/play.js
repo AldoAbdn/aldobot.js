@@ -41,10 +41,11 @@ exports.run = async(client, message, args, perms, settings) => {
       key: process.env.YT_API_KEY
     };
     let {results} = await ytSearch(query, options);
+    console.log(results);
     if(results != null){
-      let video = results[0];
-      let url = video.link;
       try {
+        let video = results[0];
+        let url = video.link;
         let info = await yt.getInfo(url);
         //Push YT to queue
         if (info != null){
