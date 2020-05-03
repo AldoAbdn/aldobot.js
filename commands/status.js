@@ -7,7 +7,6 @@ exports.run = async (client, message, args, perms, settings) => {
   if(caseNumbers == null)
     return message.reply('You must specify at least one case number');
   const newReason = args.slice(1).join(" ") || '';
-  const newReason = args.slice(1).join(" ");
   const query = "**Status:**";
   var supportticket;
   var logs;
