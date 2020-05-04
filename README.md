@@ -17,7 +17,6 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Volume | Sets music volume, pass an integer greater than 0. If no value is passed bot returns current volume | volume (volume **optional**) |
 | Playing | Shows currently playing song | playing |
 | Queue | Shows current song queue | queue |
-| Lock  | Locks bot to its current voice channel | lock |
 
 ### Server Management
 | Command     | Description   | Usage |
