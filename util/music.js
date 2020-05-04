@@ -4,7 +4,7 @@ const settings = require('../settings.json');
 exports.playQueue = (client,message) => {
   const guild = message.guild;
   const member = message.member;
-  if (member.voice.channel) {
+  if (member.voice.channel) { 
       if (guild.lock && !client.connections.find(voiceConnection => voiceConnection === member.voice.connection)){
         return;
       }
