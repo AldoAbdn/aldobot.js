@@ -4,33 +4,37 @@ const settings = require('../settings.json');
 exports.playQueue = (client,message) => {
   const guild = message.guild;
   const member = message.member;
-  if (member.voice.channel) { 
-      if (guild.lock && !client.connections.find(voiceConnection => voiceConnection === member.voice.connection)){
-        return;
-      }
+  const voiceConnection = client.voice.connections.find(voiceconnection => voiceconnection.channel.guild === message.guild);
+  if(voiceConnection){
+    handleCommand(guild, client, message, settings, voiceConnection);
+  } else if(member.voice.channel) { 
       member.voice.channel.join()
         .then(voiceConnection => {
-          // Resume
-          if (guild.dispatcher) {
-            if (guild.dispatcher.paused){
-              guild.dispatcher.resume();
-            }
-            return;
-          // Play Next Song
-          } else if (guild.queue.length > 0){
-            playSong(client, message, guild, voiceConnection).catch(error=>console.log('Error'+error));
-          // Add Song To Queue
-          } else if(guild.playing){
-            playRelatedVideos(client, guild, message, settings);
-          } else {
-            guild.playing = false;
-          }
+          handleCommand(guild, client, message, settings, voiceConnection);
         })
         .catch(console.error);
     } else {
       message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
     }
 };
+
+function handleCommand(guild, client, message, settings, voiceConnection){
+  // Resume
+  if (guild.dispatcher) {
+    if (guild.dispatcher.paused){
+      guild.dispatcher.resume();
+    }
+    return;
+  // Play Next Song
+  } else if (guild.queue.length > 0){
+    playSong(client, message, guild, voiceConnection).catch(error=>console.log('Error'+error));
+  // Add Song To Queue
+  } else if(guild.playing){
+    playRelatedVideos(client, guild, message, settings);
+  } else {
+    guild.playing = false;
+  }
+}
 
 async function playSong(client, message, guild, voiceConnection){
   guild.currentlyPlaying = guild.queue.shift();
@@ -39,12 +43,14 @@ async function playSong(client, message, guild, voiceConnection){
     guild.playing = true;
     let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5});
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
+    client.user.setActivity(guild.currentPlaying.title);
     guild.dispatcher.on('finish', () => {
       if(guild.dispatcher){
         delete guild.dispatcher;
       }
       guild.lastPlayed = guild.currentlyPlaying;
       guild.currentlyPlaying = null;
+      client.user.setActivity("");
       //Check for stop event
       if (guild.playing){
         //Delay to fix bug in discord.js 

@@ -9,6 +9,7 @@ exports.run = (client, message, args) => {
     //End Dispatcher
     if(guild.dispatcher)
       guild.dispatcher.end();
+    client.user.setActivity("");
     //Disconnects voice channel
     voiceChannel.disconnect();
   }
