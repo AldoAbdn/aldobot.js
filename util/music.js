@@ -33,7 +33,6 @@ exports.playQueue = (client,message) => {
 };
 
 async function playSong(client, message, guild, voiceConnection){
-  guild.lastPlayed = guild.currentlyPlaying;
   guild.currentlyPlaying = guild.queue.shift();
   if (guild.currentlyPlaying!=undefined || guild.currentlyPlaying!=null){
     //Set playing to true on new stream
@@ -44,6 +43,7 @@ async function playSong(client, message, guild, voiceConnection){
       if(guild.dispatcher){
         delete guild.dispatcher;
       }
+      guild.lastPlayed = guild.currentlyPlaying;
       guild.currentlyPlaying = null;
       //Check for stop event
       if (guild.playing){
