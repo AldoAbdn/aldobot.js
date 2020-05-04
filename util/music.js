@@ -13,9 +13,9 @@ exports.playQueue = (client,message) => {
           handleCommand(guild, client, message, settings, voiceConnection);
         })
         .catch(console.error);
-    } else {
-      message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
-    }
+  } else {
+    message.reply('You need to join a voice channel before play command can be issued').then(msg=>deleteMessage(msg,settings.messagetimeout));
+  }
 };
 
 function handleCommand(guild, client, message, settings, voiceConnection){

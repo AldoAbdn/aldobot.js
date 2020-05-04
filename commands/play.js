@@ -4,10 +4,6 @@ const {isURL} = require('../util/string.js');
 const yt = require('ytdl-core-discord');
 const ytSearch = require('youtube-search');
 exports.run = async(client, message, args, perms, settings) => {
-  //If no lock attribute, make one
-  if (message.guild.lock == null){
-    message.guild.lock = false;
-  } 
   //If no volume attribute, make one
   if (message.guild.volume == null){
     message.guild.volume = 1;
