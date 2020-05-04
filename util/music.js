@@ -61,7 +61,7 @@ async function playSong(client, message, guild, voiceConnection){
 }
 
 function playRelatedVideos(client, guild, message, settings){
-  let url = "https://www.youtube.com/watch?v=" + guild.currentlyPlaying.related_videos[0].id;
+  let url = "https://www.youtube.com/watch?v=" + guild.lastPlayed.related_videos[0].id;
   for (let vid of guild.currentlyPlaying.related_videos){
     if (guild.lastPlayed && vid.title != undefined && vid.title != guild.lastPlayed.title){
       if (vid.id){
