@@ -20,7 +20,7 @@ exports.playQueue = (client,message) => {
           } else if (guild.queue.length > 0){
             playSong(client, message, guild, voiceConnection).catch(error=>console.log('Error'+error));
           // Add Song To Queue
-          } else if(guild.currentlyPlaying){
+          } else if(guild.playing){
             playRelatedVideos(client, guild, message, settings);
           } else {
             guild.playing = false;
