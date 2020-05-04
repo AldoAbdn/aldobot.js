@@ -20,7 +20,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const embed = new MessageEmbed()
   .setColor(0x00AE86)
   .setTimestamp()
-  .setDescription(`**Action:** Support Ticket\n**Target:** ${member.tag}\n**Support Specialist:** ${specialist.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
+  .setDescription(`**Action:** Support Ticket\n**Target:** ${member.user.tag}\n**Support Specialist:** ${specialist.tag}\n**Issue:** ${issue}\n**Status:**Initialized`)
   .setFooter(`Case ${caseNum}`);
   //If there is a moderation channel, post embed there
   if (log!=null){

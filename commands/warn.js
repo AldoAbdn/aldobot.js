@@ -6,9 +6,9 @@ exports.run = async (client, message, args, perms, settings) => {
   //Get users
   const members = message.mentions.members.array();
   //Channels
-  const channels = message.guild.channels;
+  const channels = message.guild.channels.cache;
   //Get case number and reason, form fancy embed
-  const log = channels.cache.find(channel => channel.name === settings.moderationchannel) || channels.cache.find(channel => channel.name === settings.defaultchannel);
+  const log = channels.find(channel => channel.name === settings.moderationchannel) || channels.find(channel => channel.name === settings.defaultchannel);
   var caseNum;
   var reason;
   for (var member of members){

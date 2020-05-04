@@ -2,12 +2,15 @@ const {MessageEmbed} = require('discord.js');
 const {compareMemberRoles,caseNumber} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
+  const guild = message.guild;
+  const channels = guild.channels.cache;
+  const roles = guild.roles.cache;
   const members = message.mentions.members.array();
-  const log = message.guild.cache.find(channel => channel.name === settings.moderationchannel) || message.guild.cache.find(channel => channel.name === settings.defaultchannel);
-  const defaultRole = client.guilds.get(message.guild.id).roles.cache.find(role=>role ===  settings.defaultrole);
-  const muteRole = client.guilds.get(message.guild.id).roles.cache.find(role=>role ===  settings.muterole);
+  const log = channels.find(channel => channel.name === settings.moderationchannel) || channels.find(channel => channel.name === settings.defaultchannel);
+  const defaultRole = roles.find(role => role.name ===  settings.defaultrole);
+  const muteRole = roles.find(role => role.name ===  settings.muterole);
   if (!muteRole) return message.reply('I cannot find a mute role').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  if (members.length < 1) return message.reply('You must mention at least one guild member to mute.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   var caseNum;
   var reason;
   for (var member of members){
@@ -23,17 +26,18 @@ exports.run = async (client, message, args, perms, settings) => {
       //Bot checks if it has correct permissions
       if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
       //Checks if user has mute role, and if they do removes it
-      if (member.roles.has(muteRole.id)) {
-        member.removeRole(muteRole).catch(console.error);
-        member.addRole(defaultRole).then(() => {
+      const roles = memeber.roles.cache;
+      if (roles.has(muteRole.id)) {
+        membee.roles.remove(muteRole).catch(console.error);
+        member.roles.add(defaultRole).then(() => {
           if (log!=null){
             log.send({embed}).catch(console.error);;
           }
         });
       } else {
         //Adds mute role
-        member.removeRole(defaultRole).catch(console.error);
-        member.addRole(muteRole).then(() => {
+        member.roles.remove(defaultRole).catch(console.error);
+        member.roles.add(muteRole).then(() => {
           if (log){
             log.send({embed}).catch(console.error);;
           }

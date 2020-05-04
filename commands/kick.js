@@ -3,8 +3,9 @@ const {deleteMessage,compareMemberRoles,caseNumber} = require('../util/messageMa
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
   const members = message.mentions.members.array();
-  const log = message.guild.channels.cache.find(channel => channel.name === settings.moderationchannel) || message.guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
-  if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  const channels = message.guild.channels.cache;
+  const log = channels.find(channel => channel.name === settings.moderationchannel) || channels.find(channel => channel.name === settings.defaultchannel);
+  if (members.length < 1) return message.reply('You must mention someone to kick them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   var caseNum; 
   var reason;
   for (var member of members){
