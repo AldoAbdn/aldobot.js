@@ -10,9 +10,10 @@ exports.run = (client, message, args, perms, settings) => {
   if (!time) return message.reply('You must set a duration for the lockdown in either hours, minutes or seconds').then(msg=>deleteMessage(msg,settings.messagetimeout));
   //Checks if time includes a keywork, release or unlock
   if (validUnlocks.includes(time)) {
-    message.channel.overwritePermissions(role, {
+    message.channel.overwritePermissions([{
+      id:role.id,
       SEND_MESSAGES: null
-    }).then(() => {
+    }]).then(() => {
       //Unlocks channel
       message.channel.send('Lockdown lifted.');
       clearTimeout(client.lockit[id]);
@@ -21,16 +22,18 @@ exports.run = (client, message, args, perms, settings) => {
       console.log(error);
     });
   } else {
-    message.channel.overwritePermissions(role, {
+    message.channel.overwritePermissions([{
+      id: role.id,
       SEND_MESSAGES: false
-    }).then(() => {
+    }]).then(() => {
       //Loccks down channel for specified time
       message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
         client.lockit[id] = setTimeout(() => {
           //Only for default role
-          message.channel.overwritePermissions(role, {
+          message.channel.overwritePermissions([{
+            id:role.id,
             SEND_MESSAGES: null
-          }).then(message.channel.send('Lockdown lifted.')).catch(console.error);
+          }]).then(message.channel.send('Lockdown lifted.')).catch(console.error);
           delete client.lockit[id];
         }, ms(time));
       }).catch(error => {
