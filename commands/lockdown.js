@@ -2,6 +2,7 @@ const ms = require('ms');
 const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = (client, message, args, perms, settings) => {
   //Setup
+  var lockdownMessage;
   const role = message.guild.roles.cache.find(role => role.name === settings.defaultrole);
   const id = message.channel.id;
   if (!client.lockit) client.lockit = [];
@@ -15,7 +16,7 @@ exports.run = (client, message, args, perms, settings) => {
       SEND_MESSAGES: null
     }]).then(() => {
       //Unlocks channel
-      message.channel.send('Lockdown lifted.');
+      message.channel.send('Lockdown lifted.').then((m)=>deleteMessage(m,settings.messagetimeout)).catch(console.error);
       clearTimeout(client.lockit[id]);
       delete client.lockit[id];
     }).catch(error => {
@@ -27,14 +28,15 @@ exports.run = (client, message, args, perms, settings) => {
       SEND_MESSAGES: false
     }]).then(() => {
       //Loccks down channel for specified time
-      message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
+      message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then((msg) => {
         client.lockit[id] = setTimeout(() => {
           //Only for default role
           message.channel.overwritePermissions([{
             id:role.id,
             SEND_MESSAGES: null
-          }]).then(message.channel.send('Lockdown lifted.')).catch(console.error);
+          }]).then(message.channel.send('Lockdown lifted.')).then((m)=>deleteMessage(m,settings.messagetimeout)).catch(console.error);
           delete client.lockit[id];
+          deleteMessage(msg,0);
         }, ms(time));
       }).catch(error => {
         console.log(error);
