@@ -6,10 +6,10 @@ exports.run = async(client, message, args) => {
     //Toggle role
     if (member.roles.cache.find(role => role.id === userRole.id)){
       //Removes roll
-      member.removeRole(userRole).catch(console.error);
+      member.roles.remove(userRole).catch(console.error);
     } else {
       //Add role      
-      member.addRole(userRole).catch(console.error);
+      member.roles.add(userRole).catch(console.error);
     }
   }
 };
