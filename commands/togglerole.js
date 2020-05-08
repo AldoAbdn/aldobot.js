@@ -4,7 +4,7 @@ exports.run = async(client, message, args) => {
   const userRole = message.mentions.roles.first();
   for(var member of members){
     //Toggle role
-    if (member.roles.cache.find(role => role.id ===userRole.id)){
+    if (member.roles.cache.find(role => role.id === userRole.id)){
       //Removes roll
       member.removeRole(userRole).catch(console.error);
     } else {
