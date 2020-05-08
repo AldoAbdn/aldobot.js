@@ -26,9 +26,9 @@ exports.run = async (client, message, args, perms, settings) => {
       //Bot checks if it has correct permissions
       if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
       //Checks if user has mute role, and if they do removes it
-      const roles = memeber.roles.cache;
+      const roles = member.roles.cache;
       if (roles.has(muteRole.id)) {
-        membee.roles.remove(muteRole).catch(console.error);
+        member.roles.remove(muteRole).catch(console.error);
         member.roles.add(defaultRole).then(() => {
           if (log!=null){
             log.send({embed}).catch(console.error);;
