@@ -1,15 +1,15 @@
 exports.run = async(client, message, args) => {
   //Set variables
   const members = message.mentions.members.array();
-  const role = message.mentions.roles.first();
+  const userRole = message.mentions.roles.first();
   for(var member of members){
     //Toggle role
-    if (member.roles.cache.find("id",role.id)){
+    if (member.roles.cache.find(role => role.id ===userRole.id)){
       //Removes roll
-      member.removeRole(role).catch(console.error);
+      member.removeRole(userRole).catch(console.error);
     } else {
       //Add role      
-      member.addRole(role).catch(console.error);
+      member.addRole(userRole).catch(console.error);
     }
   }
 };
