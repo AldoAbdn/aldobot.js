@@ -1,19 +1,20 @@
 const {deleteMessage} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
-  const members = message.mentions.members.array();
+  const id = args[0];
   const log = message.guild.channels.cache.find(channel => channel.name === settings.moderationchannel) || message.guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   const guild = message.guild;
   var caseNum;
   var reason;
-  if (members.length < 1) return message.reply('You must mention someone to ban them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
-  for(var member of members){
+  // Get member
+  try{
+    const member = await guild.members.fetch(id);
     if(compareMemberRoles(message.member, member)){
       //Get case number 
       caseNum = await(caseNumber, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //unban
-      guild.unban(member, reason);
+      guild.members.unban(member);
       //send invite URL
       const dm = await member.createDM();
       dm.send(process.env.INVITE_URL);
@@ -29,6 +30,8 @@ exports.run = async (client, message, args, perms, settings) => {
         postToDefault(guild,{embed});
       }
     }
+  } catch {
+    message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).cache(console.error);
   }
 };
 
@@ -43,5 +46,5 @@ exports.conf = {
 exports.help = {
   name: 'unban',
   description: 'Unbans the user.',
-  usage: 'unban <mention> <reason>'
+  usage: 'unban <id> <reason>'
 };
