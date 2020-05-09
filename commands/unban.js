@@ -8,30 +8,32 @@ exports.run = async (client, message, args, perms, settings) => {
   var reason;
   // Get member
   try{
-    const member = await guild.members.fetch(id);
-    if(compareMemberRoles(message.member, member)){
+    const bans = await guild.fetchBans();
+    const user = bans.find(ban => ban.user.id == id)
+    if(user){
       //Get case number 
       caseNum = await(caseNumber, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //unban
-      guild.members.unban(member);
+      guild.members.unban(user);
       //send invite URL
-      const dm = await member.createDM();
+      const dm = await user.createDM();
       dm.send(process.env.INVITE_URL);
       //Fancy display of ban
       const embed = new MessageEmbed()
       .setColor(0x00AE86)
       .setTimestamp()
-      .setDescription(`**Action:** Ban\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+      .setDescription(`**Action:** Ban\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
       .setFooter(`Case ${caseNum}`);
       if (log!=null){
         log.send({embed});
       } else {
         postToDefault(guild,{embed});
       }
+    } else {
+      message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
     }
   } catch(e) {
-    console.log(e);
     message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
   }
 };
