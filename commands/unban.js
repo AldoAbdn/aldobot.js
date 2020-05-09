@@ -9,7 +9,8 @@ exports.run = async (client, message, args, perms, settings) => {
   // Get member
   try{
     const bans = await guild.fetchBans();
-    const user = bans.find(ban => ban.user.id == id);
+    const ban = bans.find(ban => ban.user.id == id);
+    const user = ban.user;
     if(user){
       //Get case number 
       caseNum = await(caseNumber, log);
