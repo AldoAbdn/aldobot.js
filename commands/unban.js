@@ -1,3 +1,4 @@
+const {MessageEmbed} = require('discord.js');
 const {deleteMessage,caseNumber,postToDefault} = require('../util/messageManagement.js');
 exports.run = async (client, message, args, perms, settings) => {
   //Setup
