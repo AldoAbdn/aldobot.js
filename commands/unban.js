@@ -30,7 +30,8 @@ exports.run = async (client, message, args, perms, settings) => {
         postToDefault(guild,{embed});
       }
     }
-  } catch {
+  } catch(e) {
+    console.log(e);
     message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
   }
 };
