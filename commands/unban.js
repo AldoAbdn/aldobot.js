@@ -31,7 +31,7 @@ exports.run = async (client, message, args, perms, settings) => {
       }
     }
   } catch {
-    message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).cache(console.error);
+    message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
   }
 };
 
