@@ -16,7 +16,7 @@ exports.run = async (client, message, args, perms, settings) => {
       caseNum = await(caseNumber, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //unban
-      guild.members.unban(user);
+      await guild.members.unban(user);
       //send invite URL
       const dm = await user.createDM();
       dm.send(process.env.INVITE_URL);
