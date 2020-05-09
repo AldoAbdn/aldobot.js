@@ -6,7 +6,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const guild = message.guild;
   var caseNum;
   var reason;
-  if (message.mentions.members.size < 1) return message.reply('You must mention someone to ban them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  if (members.length < 1) return message.reply('You must mention someone to ban them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   for(var member of members){
     if(compareMemberRoles(message.member, member)){
       //Get case number 
@@ -26,7 +26,7 @@ exports.run = async (client, message, args, perms, settings) => {
       if (log!=null){
         log.send({embed});
       } else {
-        postToDefault(message.guild,{embed});
+        postToDefault(guild,{embed});
       }
     }
   }

@@ -6,7 +6,7 @@ exports.run = async (client, message, args, perms, settings) => {
   const log = message.guild.channels.cache.find(channel => channel.name === settings.moderationchannel) || message.guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   var caseNum;
   var reason;
-  if (message.mentions.members.size < 1) return message.reply('You must mention someone to ban them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  if (members.length < 1) return message.reply('You must mention someone to ban them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
   for(var member of members){
     if(compareMemberRoles(message.member, member)){
       //Get case number 
