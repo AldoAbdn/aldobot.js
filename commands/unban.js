@@ -14,6 +14,9 @@ exports.run = async (client, message, args, perms, settings) => {
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //unban
       guild.unban(member, reason);
+      //send invite URL
+      const dm = await member.createDM();
+      dm.send(process.env.INVITE_URL);
       //Fancy display of ban
       const embed = new MessageEmbed()
       .setColor(0x00AE86)
