@@ -9,7 +9,9 @@ exports.run = async (client, message, args, perms, settings) => {
   // Get member
   try{
     const bans = await guild.fetchBans();
-    const user = bans.find(ban => ban.user.id == id)
+    console.log(bans);
+    const user = bans.find(ban => ban.user.id == id);
+    console.log(user);
     if(user){
       //Get case number 
       caseNum = await(caseNumber, log);
@@ -34,6 +36,7 @@ exports.run = async (client, message, args, perms, settings) => {
       message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
     }
   } catch(e) {
+    console.log(e);
     message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
   }
 };
