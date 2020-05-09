@@ -43,7 +43,7 @@ async function playSong(client, message, guild, voiceConnection){
     guild.playing = true;
     let stream = await yt(guild.currentlyPlaying.video_url, {audioonly: true}, {passes: 5});
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
-    client.user.setActivity(guild.currentPlaying.title);
+    client.user.setActivity(guild.currentlyPlaying.title);
     guild.dispatcher.on('finish', () => {
       console.log('song finish');
       if(guild.dispatcher){
@@ -57,7 +57,6 @@ async function playSong(client, message, guild, voiceConnection){
         //Delay to fix bug in discord.js 
         setTimeout(()=>{
           exports.playQueue(client,message);
-          console.log('end');
         },1000)
       } 
     });
