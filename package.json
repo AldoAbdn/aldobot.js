@@ -1,6 +1,6 @@
 {
   "name": "aldobot",
-  "version": "3.7.8",
+  "version": "3.7.9",
   "description": "Discord bot created using Discord.js",
   "main": "AldoBot.js",
   "repository": {
