@@ -45,6 +45,7 @@ async function playSong(client, message, guild, voiceConnection){
     guild.dispatcher = voiceConnection.play(stream,{type:'opus',volume:guild.volume});
     client.user.setActivity(guild.currentPlaying.title);
     guild.dispatcher.on('finish', () => {
+      console.log('song finish');
       if(guild.dispatcher){
         delete guild.dispatcher;
       }
