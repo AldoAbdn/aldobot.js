@@ -57,6 +57,7 @@ async function playSong(client, message, guild, voiceConnection){
         //Delay to fix bug in discord.js 
         setTimeout(()=>{
           exports.playQueue(client,message);
+          console.log('end');
         },1000)
       } 
     });
@@ -69,7 +70,9 @@ async function playSong(client, message, guild, voiceConnection){
 
 function playRelatedVideos(client, guild, message, settings){
   let url = "https://www.youtube.com/watch?v=" + guild.lastPlayed.related_videos[0].id || guild.lastPlayed.related_videos[0].video_id;
+  console.log(url);
   yt.getInfo(url).then(info=>{
+    console.log(info);
       guild.queue.push(info);
       if(message.guild.currentPlaying){
         message.reply(createQueueString(message.guild.queue),{code:'asciidoc'}).then(msg=>deleteMessage(msg,settings.messagetimeout));
