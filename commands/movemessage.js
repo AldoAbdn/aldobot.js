@@ -2,17 +2,22 @@ exports.run = async(client, message, args) => {
   //Set variables
   const channel = message.mentions.channels.first();
   if(channel == null)
-    message.reply('You must mention a channel');
-  if(message.mentions.channels.array().length > 1)
-    message.reply('Too many channels in mentions');
+    return message.reply('You must mention a channel');
+  else if(message.mentions.channels.array().length > 1)
+    return message.reply('Too many channels in mentions');
+  else if(channel.type != "text")
+    return message.reply('Mentioned channel must be a Text channel');
   const messageid = args[1];
   //retrieve message 
-  const messages = await message.channel.awaitMessages(message => message.id === messageid);
-  const selectedMessage = messages.first();
-  //Add message to channel 
-  channel.send(`${selectedMessage.author} Wrote: \n\n ${selectedMessage.content}`);
-  //Delete message
-  selectedMessage.delete();
+  const selectedMessage = await message.channel.messages.fetch(messageid);
+  if(selectedMessage){
+    //Add message to channel 
+    channel.send(`${selectedMessage.author} Wrote: \n\n ${selectedMessage.content}`);
+    //Delete message
+    selectedMessage.delete();
+  } else {
+    return message.reply('Invalid message ID');
+  }
 };
   
 exports.conf = {
