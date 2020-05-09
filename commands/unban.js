@@ -10,13 +10,13 @@ exports.run = async (client, message, args, perms, settings) => {
   try{
     const bans = await guild.fetchBans();
     const ban = bans.find(ban => ban.user.id == id);
-    const user = ban.user;
+    let user = ban.user;
     if(user){
       //Get case number 
       caseNum = await(caseNumber, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //unban
-      await guild.members.unban(user);
+      user = await guild.members.unban(user);
       //send invite URL
       const dm = await user.createDM();
       dm.send(process.env.INVITE_URL);
