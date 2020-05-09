@@ -13,10 +13,10 @@ exports.run = async (client, message, args, perms, settings) => {
     let user = ban.user;
     if(user){
       //Get case number 
-      caseNum = await(caseNumber, log);
+      caseNum = await caseNumber(client, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //unban
-      guild.members.unban(user);
+      user = await guild.members.unban(user);
       //Fancy display of ban
       const embed = new MessageEmbed()
       .setColor(0x00AE86)
@@ -32,6 +32,7 @@ exports.run = async (client, message, args, perms, settings) => {
       message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
     }
   } catch(e) {
+    console.log(e);
     message.reply("Error, check user ID").then((msg) => deleteMessage(msg, settings.messagetimeout)).catch(console.error);
   }
 };

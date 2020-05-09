@@ -10,7 +10,7 @@ exports.run = async (client, message, args, perms, settings) => {
   for(var member of members){
     if(compareMemberRoles(message.member, member)){
       //Get case number 
-      caseNum = await(caseNumber, log);
+      caseNum = await caseNumber(client, log);
       reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
       //Ban
       member.ban(reason);
