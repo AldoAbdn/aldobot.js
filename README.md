@@ -85,9 +85,6 @@ This bot uses node-opus to play music, but falls back on FFMPEG. This bot may re
 ### Youtube API Key
 This bot allows you to play music by either passing a YouTube video URL or a search term. To do this you are required to provide an API key. If you don't you will still be able to play music via URL just not by search term. 
 
-### Server Invite URL
-You will need to supply an invite url for your server that is sent to unbanned members
-
 ## Starting the Bot
 Just to be safe, navigate to the project folder and open a command prompt there. type npm install
 
@@ -100,7 +97,6 @@ OWNER_ID
 DB
 DBNAME
 YT_API_KEY
-INVITE_URL
 ```
 These will correspond to the values you retrieved earlier. There are many ways to do this but a simple way is:
 ```
