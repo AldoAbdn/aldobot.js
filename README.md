@@ -26,7 +26,7 @@ Highly recommend checking out his tutorial [here](https://www.youtube.com/watch?
 | Kick        | Kicks the mentioned user | kick (mention) (reason) | 
 | Mute        | mutes or unmutes a mentioned user | un/mute (mention) (reason) |
 | Ban         | Bans the mentioned user | ban (mention) (reason) |
-| Unban       | Unbans the user | unban (ID) (reason) |
+| Unban       | Unbans the mentioned user | unban (mention) (reason) |
 | Lockdown    | This will lock a channel down for the set duration, be it in hours, minutes or seconds | lockdown (duration) |
 | Purge       | Purges X amount of messages from a given channel | purge (number) |
 | Reason      | Updates an unset moderator action | reason (case-number) (new-reason) |

@@ -1,23 +1,31 @@
 const {deleteMessage} = require('../util/messageManagement.js');
-exports.run = async(client, message, args, perms, settings) => {
-  //Set variables
-  const reason = args.slice(1).join(' ');
-  var userids = args[0].split(",");
-  var users = [];
+exports.run = async (client, message, args, perms, settings) => {
+  //Setup
+  const members = message.mentions.members.array();
+  const log = message.guild.channels.cache.find(channel => channel.name === settings.moderationchannel) || message.guild.channels.cache.find(channel => channel.name === settings.defaultchannel);
   const guild = message.guild;
-  for (var userid of userids){
-    users.push(await client.fetchUser(userid));
-  }
-  //Sets reason and unbanne
-  client.unbanReason = reason;
-  client.unbanAuth = message.author;
-  //If no reason, returns
-  if (reason.length < 1) return message.reply('You must supply a reason for the unban.').then(msg=>deleteMessage(msg,settings.messagetimeout));
-  for (var user of users){
-    //Must pass a user resolvable
-    if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
-    //Unbans user
-    guild.unban(user);
+  var caseNum;
+  var reason;
+  if (message.mentions.members.size < 1) return message.reply('You must mention someone to ban them.').then(msg=>deleteMessage(msg,settings.messagetimeout)).catch(console.error);
+  for(var member of members){
+    if(compareMemberRoles(message.member, member)){
+      //Get case number 
+      caseNum = await(caseNumber, log);
+      reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
+      //unban
+      guild.unban(member, reason);
+      //Fancy display of ban
+      const embed = new MessageEmbed()
+      .setColor(0x00AE86)
+      .setTimestamp()
+      .setDescription(`**Action:** Ban\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+      .setFooter(`Case ${caseNum}`);
+      if (log!=null){
+        log.send({embed});
+      } else {
+        postToDefault(message.guild,{embed});
+      }
+    }
   }
 };
 
@@ -32,5 +40,5 @@ exports.conf = {
 exports.help = {
   name: 'unban',
   description: 'Unbans the user.',
-  usage: 'unban <ID> <reason>'
+  usage: 'unban <mention> <reason>'
 };
